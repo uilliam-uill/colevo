@@ -7,6 +7,8 @@
 <title>Colégio Evolução</title>
 <link rel="stylesheet" type="text/css" href="style/screenTeacher.css">
 <link rel="stylesheet" type="text/css" href="style/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="style/screenClassTeacher.css">
+<script src="js/bootstrap.js.map"></script>
 </head>
 <body>
 	<div class = "header">
@@ -15,8 +17,6 @@
 			<h1 style="color: white">Colégio Evolução - Acesso Professor</h1>
 		</div>
 	</div>
-	
-	
 <%@ page import="java.io.FileInputStream" %>
 <%@ page import="java.io.IOException" %>
 <%@ page import="java.io.InputStream" %>
@@ -39,16 +39,18 @@
         PreparedStatement stAlunosMat = null;
         ResultSet rsNotas = null;
         try {
-        	stAlunosMat = conexao.prepareStatement("SELECT pessoa.nome, notas.primeira_und, notas.segunda_und, notas.terceira_und," +
+        	stAlunosMat = conexao.prepareStatement("SELECT aluno.id_aluno, pessoa.nome, notas.primeira_und, notas.segunda_und, notas.terceira_und," +
             	       " notas.recuperacao, notas.nota_final, notas.aprovado " +
             	       " FROM notas INNER JOIN aluno ON aluno.id_aluno = notas.id_aluno" +
             	       " INNER JOIN pessoa ON pessoa.id_pessoa = aluno.id_pessoa;");
 
         	rsNotas = stAlunosMat.executeQuery();%>
-        	<h1 class="titleTeacher"><%=turmaJs + materiaJs%></h1>
+        	<h1 class="titleTeacher">Segue abaixo alunos de <%=materiaJs%> da turma <%=turmaJs%></h1>
+        	<div class="tableDiv">
 			<table class="table">
 				<thead class="thead-light">
 				    <tr>
+				      <th scope="col">Código do Aluno</th>
 				      <th scope="col">Nome</th>
 				      <th scope="col">Primeria Unidade</th>
 				      <th scope="col">Segunda Unidade</th>
@@ -61,6 +63,7 @@
 	            <% while (rsNotas.next()) { %> 
 	            </tbody>
 						<tr> 
+							<td><%=rsNotas.getInt("id_aluno")%>
 							<td><%=rsNotas.getString("nome")%></td>
 							<td><%=rsNotas.getDouble("primeira_und")%></td>
 							<td><%=rsNotas.getDouble("segunda_und")%></td>
@@ -68,7 +71,7 @@
 							<td><%=rsNotas.getDouble("recuperacao")%></td>
 							<td><%=rsNotas.getDouble("nota_final")%></td>
 							<td><%=rsNotas.getBoolean("aprovado")%></td>
-							<td><button class="btn-primary">Atualizar Nota</button></td>
+							<td><button type="button" class="btn-primary">Atualizar Nota</button></td>
 						</tr>
 						<% } 
         }catch (SQLException e) {
@@ -79,5 +82,21 @@
     } %>
     </tbody>
     </table> 
+    </div>
+    
+     <script>
+    var buttons = document.querySelectorAll('.btn-primary');
+
+    // Iterar sobre cada botão para adicionar um evento de clique
+    buttons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        // Acessar o valor da terceira célula (índice 2, pois começamos do zero) 
+        var idAluno = this.closest('tr').querySelectorAll('td')[0].textContent;
+        
+        // Fazer algo com o ID da matéria, como exibir em um console
+       window.location.href = "studentToken.jsp?id=" + idAluno;
+      });
+    });
+    </script>
 </body>
 </html>

@@ -7,6 +7,7 @@
 <title>Colégio Evolução</title>
 <link rel="stylesheet" type="text/css" href="style/screenTeacher.css">
 <link rel="stylesheet" type="text/css" href="style/bootstrap.css">
+<script src="js/bootstrap.js.map"></script>
 </head>
 <body>
 	<div class = "header">
@@ -20,7 +21,7 @@
 		%>
 	<br> <br>
 	<div class="teacherData">
-	<h1 class="titleTeacher">Olá <%=personTeacher.getName()%></h1>
+	<h1 class="titleTeacher">Olá <%=personTeacher.getName()%>, a seguir segue suas materias e turmas </h1>
 	</div>
 	
 	
@@ -38,6 +39,7 @@
 <%@ page import="javaClass.Teacher" %> 
 <%@ page import="javaClass.ConectionMysql" %> 
 <%@ page import="java.sql.*, java.util.List, java.util.ArrayList" %>
+<div class="tableClass">
 <table class="table">
 	 <thead class="thead-light">
 	    <tr>
@@ -81,6 +83,7 @@
     } %>
     </tbody>
     </table> 
+    </div>
     <script>
     var buttons = document.querySelectorAll('.btn-primary');
 

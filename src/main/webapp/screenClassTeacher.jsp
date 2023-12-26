@@ -51,6 +51,7 @@
 				<thead class="thead-light">
 				    <tr>
 				      <th scope="col">Código do Aluno</th>
+				      <th scope="col">Código da Matéria</th>
 				      <th scope="col">Nome</th>
 				      <th scope="col">Primeria Unidade</th>
 				      <th scope="col">Segunda Unidade</th>
@@ -63,7 +64,8 @@
 	            <% while (rsNotas.next()) { %> 
 	            </tbody>
 						<tr> 
-							<td><%=rsNotas.getInt("id_aluno")%>
+							<td><%=rsNotas.getInt("id_aluno")%></td>
+							<td><%=request.getParameter("id") %></td>
 							<td><%=rsNotas.getString("nome")%></td>
 							<td><%=rsNotas.getDouble("primeira_und")%></td>
 							<td><%=rsNotas.getDouble("segunda_und")%></td>
@@ -92,9 +94,10 @@
       button.addEventListener('click', function() {
         // Acessar o valor da terceira célula (índice 2, pois começamos do zero) 
         var idAluno = this.closest('tr').querySelectorAll('td')[0].textContent;
+        var idMateria = this.closest('tr').querySelectorAll('td')[1].textContent;
         
         // Fazer algo com o ID da matéria, como exibir em um console
-       window.location.href = "studentToken.jsp?id=" + idAluno;
+       window.location.href = "studentToken.jsp?id=" + idAluno + "&idmateria=" + idMateria;
       });
     });
     </script>

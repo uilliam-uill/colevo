@@ -1,5 +1,16 @@
 @charset "ISO-8859-1";
-
+body{
+	padding: 0px;
+	margin: 0px;
+}
+label{
+	color: white;
+}
 .dadosAluno{
 	box-shadow: 10px 5px 5px black;
+	margin-left: 150px;
+}
+
+.titleNota{
+	color: white;
 }

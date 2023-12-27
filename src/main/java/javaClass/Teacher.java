@@ -3,7 +3,7 @@ package javaClass;
 public class Teacher {
 	static private Teacher instance;
 	public String numberClass;
-	public String idTeacher;
+	public int idTeacher;
 	public int idClass;
 	public String materia;
 	public static Teacher getInstance() {
@@ -18,10 +18,10 @@ public class Teacher {
 	public void setNumberClass(String numberClass) {
 		this.numberClass = numberClass;
 	}
-	public String getIdTeacher() {
+	public int getIdTeacher() {
 		return idTeacher;
 	}
-	public void setIdTeacher(String idTeacher) {
+	public void setIdTeacher(int idTeacher) {
 		this.idTeacher = idTeacher;
 	}
 	public int getIdClass() {

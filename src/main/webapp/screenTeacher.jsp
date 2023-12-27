@@ -62,7 +62,7 @@
             stMaterias = conexao.prepareStatement("SELECT materias.nome_materia, turma.serie,turma.id_turma, materias.id_materia" +
             		" FROM materias INNER JOIN professor ON materias.id_professor = professor.id_professor INNER JOIN " +
             		" turma ON materias.id_turma = turma.id_turma WHERE professor.id_professor = ?");
-            stMaterias.setInt(1, 1);
+            stMaterias.setInt(1, Integer.parseInt(request.getParameter("idProfessor")));
 
             rsMaterias = stMaterias.executeQuery();%>
 			
@@ -93,10 +93,15 @@
         // Acessar o valor da terceira célula (índice 2, pois começamos do zero) 
         var materiaId = this.closest('tr').querySelectorAll('td')[2].textContent;
         var turmaJs = this.closest('tr').querySelectorAll('td')[1].textContent;   
+        var turmaId = this.closest('tr').querySelectorAll('td')[0].textContent;
         var materiaNome = this.closest('tr').querySelectorAll('td')[3].textContent;
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Capturando o valor do parâmetro 'idmateria'
+       	var idProfessor = urlParams.get('idProfessor');
         
         // Fazer algo com o ID da matéria, como exibir em um console
-       window.location.href = "screenClassTeacher.jsp?id=" + materiaId + "&materia=" + materiaNome + "&turma=" + turmaJs;
+       window.location.href = "screenClassTeacher.jsp?id=" + materiaId + "&materia=" + materiaNome + "&turma=" + turmaJs + "&idTurma=" + turmaId + "&idProfessor=" + idProfessor;
       });
     });
     </script>

@@ -1,3 +1,4 @@
+<%@page import="javaClass.Teacher"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -72,7 +73,7 @@
                 loginPerson = conexao.prepareStatement("SELECT pessoa.id_pessoa, pessoa.nome, " +
                                 " CASE WHEN professor.id_professor IS NOT NULL THEN 'Professor' " +
                                 " WHEN aluno.id_aluno IS NOT NULL THEN 'Aluno' " +
-                                " ELSE 'Nenhum' END AS tipo_usuario FROM pessoa" +
+                                " ELSE 'Nenhum' END AS tipo_usuario, professor.id_professor,aluno.id_aluno FROM pessoa" +
                                 " LEFT JOIN professor ON pessoa.id_pessoa = professor.id_pessoa " +
                                 " LEFT JOIN aluno ON pessoa.id_pessoa = aluno.id_pessoa " +
                                 " WHERE pessoa.cpf = ? AND pessoa.senha = ?; ");
@@ -87,7 +88,7 @@
                     personLogin.setId(rsLoginPerson.getInt("id_pessoa"));
                     personLogin.setName(rsLoginPerson.getString("nome"));
                     if (tipo_usuario.equals("Professor")) {
-                        RequestDispatcher dispatcher = request.getRequestDispatcher("screenTeacher.jsp");
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("screenTeacher.jsp?idProfessor=" + rsLoginPerson.getInt("professor.id_professor"));
                         dispatcher.forward(request, response);
                     } else if (tipo_usuario.equals("Aluno")) {
                         RequestDispatcher dispatcher = request.getRequestDispatcher("screenStudent.jsp");

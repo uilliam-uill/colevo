@@ -51,7 +51,7 @@
             <div class="card shadow border">
                 <div class="card-body d-flex flex-column align-items-center">
                 <h3 class="titleNota">Atualize a Nota</h3>
-	                <form method="post">
+                	<form>
 	                    <label>Código do aluno</label> 
 	                    <input type="text" class="form-control" id="idAluno" value="<%=rsStudentData.getInt("id_aluno")%>" > <br>
 	                    
@@ -60,16 +60,23 @@
 	                    
 	                    <label>CPF</label> 
 	                    <input type="text" class="form-control" value="<%=rsStudentData.getString("cpf") %>" disabled="disabled"> <br>
-	                    
+	               </form>     
 	                    <label>Primeira Unidade</label> 
-	                    <input type="number" name="notaunidadeum"  step="0.1" class="form-control" id="unidOne" onchange="aprovar()" value="<%=rsStudentData.getDouble("primeira_und") %>"> <br>
-	                    
-	                    <label>Segunda Unidade</label> 
-	                    <input type="number" name="notaunidadedois" step="0.1" class="form-control" id="unidTwo" onchange="aprovar()" value="<%=rsStudentData.getDouble("segunda_und") %>"> <br>
-	                    
-	                    <label>Terceira Unidade</label> 
-	                    <input type="number" name="notaunidadetres" step="0.1" class="form-control" id="unidThree" onchange="aprovar()" value="<%=rsStudentData.getDouble("terceira_und") %>"> <br>
-	                    
+	                    <div class="buttonUnid">
+		                    <input type="number" name="notaunidadeum"  step="0.1" class="form-control" id="unidOne" onchange="aprovar()" value="<%=rsStudentData.getDouble("primeira_und") %>"> 
+		                    <button class="btn-primary" id="unidadeUm" >Acessar Notas</button>
+	                    </div>
+	                    <label>Segunda Unidade</label>
+	                     <div class="buttonUnid"> 
+		                    <input type="number" name="notaunidadedois" step="0.1" class="form-control" id="unidTwo" onchange="aprovar()" value="<%=rsStudentData.getDouble("segunda_und") %>"> <br>
+	                    <button class="btn-primary" id="unidadeDois">Acessar Notas</button>
+	                    </div>
+	                    <label>Terceira Unidade</label>
+	                     <div class="buttonUnid">  
+		                    <input type="number" name="notaunidadetres" step="0.1" class="form-control" id="unidThree" onchange="aprovar()" value="<%=rsStudentData.getDouble("terceira_und") %>"> <br>
+	                    <button class="btn-primary" id="unidadeTres">Acessar Notas</button>
+	                    </div> 
+	               <form>
 	                    <label>Recuperação</label> 
 	                    <input type="number" name="notarecuperacao" step="0.1" class="form-control" value="<%=rsStudentData.getDouble("recuperacao") %>"> <br>
 	                    
@@ -80,13 +87,8 @@
 	                    <label>Sim</label> 
 						<input type="radio" name="status" value="false" <% if (!rsStudentData.getBoolean("aprovado")) { %> checked <% } %>>
 						<label>Não</label>  <br> <br> 
-	                    
-	                    <label>Notas</label>
-	                    <div class="form-outline">
-							  <textarea class="form-control" name="detalhesnota" id="textAreaExample1" rows="4"></textarea>
-						</div>
 	                    <button type="submit" class="btn btn-success">Enviar</button>
-	                </form>
+	              </form>           
                 </div>
             </div>
         </div>
@@ -141,5 +143,46 @@ if(conexao != null && request.getParameter("idAluno") != null){
 			document.querySelector('input[name="status"][value="false"]').checked = true;
 		}
 	}
+	var buttonUm = document.getElementById('unidadeUm');
+
+	buttonUm.addEventListener('click', function() {
+	    var idAluno = document.getElementById('idAluno').value;
+	    var urlParams = new URLSearchParams(window.location.search);
+
+	    // Capturando o valor do parâmetro 'idmateria' e 'idTurma'
+	    var idMateria = urlParams.get('idmateria');
+	    var idTurma = urlParams.get('idTurma');
+
+	    // Corrigindo a concatenação para redirecionamento
+	    window.location.href = "notesScreen.jsp?id=" + idAluno + "&idMateria=" + idMateria + "&idTurma=" + idTurma + "&unidade=1";
+	});
+
+	var buttonDois = document.getElementById('unidadeDois');
+
+	buttonDois.addEventListener('click', function() {
+	    var idAluno = document.getElementById('idAluno').value;
+	    var urlParams = new URLSearchParams(window.location.search);
+
+	    // Capturando o valor do parâmetro 'idmateria' e 'idTurma'
+	    var idMateria = urlParams.get('idmateria');
+	    var idTurma = urlParams.get('idTurma');
+
+	    // Corrigindo a concatenação para redirecionamento
+	    window.location.href = "notesScreen.jsp?id=" + idAluno + "&idMateria=" + idMateria + "&idTurma=" + idTurma + "&unidade=2";
+	});
+	
+	var buttonTres = document.getElementById('unidadeTres');
+
+	buttonTres.addEventListener('click', function() {
+	    var idAluno = document.getElementById('idAluno').value;
+	    var urlParams = new URLSearchParams(window.location.search);
+
+	    // Capturando o valor do parâmetro 'idmateria' e 'idTurma'
+	    var idMateria = urlParams.get('idmateria');
+	    var idTurma = urlParams.get('idTurma');
+	    var idProfessor = urlParams.get('idProfessor');
+	    // Corrigindo a concatenação para redirecionamento
+	    window.location.href = "notesScreen.jsp?id=" + idAluno + "&idMateria=" + idMateria + "&idTurma=" + idTurma + "&unidade=3&idprofessor=" + idProfessor;
+	});
 </script>
 </html>

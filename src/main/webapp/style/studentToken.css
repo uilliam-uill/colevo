@@ -15,3 +15,7 @@ label{
 .titleNota{
 	color: white;
 }
+
+.buttonUnid{
+	display: flex;
+}

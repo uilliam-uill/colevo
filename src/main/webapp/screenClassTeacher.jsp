@@ -95,9 +95,14 @@
         // Acessar o valor da terceira célula (índice 2, pois começamos do zero) 
         var idAluno = this.closest('tr').querySelectorAll('td')[0].textContent;
         var idMateria = this.closest('tr').querySelectorAll('td')[1].textContent;
+        const urlParams = new URLSearchParams(window.location.search);
+
+     // Capturando o valor do parâmetro 'idmateria'
+    	var idTurma = urlParams.get('idTurma');
+    	var idProfessor = urlParams.get('idProfessor');
         
         // Fazer algo com o ID da matéria, como exibir em um console
-       window.location.href = "studentToken.jsp?id=" + idAluno + "&idmateria=" + idMateria;
+       window.location.href = "studentToken.jsp?id=" + idAluno + "&idmateria=" + idMateria + "&idTurma=" + idTurma + "&idProfessor=" + idProfessor;
       });
     });
     </script>

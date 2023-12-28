@@ -76,98 +76,60 @@
                  }
                 }
                 %>
-                	<form method="post">
-                		<label>AD - Atividade Diversificada:</label>
-                		<input type="number" id="ad" name="notaAd" onchange="somaNota()" value="<%=notaAD %>" name="ad">
+                		<label>AD - Atividade Diversificada:</label> 
+                		<input type="number" id="ad" name="notaAd" onchange="somaNota()" value="<%=notaAD %>">
                 		<br>
                 		<label>APS - Avaliação Parcial Semanal:</label>
-                		<input type="number" id="aps" name="notaAps" onchange="somaNota()" value="<%=notaAPS %>" name="aps">
+                		<input type="number" id="aps" name="notaAps" onchange="somaNota()" value="<%=notaAPS %>">
                 		<br>
                 		<label>AS - Avaliação Sistemática:</label>
-                		<input type="number" id="as" name="notaAs" onchange="somaNota()" value="<%=notaAS %>" name="as">
+                		<input type="number" id="as" name="notaAs" onchange="somaNota()" value="<%=notaAS %>">
                 		<br>
                 		<label>AFT: Avaliação Final Trimestral:</label>
-                		<input type="number" id="aft" name="notaAft" onchange="somaNota()" value="<%=notaAFT %>" name="aft">
+                		<input type="number" id="aft" name="notaAft" onchange="somaNota()" value="<%=notaAFT %>">
                 		<br>
                 		<label>Nota Final</label>
-                		<input type="number" id="soma" name="notaAd" value=""> <br>
-                		<button type="submit" class="btn btn-success">Salvar</button>
-                	</form>
-               <%PreparedStatement updateNota = null;
-               ResultSet rsnotas = null;
-               if(conexao != null){
-            	   updateNota = conexao.prepareStatement("INSERT INTO avaliacao (id_aluno, id_materia, id_turma, id_professor," +
-            	 " nota_tirada, unidade, id_avaliacao)" +
-            	   " VALUES (?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE nota_tirada = ?;" );
-            	   updateNota.setInt(1, Integer.parseInt(request.getParameter("id")));
-            	   updateNota.setInt(2, Integer.parseInt(request.getParameter("idMateria")));
-            	   updateNota.setInt(3, Integer.parseInt(request.getParameter("idTurma")));
-            	   updateNota.setInt(4, Integer.parseInt(request.getParameter("idprofessor")));
-            	   updateNota.setDouble(5, Double.parseDouble(request.getParameter("notaAd")));
-            	   updateNota.setInt(6, Integer.parseInt(request.getParameter("unidade")));
-            	   updateNota.setInt(7, 2);
-            	   updateNota.setDouble(8, Double.parseDouble(request.getParameter("notaAd")));
-            	   updateNota.execute();
-            	   
-            	   updateNota = conexao.prepareStatement("INSERT INTO avaliacao (id_aluno, id_materia, id_turma, id_professor," +
-                      	 " nota_tirada, unidade, id_avaliacao)" +
-                      	   " VALUES (?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE nota_tirada = ?;" );
-                      	   updateNota.setInt(1, Integer.parseInt(request.getParameter("id")));
-                      	   updateNota.setInt(2, Integer.parseInt(request.getParameter("idMateria")));
-                      	   updateNota.setInt(3, Integer.parseInt(request.getParameter("idTurma")));
-                      	 updateNota.setInt(4, Integer.parseInt(request.getParameter("idprofessor")));
-                      	   updateNota.setDouble(5, Double.parseDouble(request.getParameter("notaAps")));
-                      	   updateNota.setInt(6, Integer.parseInt(request.getParameter("unidade")));
-                      	   updateNota.setInt(7, 3);
-                      	   updateNota.setDouble(8, Double.parseDouble(request.getParameter("notaAps")));
-                      	   updateNota.execute();
-            	   
-                      	 updateNota = conexao.prepareStatement("INSERT INTO avaliacao (id_aluno, id_materia, id_turma, id_professor," +
-                              	 " nota_tirada, unidade, id_avaliacao)" +
-                              	   " VALUES (?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE nota_tirada = ?;" );
-                              	   updateNota.setInt(1, Integer.parseInt(request.getParameter("id")));
-                              	   updateNota.setInt(2, Integer.parseInt(request.getParameter("idMateria")));
-                              	   updateNota.setInt(3, Integer.parseInt(request.getParameter("idTurma")));
-                              	 updateNota.setInt(4, Integer.parseInt(request.getParameter("idprofessor")));
-                              	   updateNota.setDouble(5, Double.parseDouble(request.getParameter("notaAs")));
-                              	   updateNota.setInt(6, Integer.parseInt(request.getParameter("unidade")));
-                              	   updateNota.setInt(7, 4);
-                              	   updateNota.setDouble(8, Double.parseDouble(request.getParameter("notaAs")));
-                              	   updateNota.execute(); 
-                              	   
-                              	 updateNota = conexao.prepareStatement("INSERT INTO avaliacao (id_aluno, id_materia, id_turma, id_professor," +
-                                      	 " nota_tirada, unidade, id_avaliacao)" +
-                                      	   " VALUES (?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE nota_tirada = ?;" );
-                                      	   updateNota.setInt(1, Integer.parseInt(request.getParameter("id")));
-                                      	   updateNota.setInt(2, Integer.parseInt(request.getParameter("idMateria")));
-                                      	   updateNota.setInt(3, Integer.parseInt(request.getParameter("idTurma")));
-                                      	   updateNota.setInt(4, Integer.parseInt(request.getParameter("idprofessor")));
-                                      	   updateNota.setDouble(5, Double.parseDouble(request.getParameter("notaAft")));
-                                      	   updateNota.setInt(6, Integer.parseInt(request.getParameter("unidade")));
-                                      	   updateNota.setInt(7, 5);
-                                      	   updateNota.setDouble(8, Double.parseDouble(request.getParameter("notaAft")));
-                                      	   updateNota.execute();      	   
-               }
-               %>
+                		<input type="number" id="soma" step="0.1" name="notaFinal" value=""> <br>
+                		<button type="button" onclick="updateNotas()" class="btn btn-success">Salvar</button>
                 </div>
             </div>
         </div>
 </div>
 </body>
 <script>
-var ad = parseFloat(document.getElementById('ad').value) || 0;
-var aps = parseFloat(document.getElementById('aps').value) || 0;
-var as = parseFloat(document.getElementById('as').value) || 0;
-var aft = parseFloat(document.getElementById('aft').value) || 0;
-var finalGrade = ad + aps + as + aft;
-document.getElementById('soma').value = finalGrade;
-	function somaNota(){
-		var ad = parseFloat(document.getElementById('ad').value) || 0;
-		var aps = parseFloat(document.getElementById('aps').value) || 0;
-		var as = parseFloat(document.getElementById('as').value) || 0;
-		var aft = parseFloat(document.getElementById('aft').value) || 0;
-		var finalGrade = ad + aps + as + aft;
-		document.getElementById('soma').value = finalGrade;
-	}
+    var ad = parseFloat(document.getElementById('ad').value) || 0;
+    var aps = parseFloat(document.getElementById('aps').value) || 0;
+    var as = parseFloat(document.getElementById('as').value) || 0;
+    var aft = parseFloat(document.getElementById('aft').value) || 0;
+    var finalGrade = ad + aps + as + aft;
+    document.getElementById('soma').value = finalGrade;
+
+    function somaNota() {
+        var ad = parseFloat(document.getElementById('ad').value) || 0;
+        var aps = parseFloat(document.getElementById('aps').value) || 0;
+        var as = parseFloat(document.getElementById('as').value) || 0;
+        var aft = parseFloat(document.getElementById('aft').value) || 0;
+        var finalGrade = ad + aps + as + aft;
+        document.getElementById('soma').value = finalGrade;
+    }
+
+    function updateNotas() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var idAluno = urlParams.get('id');
+        var idMateria = urlParams.get('idMateria');
+        var idTurma = urlParams.get('idTurma');
+        var unidade = urlParams.get('unidade');
+
+        window.location.href = "updateInsertNotes.jsp?idAluno=" + idAluno +
+            "&idUnidade=" + unidade + "&idMateria=" + idMateria +
+            "&idTurma=" + idTurma + "&unidade=" + unidade +
+            "&notaAd=" + parseFloat(document.getElementById('ad').value) +
+            "&notaAps=" + parseFloat(document.getElementById('aps').value) +
+            "&notaAs=" + parseFloat(document.getElementById('as').value) +
+            "&notaAft=" + parseFloat(document.getElementById('aft').value) +
+            "&notaFinal=" + document.getElementById('soma').value +
+            "&idProfessor=" + urlParams.get('idprofessor');
+    }
 </script>
+
 </html>

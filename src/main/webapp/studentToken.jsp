@@ -97,7 +97,7 @@
 <%} 
 %>
 
-<%
+<%/*
 PreparedStatement updateDataStudent = null;
 ResultSet rsUpdate= null;
 if(conexao != null && request.getParameter("idAluno") != null){
@@ -125,7 +125,7 @@ if(conexao != null && request.getParameter("idAluno") != null){
 	}catch (SQLException e) {
         e.printStackTrace();
     }
-}
+}*/
 %>
 
 </body>

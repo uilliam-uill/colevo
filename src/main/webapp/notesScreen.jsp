@@ -32,7 +32,7 @@
         <div class="col-6 mx-auto">
             <div class="card shadow border">
                 <div class="card-body d-flex flex-column align-items-center">
-                <h3 class="titleNota">Unidade <%=request.getParameter("unidade") %></h3>
+                <h3 class="titleNota"><%=request.getParameter("unidade")%>º Trimestre</h3>
                 <%
                 Teacher t = Teacher.getInstance();
                 PreparedStatement notasAtiv = null;
@@ -76,20 +76,23 @@
                  }
                 }
                 %>
-                		<label>AD - Atividade Diversificada:</label> 
+             	   		<div class="alert alert-success" id="salvoSucess" role="alert">
+  							Salvo com Sucesso!!!
+						</div>
+                		<label>AD - Atividade Diversificada:<span class="noteProva">2.0</span></label> 
                 		<input type="number" id="ad" name="notaAd" onchange="somaNota()" value="<%=notaAD %>">
                 		<br>
-                		<label>APS - Avaliação Parcial Semanal:</label>
+                		<label>APS - Avaliação Parcial Semanal:<span class="noteProva">3.0</span></label>
                 		<input type="number" id="aps" name="notaAps" onchange="somaNota()" value="<%=notaAPS %>">
                 		<br>
-                		<label>AS - Avaliação Sistemática:</label>
+                		<label>AS - Avaliação Sistemática:<span class="noteProva">1.0</span></label>
                 		<input type="number" id="as" name="notaAs" onchange="somaNota()" value="<%=notaAS %>">
                 		<br>
-                		<label>AFT: Avaliação Final Trimestral:</label>
+                		<label>AFT: Avaliação Final Trimestral:<span class="noteProva">4.0</span></label>
                 		<input type="number" id="aft" name="notaAft" onchange="somaNota()" value="<%=notaAFT %>">
                 		<br>
-                		<label>Nota Final</label>
-                		<input type="number" id="soma" step="0.1" name="notaFinal" value=""> <br>
+                		<label>Média trimestral</label>
+                		<input type="number" id="soma" step="0.1" name="notaFinal" value="" readonly> <br>
                 		<button type="button" onclick="updateNotas()" class="btn btn-success">Salvar</button>
                 </div>
             </div>
@@ -97,6 +100,7 @@
 </div>
 </body>
 <script>
+	document.getElementById('salvoSucess').style.display = 'none';
     var ad = parseFloat(document.getElementById('ad').value) || 0;
     var aps = parseFloat(document.getElementById('aps').value) || 0;
     var as = parseFloat(document.getElementById('as').value) || 0;
@@ -129,7 +133,29 @@
             "&notaAft=" + parseFloat(document.getElementById('aft').value) +
             "&notaFinal=" + document.getElementById('soma').value +
             "&idProfessor=" + urlParams.get('idprofessor');
+        document.getElementById('salvoSucess').style.display = 'block';
     }
+    
+    var inputMf = document.getElementById('soma');
+
+    // Obtém o valor atual do input
+	var valorMf = inputMf.value;
+
+    // Se houver um valor, formata para exibir apenas uma casa decimal
+    if (valorMf !== "") {
+        // Converte para número
+        var numeroMf = parseFloat(valorMf);
+
+        // Verifica se é um número válido
+        if (!isNaN(numeroMf)) {
+            // Formata para exibir apenas uma casa decimal
+            inputMf.value = numeroMf.toFixed(1);
+        } else {
+            // Caso não seja um número válido, limpa o valor do input
+            inputMf.value = "";
+        }
+    }
+
 </script>
 
 </html>

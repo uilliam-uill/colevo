@@ -71,8 +71,11 @@
 							<td><%=rsNotas.getDouble("segunda_und")%></td>
 							<td><%=rsNotas.getDouble("terceira_und")%></td>
 							<td><%=rsNotas.getDouble("recuperacao")%></td>
-							<td><%=rsNotas.getDouble("nota_final")%></td>
-							<td><%=rsNotas.getBoolean("aprovado")%></td>
+							<td><%= Double.parseDouble(rsNotas.getString("primeira_und")) +
+         					Double.parseDouble(rsNotas.getString("segunda_und")) +
+         					Double.parseDouble(rsNotas.getString("terceira_und")) %>
+							</td>
+<td><%=rsNotas.getBoolean("aprovado")%></td>
 							<td><button type="button" class="btn-primary">Atualizar Nota</button></td>
 						</tr>
 						<% } 

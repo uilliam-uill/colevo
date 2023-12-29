@@ -53,7 +53,7 @@
                 <h3 class="titleNota">Atualize a Nota</h3>
                 	<form>
 	                    <label>Código do aluno</label> 
-	                    <input type="text" class="form-control" id="idAluno" value="<%=rsStudentData.getInt("id_aluno")%>" > <br>
+	                    <input type="text" class="form-control" id="idAluno" value="<%=rsStudentData.getInt("id_aluno")%>" readonly> <br>
 	                    
 	                    <label>Nome</label> 
 	                    <input type="text" class="form-control" value="<%=rsStudentData.getString("nome")%>" disabled="disabled"> <br>
@@ -61,33 +61,35 @@
 	                    <label>CPF</label> 
 	                    <input type="text" class="form-control" value="<%=rsStudentData.getString("cpf") %>" disabled="disabled"> <br>
 	               </form>     
-	                    <label>Primeira Unidade</label> 
+	                    <label>Primeiro Trimestre</label> 
 	                    <div class="buttonUnid">
-		                    <input type="number" name="notaunidadeum"  step="0.1" class="form-control" id="unidOne" onchange="aprovar()" value="<%=rsStudentData.getDouble("primeira_und") %>"> 
+		                    <input type="number" name="notaunidadeum"  step="0.1" class="form-control" id="unidOne" onchange="aprovar()" value="<%=rsStudentData.getDouble("primeira_und") %>"readonly> 
 		                    <button class="btn-primary" id="unidadeUm" >Acessar Notas</button>
 	                    </div>
-	                    <label>Segunda Unidade</label>
+	                    <label>Segundo Trimestre</label>
 	                     <div class="buttonUnid"> 
-		                    <input type="number" name="notaunidadedois" step="0.1" class="form-control" id="unidTwo" onchange="aprovar()" value="<%=rsStudentData.getDouble("segunda_und") %>"> <br>
+		                    <input type="number" name="notaunidadedois" step="0.1" class="form-control" id="unidTwo" onchange="aprovar()" value="<%=rsStudentData.getDouble("segunda_und") %>" readonly> <br>
 	                    <button class="btn-primary" id="unidadeDois">Acessar Notas</button>
 	                    </div>
-	                    <label>Terceira Unidade</label>
+	                    <label>Terceiro Trimestre</label>
 	                     <div class="buttonUnid">  
-		                    <input type="number" name="notaunidadetres" step="0.1" class="form-control" id="unidThree" onchange="aprovar()" value="<%=rsStudentData.getDouble("terceira_und") %>"> <br>
+		                    <input type="number" name="notaunidadetres" step="0.1" class="form-control" id="unidThree" onchange="aprovar()" value="<%=rsStudentData.getDouble("terceira_und") %>" readonly> <br>
 	                    <button class="btn-primary" id="unidadeTres">Acessar Notas</button>
 	                    </div> 
 	               <form>
 	                    <label>Recuperação</label> 
-	                    <input type="number" name="notarecuperacao" step="0.1" class="form-control" value="<%=rsStudentData.getDouble("recuperacao") %>"> <br>
+	                    <input type="number" name="notarecuperacao" step=".1" class="form-control" value="<%=rsStudentData.getDouble("recuperacao") %>"> <br>
 	                    
-	                    <label>Nota Final</label> 
-	                    <input type="number" name="notafinal" class="form-control" step="0.1" id="somaNotas" value="<%=rsStudentData.getDouble("nota_final") %>"> <br>
+	                    <label>Somatório de Notas</label> 
+	                    <input type="number" name="notafinal" class="form-control" step="0.1" id="somaNotas" value="<%=rsStudentData.getDouble("nota_final") %>" readonly> <br>
+	                    <label>Média de Notas</label> 
+	                    <input type="number" name="notafinal" class="form-control" id="mediaFinal" value="<%=rsStudentData.getDouble("nota_final") %>" readonly> <br>
 	                    <label>Aprovação:</label>
-	                    <input type="radio" name="status" value="true" <% if (rsStudentData.getBoolean("aprovado")) { %> checked <% } %>>
+	                    <input type="radio" name="status" value="true" <% if (rsStudentData.getBoolean("aprovado")) { %> checked <% } %> readonly>
 	                    <label>Sim</label> 
-						<input type="radio" name="status" value="false" <% if (!rsStudentData.getBoolean("aprovado")) { %> checked <% } %>>
-						<label>Não</label>  <br> <br> 
-	                    <button type="submit" class="btn btn-success">Enviar</button>
+						<input type="radio" name="status" value="false" <% if (!rsStudentData.getBoolean("aprovado")) { %> checked <% } %> readonly>
+						<label>Não</label> 
+	                    <button type="submit" class="btn btn-success">Salvar Aprovação</button>
 	              </form>           
                 </div>
             </div>
@@ -130,19 +132,19 @@ if(conexao != null && request.getParameter("idAluno") != null){
 
 </body>
 <script>
-	function aprovar(){
 		var one_unid = parseFloat(document.getElementById('unidOne').value) || 0;
 		var two_unid = parseFloat(document.getElementById('unidTwo').value) || 0;
 		var three_unid = parseFloat(document.getElementById('unidThree').value) || 0;
 		var finalGrade = one_unid + two_unid + three_unid;
+		var medianota = finalGrade/3;
 		document.getElementById('somaNotas').value = finalGrade;
+		document.getElementById('mediaFinal').value = medianota;
 		
 		if (finalGrade > 18.0) {
 			document.querySelector('input[name="status"][value="true"]').checked = true;
 		} else {
 			document.querySelector('input[name="status"][value="false"]').checked = true;
 		}
-	}
 	var buttonUm = document.getElementById('unidadeUm');
 
 	buttonUm.addEventListener('click', function() {
@@ -184,5 +186,72 @@ if(conexao != null && request.getParameter("idAluno") != null){
 	    // Corrigindo a concatenação para redirecionamento
 	    window.location.href = "notesScreen.jsp?id=" + idAluno + "&idMateria=" + idMateria + "&idTurma=" + idTurma + "&unidade=3&idprofessor=" + idProfessor;
 	});
+	
+	var input = document.getElementById('somaNotas');
+
+	    // Obtém o valor atual do input
+	var valor = input.value;
+
+	    // Se houver um valor, formata para exibir apenas uma casa decimal
+	    if (valor !== "") {
+	        // Converte para número
+	        var numero = parseFloat(valor);
+
+	        // Verifica se é um número válido
+	        if (!isNaN(numero)) {
+	            // Formata para exibir apenas uma casa decimal
+	            input.value = numero.toFixed(1);
+	        } else {
+	            // Caso não seja um número válido, limpa o valor do input
+	            input.value = "";
+	        }
+	    }
+
+	    var inputMf = document.getElementById('mediaFinal');
+
+	    // Obtém o valor atual do input
+	var valorMf = inputMf.value;
+
+	    // Se houver um valor, formata para exibir apenas uma casa decimal
+	    if (valorMf !== "") {
+	        // Converte para número
+	        var numeroMf = parseFloat(valorMf);
+
+	        // Verifica se é um número válido
+	        if (!isNaN(numeroMf)) {
+	            // Formata para exibir apenas uma casa decimal
+	            inputMf.value = numeroMf.toFixed(1);
+	        } else {
+	            // Caso não seja um número válido, limpa o valor do input
+	            inputMf.value = "";
+	        }
+	    }
+
+
+
+	var inputMedia = document.getElementById('mediaFinal');
+
+	inputMedia.addEventListener('input', function() {
+	    // Obtém o valor atual do input
+	    var valor = input.value;
+
+	    // Remove qualquer caractere que não seja número ou ponto decimal
+	    valor = valor.replace(/[^0-9.]/g, '');
+
+	    // Divida o número em parte inteira e decimal
+	    var partes = valor.split('.');
+	    var parteDecimal = partes[1];
+
+	    // Limita a parte decimal a uma casa decimal
+	    if (parteDecimal && parteDecimal.length > 1) {
+	        parteDecimal = parteDecimal.slice(0, 1); // Mantém apenas a primeira casa decimal
+	        valor = partes[0] + '.' + parteDecimal;
+	    }
+
+	    // Atualiza o valor do input
+	    inputMedia.value = valor;
+	});
+
+	
 </script>
 </html>

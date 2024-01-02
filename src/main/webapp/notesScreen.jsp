@@ -41,15 +41,17 @@
     			Double notaAPS = 0.0;
     			Double notaAS = 0.0;
     			Double notaAFT = 0.0;
+    			Double sasUm = 0.0;
+    			Double sasDois = 0.0;
     			Connection conexao = ConectionMysql.conectar();
-                if(Integer.parseInt(request.getParameter("idTurma"))!= 12){ %>
+                %>
                 <%
                  if (conexao != null){
             		try{
             			notasAtiv = conexao.prepareStatement("SELECT avaliacao.nota_tirada, avaliacao.id_avaliacao FROM avaliacao " +
             			" INNER JOIN tipos_avaliacao ON avaliacao.id_avaliacao = tipos_avaliacao.id_avaliacao" + 
             			" WHERE avaliacao.unidade = ? AND avaliacao.id_aluno = ? AND avaliacao.id_materia = ?" + 
-            			" AND avaliacao.id_turma = ? AND avaliacao.id_avaliacao IN (2, 3, 4, 5);");
+            			" AND avaliacao.id_turma = ? AND avaliacao.id_avaliacao IN (2, 3, 4, 5, 6, 7);");
             			notasAtiv.setInt(1, Integer.parseInt(request.getParameter("unidade")));
             			notasAtiv.setInt(2, Integer.parseInt(request.getParameter("id")));
             			notasAtiv.setInt(3, Integer.parseInt(request.getParameter("idMateria")));
@@ -69,12 +71,17 @@
             				if(rsAtiv.getInt("id_avaliacao") == 5){
             					notaAFT = rsAtiv.getDouble("nota_tirada");
             				}
+            				if(rsAtiv.getInt("id_avaliacao") == 6){
+            					sasUm = rsAtiv.getDouble("nota_tirada");
+            				}
+            				if(rsAtiv.getInt("id_avaliacao") == 7){
+            					sasDois = rsAtiv.getDouble("nota_tirada");
+            				}
             			}
             		}catch (SQLException e) {
                         e.printStackTrace();
                     }
                  }
-                }
                 %>
              	   		<div class="alert alert-success" id="salvoSucess" role="alert">
   							Salvo com Sucesso!!!
@@ -85,11 +92,19 @@
                 		<label>APS - Avaliação Parcial Semanal:<span class="noteProva">3.0</span></label>
                 		<input type="number" id="aps" name="notaAps" onchange="somaNota()" value="<%=notaAPS %>">
                 		<br>
-                		<label>AS - Avaliação Sistemática:<span class="noteProva">1.0</span></label>
-                		<input type="number" id="as" name="notaAs" onchange="somaNota()" value="<%=notaAS %>">
-                		<br>
-                		<label>AFT: Avaliação Final Trimestral:<span class="noteProva">4.0</span></label>
-                		<input type="number" id="aft" name="notaAft" onchange="somaNota()" value="<%=notaAFT %>">
+                		<%if(Integer.parseInt(request.getParameter("idTurma")) == 12) {%>
+	                		<label>SAS1 = Enem 1:<span class="noteProva">2.0</span></label>
+	                		<input type="number" id="sas1ouas" name="notaAsOuSasum" onchange="somaNota()" value="<%=sasUm %>">
+	                		<br>
+	                		<label>SAS2 = Enem 2:<span class="noteProva">3.0</span></label>
+	                		<input type="number" id="sas2ouaft" name="notaAftOuSasdois" onchange="somaNota()" value="<%=sasDois %>">
+                		<%} else if (Integer.parseInt(request.getParameter("idTurma")) != 12){ %>
+	                		<label>AS - Avaliação Sistemática:<span class="noteProva">1.0</span></label>
+	                		<input type="number" id="sas1ouas" name="notaAsOuSasum" onchange="somaNota()" value="<%=notaAS %>">
+	                		<br>
+	                		<label>AFT: Avaliação Final Trimestral:<span class="noteProva">4.0</span></label>
+	                		<input type="number" id="sas2ouaft" name="notaAftOuSasdois" onchange="somaNota()" value="<%=notaAFT %>">
+                		<%} %>
                 		<br>
                 		<label>Média trimestral</label>
                 		<input type="number" id="soma" step="0.1" name="notaFinal" value="" readonly> <br>
@@ -103,16 +118,16 @@
 	document.getElementById('salvoSucess').style.display = 'none';
     var ad = parseFloat(document.getElementById('ad').value) || 0;
     var aps = parseFloat(document.getElementById('aps').value) || 0;
-    var as = parseFloat(document.getElementById('as').value) || 0;
-    var aft = parseFloat(document.getElementById('aft').value) || 0;
+    var as = parseFloat(document.getElementById('sas1ouas').value) || 0;
+    var aft = parseFloat(document.getElementById('sas2ouaft').value) || 0;
     var finalGrade = ad + aps + as + aft;
     document.getElementById('soma').value = finalGrade;
 
     function somaNota() {
         var ad = parseFloat(document.getElementById('ad').value) || 0;
         var aps = parseFloat(document.getElementById('aps').value) || 0;
-        var as = parseFloat(document.getElementById('as').value) || 0;
-        var aft = parseFloat(document.getElementById('aft').value) || 0;
+        var as = parseFloat(document.getElementById('sas1ouas').value) || 0;
+        var aft = parseFloat(document.getElementById('sas2ouaft').value) || 0;
         var finalGrade = ad + aps + as + aft;
         document.getElementById('soma').value = finalGrade;
     }
@@ -123,14 +138,15 @@
         var idMateria = urlParams.get('idMateria');
         var idTurma = urlParams.get('idTurma');
         var unidade = urlParams.get('unidade');
-
+		
+        
         window.location.href = "updateInsertNotes.jsp?idAluno=" + idAluno +
             "&idUnidade=" + unidade + "&idMateria=" + idMateria +
             "&idTurma=" + idTurma + "&unidade=" + unidade +
             "&notaAd=" + parseFloat(document.getElementById('ad').value) +
             "&notaAps=" + parseFloat(document.getElementById('aps').value) +
-            "&notaAs=" + parseFloat(document.getElementById('as').value) +
-            "&notaAft=" + parseFloat(document.getElementById('aft').value) +
+            "&notaAsOuSasum=" + parseFloat(document.getElementById('sas1ouas').value) +
+            "&notaAftOuSasdois=" + parseFloat(document.getElementById('sas2ouaft').value) +
             "&notaFinal=" + document.getElementById('soma').value +
             "&idProfessor=" + urlParams.get('idprofessor');
         document.getElementById('salvoSucess').style.display = 'block';

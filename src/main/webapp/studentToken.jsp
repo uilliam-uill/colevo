@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="style/screenTeacher.css">
 <link rel="stylesheet" type="text/css" href="style/studentToken.css">
 </head>
+
 <body>
 <div class = "header">
 		<div class="icons">
@@ -78,8 +79,8 @@
 	                    </div> 
 	               <form>
 	                    <label>Recuperação</label> 
-	                    <input type="number" name="notarecuperacao" step=".1" class="form-control" value="<%=rsStudentData.getDouble("recuperacao") %>"> <br>
-	                    
+	                 	<input type="number" name="notarecuperacao" step="0.1" id="recuperacaoId" class="form-control" onchange="noteRecu()" value="<%=rsStudentData.getDouble("recuperacao") %>">
+   
 	                    <label>Somatório de Notas</label> 
 	                    <input type="number" name="notafinal" class="form-control" step="0.1" id="somaNotas" value="<%=rsStudentData.getDouble("nota_final") %>" readonly> <br>
 	                    <label>Média de Notas</label> 
@@ -89,8 +90,9 @@
 	                    <label>Sim</label> 
 						<input type="radio" name="status" value="false" <% if (!rsStudentData.getBoolean("aprovado")) { %> checked <% } %> readonly>
 						<label>Não</label> 
-	                    <button type="submit" class="btn btn-success">Salvar Aprovação</button>
-	              </form>           
+				 </form>    		
+	                    <button type="button" class="btn btn-success" onclick="aprovarAluno()">Salvar Aprovação</button>
+	                    
                 </div>
             </div>
         </div>
@@ -132,10 +134,12 @@ if(conexao != null && request.getParameter("idAluno") != null){
 
 </body>
 <script>
+		//somar notas
 		var one_unid = parseFloat(document.getElementById('unidOne').value) || 0;
 		var two_unid = parseFloat(document.getElementById('unidTwo').value) || 0;
 		var three_unid = parseFloat(document.getElementById('unidThree').value) || 0;
-		var finalGrade = one_unid + two_unid + three_unid;
+		var recuperacao = parseFloat(document.getElementById('recuperacaoId').value) || 0;
+		var finalGrade = one_unid + two_unid + three_unid + recuperacao;
 		var medianota = finalGrade/3;
 		document.getElementById('somaNotas').value = finalGrade;
 		document.getElementById('mediaFinal').value = medianota;
@@ -145,69 +149,66 @@ if(conexao != null && request.getParameter("idAluno") != null){
 		} else {
 			document.querySelector('input[name="status"][value="false"]').checked = true;
 		}
-	var buttonUm = document.getElementById('unidadeUm');
 
-	buttonUm.addEventListener('click', function() {
-	    var idAluno = document.getElementById('idAluno').value;
-	    var urlParams = new URLSearchParams(window.location.search);
+		//encaminhar pagina trimestre 1
+		var buttonUm = document.getElementById('unidadeUm');
 
-	    // Capturando o valor do parâmetro 'idmateria' e 'idTurma'
-	    var idMateria = urlParams.get('idmateria');
-	    var idTurma = urlParams.get('idTurma');
-
-	    // Corrigindo a concatenação para redirecionamento
-	    window.location.href = "notesScreen.jsp?id=" + idAluno + "&idMateria=" + idMateria + "&idTurma=" + idTurma + "&unidade=1";
+		buttonUm.addEventListener('click', function() {
+		    var idAluno = document.getElementById('idAluno').value;
+		    var urlParams = new URLSearchParams(window.location.search);
+	
+		    var idMateria = urlParams.get('idmateria');
+		    var idTurma = urlParams.get('idTurma');
+	
+		    window.location.href = "notesScreen.jsp?id=" + idAluno + "&idMateria=" + idMateria + "&idTurma=" + idTurma + "&unidade=1";
 	});
 
-	var buttonDois = document.getElementById('unidadeDois');
+		//encaminhar pagina trimestre 12
+		var buttonDois = document.getElementById('unidadeDois');
 
-	buttonDois.addEventListener('click', function() {
-	    var idAluno = document.getElementById('idAluno').value;
-	    var urlParams = new URLSearchParams(window.location.search);
-
-	    // Capturando o valor do parâmetro 'idmateria' e 'idTurma'
-	    var idMateria = urlParams.get('idmateria');
-	    var idTurma = urlParams.get('idTurma');
-
-	    // Corrigindo a concatenação para redirecionamento
-	    window.location.href = "notesScreen.jsp?id=" + idAluno + "&idMateria=" + idMateria + "&idTurma=" + idTurma + "&unidade=2";
+		buttonDois.addEventListener('click', function() {
+		    var idAluno = document.getElementById('idAluno').value;
+		    var urlParams = new URLSearchParams(window.location.search);
+	
+		    var idMateria = urlParams.get('idmateria');
+		    var idTurma = urlParams.get('idTurma');
+	
+		    window.location.href = "notesScreen.jsp?id=" + idAluno + "&idMateria=" + idMateria + "&idTurma=" + idTurma + "&unidade=2";
 	});
 	
-	var buttonTres = document.getElementById('unidadeTres');
+		//encaminhar pagina trimestre 3
+		var buttonTres = document.getElementById('unidadeTres');
 
-	buttonTres.addEventListener('click', function() {
-	    var idAluno = document.getElementById('idAluno').value;
-	    var urlParams = new URLSearchParams(window.location.search);
-
-	    // Capturando o valor do parâmetro 'idmateria' e 'idTurma'
-	    var idMateria = urlParams.get('idmateria');
-	    var idTurma = urlParams.get('idTurma');
-	    var idProfessor = urlParams.get('idProfessor');
-	    // Corrigindo a concatenação para redirecionamento
-	    window.location.href = "notesScreen.jsp?id=" + idAluno + "&idMateria=" + idMateria + "&idTurma=" + idTurma + "&unidade=3&idprofessor=" + idProfessor;
+		buttonTres.addEventListener('click', function() {
+		    var idAluno = document.getElementById('idAluno').value;
+		    var urlParams = new URLSearchParams(window.location.search);
+	
+		    var idMateria = urlParams.get('idmateria');
+		    var idTurma = urlParams.get('idTurma');
+		    var idProfessor = urlParams.get('idProfessor');
+		    
+		    window.location.href = "notesScreen.jsp?id=" + idAluno + "&idMateria=" + idMateria + "&idTurma=" + idTurma + "&unidade=3&idprofessor=" + idProfessor;
 	});
 	
 	var input = document.getElementById('somaNotas');
 
-	    // Obtém o valor atual do input
 	var valor = input.value;
 
-	    // Se houver um valor, formata para exibir apenas uma casa decimal
+
 	    if (valor !== "") {
-	        // Converte para número
+	    	
 	        var numero = parseFloat(valor);
 
-	        // Verifica se é um número válido
 	        if (!isNaN(numero)) {
-	            // Formata para exibir apenas uma casa decimal
+	        	
 	            input.value = numero.toFixed(1);
 	        } else {
-	            // Caso não seja um número válido, limpa o valor do input
+	        	
 	            input.value = "";
 	        }
 	    }
 
-	    var inputMf = document.getElementById('mediaFinal');
+	var inputMf = document.getElementById('mediaFinal');
 
 	    // Obtém o valor atual do input
 	var valorMf = inputMf.value;
@@ -226,8 +227,6 @@ if(conexao != null && request.getParameter("idAluno") != null){
 	            inputMf.value = "";
 	        }
 	    }
-
-
 
 	var inputMedia = document.getElementById('mediaFinal');
 
@@ -252,6 +251,44 @@ if(conexao != null && request.getParameter("idAluno") != null){
 	    inputMedia.value = valor;
 	});
 
+	function aprovarAluno() {
+	    var radios = document.getElementsByName("status");
+	    var recuperacao = parseFloat(document.getElementById('recuperacaoId').value) || 0;
+	    var aprovado;
+
+	    radios.forEach(function(radio) {
+	        if (radio.checked) {
+	            aprovado = radio.value;
+	        }
+	    });
+
+	    var urlParams = new URLSearchParams(window.location.search);
+	    var idAluno = document.getElementById('idAluno').value;
+	    var idMateria = urlParams.get('idmateria');
+
+	    // Monta a URL corretamente com os parâmetros
+	    window.location.href = "updateApproved.jsp?idAluno=" + idAluno + "&idMateria=" + idMateria + "&aprovado=" + aprovado + "&recuperacao=" + recuperacao;
+	}
 	
+	//inserir nota recuperação
+	function noteRecu() {
+	    var one_unidR = parseFloat(document.getElementById('unidOne').value) || 0;
+	    var two_unidR = parseFloat(document.getElementById('unidTwo').value) || 0;
+	    var three_unidR = parseFloat(document.getElementById('unidThree').value) || 0;
+	    var recuperacaonotaR = parseFloat(document.getElementById('recuperacaoId').value) || 0;
+	    var finalGradeR = one_unidR + two_unidR + three_unidR + recuperacaonotaR;
+	    var medianotaR = finalGradeR / 3; // Dividindo por 4 (3 unidades + recuperação)
+
+	    document.getElementById('somaNotas').value = finalGradeR.toFixed(1); // Atualiza a soma das notas
+	    document.getElementById('mediaFinal').value = medianotaR.toFixed(1); // Atualiza a média final
+
+	    // Atualiza o status baseado na nota final
+	    if (finalGradeR > 18.0) {
+	        document.querySelector('input[name="status"][value="true"]').checked = true;
+	    } else {
+	        document.querySelector('input[name="status"][value="false"]').checked = true;
+	    }
+	}
+
 </script>
 </html>

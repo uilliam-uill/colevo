@@ -42,11 +42,14 @@
         	stAlunosMat = conexao.prepareStatement("SELECT aluno.id_aluno, pessoa.nome, notas.primeira_und, notas.segunda_und, notas.terceira_und," +
             	       " notas.recuperacao, notas.nota_final, notas.aprovado " +
             	       " FROM notas INNER JOIN aluno ON aluno.id_aluno = notas.id_aluno" +
-            	       " INNER JOIN pessoa ON pessoa.id_pessoa = aluno.id_pessoa;");
+            	       " INNER JOIN pessoa ON pessoa.id_pessoa = aluno.id_pessoa WHERE notas.id_materia = ?");
+        	stAlunosMat.setInt(1, Integer.parseInt(request.getParameter("id")));
 
         	rsNotas = stAlunosMat.executeQuery();%>
         	<h1 class="titleTeacher">Segue abaixo alunos de <%=materiaJs%> da turma <%=turmaJs%></h1>
-        	<div class="tableDiv">
+        	<button type="submit" class="btn-primary" onclick="planoAulaCaminho()" id="planoaula">Atualizar Nota</button>
+
+<div class="tableDiv">
 			<table class="table">
 				<thead class="thead-light">
 				    <tr>
@@ -89,25 +92,36 @@
     </table> 
     </div>
     
-     <script>
-    var buttons = document.querySelectorAll('.btn-primary');
+<script>
+var buttonsAula = document.querySelectorAll('.btn-primary');
 
-    // Iterar sobre cada botão para adicionar um evento de clique
-    buttons.forEach(function(button) {
-      button.addEventListener('click', function() {
-        // Acessar o valor da terceira célula (índice 2, pois começamos do zero) 
-        var idAluno = this.closest('tr').querySelectorAll('td')[0].textContent;
-        var idMateria = this.closest('tr').querySelectorAll('td')[1].textContent;
-        const urlParams = new URLSearchParams(window.location.search);
+//Iterar sobre cada botão para adicionar um evento de clique
+buttonsAula.forEach(function(button) {
+button.addEventListener('click', function() {
+ // Acessar o valor da terceira célula (índice 2, pois começamos do zero) 
+ var idAluno = this.closest('tr').querySelectorAll('td')[0].textContent;
+ var idMateria = this.closest('tr').querySelectorAll('td')[1].textContent;
+ const urlParams = new URLSearchParams(window.location.search);
 
-     // Capturando o valor do parâmetro 'idmateria'
-    	var idTurma = urlParams.get('idTurma');
-    	var idProfessor = urlParams.get('idProfessor');
-        
-        // Fazer algo com o ID da matéria, como exibir em um console
-       window.location.href = "studentToken.jsp?id=" + idAluno + "&idmateria=" + idMateria + "&idTurma=" + idTurma + "&idProfessor=" + idProfessor;
-      });
-    });
+ // Capturando o valor do parâmetro 'idTurma' e 'idProfessor'
+ var idTurma = urlParams.get('idTurma');
+ var idProfessor = urlParams.get('idProfessor');
+
+ // Fazer algo com os IDs, como redirecionar para outra página
+ window.location.href = "studentToken.jsp?id=" + idAluno + "&idmateria=" + idMateria + "&idTurma=" + idTurma + "&idProfessor=" + idProfessor;
+});
+});
+
+//Exemplo de manipulação de elementos para outro evento
+var buttonsPlanoAula = document.querySelectorAll('.planoaula');
+
+buttonsPlanoAula.forEach(function(button) {
+button.addEventListener('click', function() {
+ var idMateria = this.closest('tr').querySelectorAll('td')[1].textContent;
+ window.location.href = "subjects.jsp?idMateria=" + idMateria;
+});
+});
+
     </script>
 </body>
 </html>

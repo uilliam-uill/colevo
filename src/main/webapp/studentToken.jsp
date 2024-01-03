@@ -13,8 +13,8 @@
 <body>
 <div class = "header">
 		<div class="icons">
-			<img src="imagens/logobranca.png" width="100">
-			<h1 style="color: white">Colégio Evolução - Ficha Aluno</h1>
+			<img src="imagens\Captura de tela 2024-01-02 174742-fotor-bg-remover-20240102174819.png" width="300">
+			<h1 style="color: white">Desempenho do Aluno</h1>
 		</div>
 	</div>
 <%@ page import="java.io.FileInputStream" %>
@@ -35,7 +35,7 @@
     if (conexao != null) {
         try{
         	getStudentData = conexao.prepareStatement("SELECT aluno.id_aluno, pessoa.nome, notas.primeira_und, notas.segunda_und, " +
-        		" notas.terceira_und, notas.recuperacao, notas.nota_final, notas.aprovado, notas.notas_detalhada, pessoa.cpf " + 
+        		" notas.terceira_und, notas.recuperacao, notas.nota_final, notas.aprovado, pessoa.cpf " + 
         		" FROM notas INNER JOIN aluno ON aluno.id_aluno = notas.id_aluno INNER JOIN pessoa ON pessoa.id_pessoa " + 
         		" = aluno.id_pessoa where aluno.id_aluno = ?;");
         	getStudentData.setInt(1, Integer.parseInt(request.getParameter("id")));
@@ -78,7 +78,7 @@
 	                    <button class="btn-primary" id="unidadeTres">Acessar Notas</button>
 	                    </div> 
 	               <form>
-	                    <label>Recuperação</label> 
+	                    <label>Prova Final</label> 
 	                 	<input type="number" name="notarecuperacao" step="0.1" id="recuperacaoId" class="form-control" onchange="noteRecu()" value="<%=rsStudentData.getDouble("recuperacao") %>">
    
 	                    <label>Somatório de Notas</label> 
@@ -141,6 +141,9 @@ if(conexao != null && request.getParameter("idAluno") != null){
 		var recuperacao = parseFloat(document.getElementById('recuperacaoId').value) || 0;
 		var finalGrade = one_unid + two_unid + three_unid + recuperacao;
 		var medianota = finalGrade/3;
+		if(medianota > 5.6 && medianota<6){
+			medianota = 6;
+		}
 		document.getElementById('somaNotas').value = finalGrade;
 		document.getElementById('mediaFinal').value = medianota;
 		
@@ -265,9 +268,11 @@ if(conexao != null && request.getParameter("idAluno") != null){
 	    var urlParams = new URLSearchParams(window.location.search);
 	    var idAluno = document.getElementById('idAluno').value;
 	    var idMateria = urlParams.get('idmateria');
-
+	    var mediaFinal = document.getElementById('mediaFinal').value;
+	    var notaFinal = document.getElementById('somaNotas').value;
 	    // Monta a URL corretamente com os parâmetros
-	    window.location.href = "updateApproved.jsp?idAluno=" + idAluno + "&idMateria=" + idMateria + "&aprovado=" + aprovado + "&recuperacao=" + recuperacao;
+	    window.location.href = "updateApproved.jsp?idAluno=" + idAluno + "&idMateria=" + idMateria + "&aprovado=" + aprovado
+	    		+ "&medianota=" + mediaFinal + "&notaFinal=" + notaFinal;
 	}
 	
 	//inserir nota recuperação
@@ -289,6 +294,20 @@ if(conexao != null && request.getParameter("idAluno") != null){
 	        document.querySelector('input[name="status"][value="false"]').checked = true;
 	    }
 	}
+	
+	// Selecionando todos os inputs do tipo number
+	var inputs = document.querySelectorAll('input[type="number"]');
+
+	// Adicionando um listener de evento 'input' para cada input
+	inputs.forEach(function(input) {
+	    input.addEventListener('input', function() {
+	        if (input.value !== '') {
+	            var valor = parseFloat(input.value);
+	            input.value = valor.toFixed(1); // Limitando para uma casa decimal
+	        }
+	    });
+	});
+
 
 </script>
 </html>

@@ -71,13 +71,25 @@
                                       	   updateNota.setInt(5, Integer.parseInt(request.getParameter("unidade").trim()));
                                       	   updateNota.setInt(6, 5);
                                       	   updateNota.setDouble(7, Double.parseDouble(request.getParameter("notaAftOuSasdois").trim()));
-                                      	   updateNota.execute();   
+                                      	   updateNota.execute();
+                                      	   
+                                      	 updateNota = conexao.prepareStatement("INSERT INTO avaliacao (id_aluno, id_materia, id_turma," +
+                                              	 " nota_tirada, unidade, id_avaliacao)" +
+                                              	   " VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE nota_tirada = ?;" );
+                                              	   updateNota.setInt(1, Integer.parseInt(request.getParameter("idAluno").trim()));
+                                              	   updateNota.setInt(2, Integer.parseInt(request.getParameter("idMateria").trim()));
+                                              	   updateNota.setInt(3, Integer.parseInt(request.getParameter("idTurma").trim()));
+                                              	   updateNota.setDouble(4, Double.parseDouble(request.getParameter("rpt").trim()));
+                                              	   updateNota.setInt(5, Integer.parseInt(request.getParameter("unidade").trim()));
+                                              	   updateNota.setInt(6, 8);
+                                              	   updateNota.setDouble(7, Double.parseDouble(request.getParameter("rpt").trim()));
+                                              	   updateNota.execute();       	   
 			Double mediaFinal = Double.parseDouble(request.getParameter("notaAftOuSasdois").trim()) + 
 								Double.parseDouble(request.getParameter("notaAsOuSasum").trim()) +
 								Double.parseDouble(request.getParameter("notaAps").trim()) +
-								Double.parseDouble(request.getParameter("notaAd").trim());
+								Double.parseDouble(request.getParameter("notaAd").trim()) +
+								Double.parseDouble(request.getParameter("rpt").trim());
 		
-
 			if(Integer.parseInt(request.getParameter("unidade").trim()) == 1){
 			    updateUnidade = conexao.prepareStatement("UPDATE notas SET primeira_und = ? WHERE id_aluno = ? AND id_materia = ?");
 			    updateUnidade.setDouble(1, mediaFinal);
@@ -145,10 +157,24 @@
 			                                      	   updateNota.setInt(6, 7);
 			                                      	   updateNota.setDouble(7, Double.parseDouble(request.getParameter("notaAftOuSasdois").trim()));
 			                                      	   updateNota.execute();   
+			                                      	   
+			                                      	 updateNota = conexao.prepareStatement("INSERT INTO avaliacao (id_aluno, id_materia, id_turma," +
+			                                              	 " nota_tirada, unidade, id_avaliacao)" +
+			                                              	   " VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE nota_tirada = ?;" );
+			                                              	   updateNota.setInt(1, Integer.parseInt(request.getParameter("idAluno").trim()));
+			                                              	   updateNota.setInt(2, Integer.parseInt(request.getParameter("idMateria").trim()));
+			                                              	   updateNota.setInt(3, Integer.parseInt(request.getParameter("idTurma").trim()));
+			                                              	   updateNota.setDouble(4, Double.parseDouble(request.getParameter("rpt").trim()));
+			                                              	   updateNota.setInt(5, Integer.parseInt(request.getParameter("unidade").trim()));
+			                                              	   updateNota.setInt(6, 8);
+			                                              	   updateNota.setDouble(7, Double.parseDouble(request.getParameter("rpt").trim()));
+			                                              	   updateNota.execute();        	   
+			                                      	   
 						Double mediaFinal = Double.parseDouble(request.getParameter("notaAsOuSasum").trim()) + 
 											Double.parseDouble(request.getParameter("notaAftOuSasdois").trim()) +
 											Double.parseDouble(request.getParameter("notaAps").trim()) +
-											Double.parseDouble(request.getParameter("notaAd").trim());
+											Double.parseDouble(request.getParameter("notaAd").trim()) +
+											Double.parseDouble(request.getParameter("rpt").trim());
 					
 
 						if(Integer.parseInt(request.getParameter("unidade").trim()) == 1){

@@ -13,8 +13,8 @@
 <body>
 <div class = "header">
 		<div class="icons">
-			<img src="imagens/logobranca.png" width="100">
-			<h1 style="color: white">Colégio Evolução - Ficha Aluno</h1>
+			<img src="imagens\Captura de tela 2024-01-02 174742-fotor-bg-remover-20240102174819.png" width="300">
+			<h1 style="color: white">Ficha Aluno</h1>
 		</div>
 	</div>
 	     		<%@ page import="java.io.FileInputStream" %>
@@ -43,6 +43,7 @@
     			Double notaAFT = 0.0;
     			Double sasUm = 0.0;
     			Double sasDois = 0.0;
+    			Double notaRpt = 0.0;
     			Connection conexao = ConectionMysql.conectar();
                 %>
                 <%
@@ -51,7 +52,7 @@
             			notasAtiv = conexao.prepareStatement("SELECT avaliacao.nota_tirada, avaliacao.id_avaliacao FROM avaliacao " +
             			" INNER JOIN tipos_avaliacao ON avaliacao.id_avaliacao = tipos_avaliacao.id_avaliacao" + 
             			" WHERE avaliacao.unidade = ? AND avaliacao.id_aluno = ? AND avaliacao.id_materia = ?" + 
-            			" AND avaliacao.id_turma = ? AND avaliacao.id_avaliacao IN (2, 3, 4, 5, 6, 7);");
+            			" AND avaliacao.id_turma = ? AND avaliacao.id_avaliacao IN (2, 3, 4, 5, 6, 7, 8);");
             			notasAtiv.setInt(1, Integer.parseInt(request.getParameter("unidade")));
             			notasAtiv.setInt(2, Integer.parseInt(request.getParameter("id")));
             			notasAtiv.setInt(3, Integer.parseInt(request.getParameter("idMateria")));
@@ -76,6 +77,9 @@
             				}
             				if(rsAtiv.getInt("id_avaliacao") == 7){
             					sasDois = rsAtiv.getDouble("nota_tirada");
+            				}
+            				if(rsAtiv.getInt("id_avaliacao") == 8){
+            					notaRpt = rsAtiv.getDouble("nota_tirada");
             				}
             			}
             		}catch (SQLException e) {
@@ -106,6 +110,9 @@
 	                		<input type="number" id="sas2ouaft" name="notaAftOuSasdois" onchange="somaNota()" value="<%=notaAFT %>">
                 		<%} %>
                 		<br>
+                		<label>RPT - Recuperação Trimestral:<span class="noteProva">3.0</span></label>
+                		<input type="number" id="notaRpt" name="rpt" onchange="somaNota()" value="<%=notaRpt %>">
+                		<br>
                 		<label>Média trimestral</label>
                 		<input type="number" id="soma" step="0.1" name="notaFinal" value="" readonly> <br>
                 		<button type="button" onclick="updateNotas()" class="btn btn-success">Salvar</button>
@@ -120,7 +127,8 @@
     var aps = parseFloat(document.getElementById('aps').value) || 0;
     var as = parseFloat(document.getElementById('sas1ouas').value) || 0;
     var aft = parseFloat(document.getElementById('sas2ouaft').value) || 0;
-    var finalGrade = ad + aps + as + aft;
+    var rpt = parseFloat(document.getElementById('notaRpt').value) || 0;
+    var finalGrade = ad + aps + as + aft + rpt;
     document.getElementById('soma').value = finalGrade;
 
     function somaNota() {
@@ -128,9 +136,10 @@
         var aps = parseFloat(document.getElementById('aps').value) || 0;
         var as = parseFloat(document.getElementById('sas1ouas').value) || 0;
         var aft = parseFloat(document.getElementById('sas2ouaft').value) || 0;
-        var finalGrade = ad + aps + as + aft;
+        var rptValue = parseFloat(document.getElementById('notaRpt').value) || 0; // Renomeando a variável rpt
+        var finalGrade = ad + aps + as + aft + rptValue;
         document.getElementById('soma').value = finalGrade;
-    }
+         }
 
     function updateNotas() {
         var urlParams = new URLSearchParams(window.location.search);
@@ -138,8 +147,8 @@
         var idMateria = urlParams.get('idMateria');
         var idTurma = urlParams.get('idTurma');
         var unidade = urlParams.get('unidade');
-		
-        
+        var rptWn = parseFloat(document.getElementById('notaRpt').value) || 0;
+    	document.getElementById('salvoSucess').style.display = 'block';
         window.location.href = "updateInsertNotes.jsp?idAluno=" + idAluno +
             "&idUnidade=" + unidade + "&idMateria=" + idMateria +
             "&idTurma=" + idTurma + "&unidade=" + unidade +
@@ -148,30 +157,32 @@
             "&notaAsOuSasum=" + parseFloat(document.getElementById('sas1ouas').value) +
             "&notaAftOuSasdois=" + parseFloat(document.getElementById('sas2ouaft').value) +
             "&notaFinal=" + document.getElementById('soma').value +
-            "&idProfessor=" + urlParams.get('idprofessor');
-        document.getElementById('salvoSucess').style.display = 'block';
+            "&idProfessor=" + urlParams.get('idprofessor') + "&rpt=" + rptWn;
     }
     
     var inputMf = document.getElementById('soma');
 
-    // Obtém o valor atual do input
 	var valorMf = inputMf.value;
 
-    // Se houver um valor, formata para exibir apenas uma casa decimal
     if (valorMf !== "") {
-        // Converte para número
         var numeroMf = parseFloat(valorMf);
-
-        // Verifica se é um número válido
+        
         if (!isNaN(numeroMf)) {
-            // Formata para exibir apenas uma casa decimal
             inputMf.value = numeroMf.toFixed(1);
         } else {
-            // Caso não seja um número válido, limpa o valor do input
             inputMf.value = "";
         }
     }
+    
+    var inputs = document.querySelectorAll('input[type="number"]');
 
+    inputs.forEach(function(input) {
+        input.addEventListener('input', function() {
+            if (input.value !== '') {
+                var valor = parseFloat(input.value);
+                input.value = valor.toFixed(1); 
+            }
+        });
+    });
 </script>
-
 </html>

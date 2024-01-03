@@ -12,8 +12,8 @@
 <body>
 	<div class = "header">
 		<div class="icons">
-			<img src="imagens/logobranca.png" width="100">
-			<h1 style="color: white">Colégio Evolução - Acesso Professor</h1>
+			<img src="imagens\Captura de tela 2024-01-02 174742-fotor-bg-remover-20240102174819.png" width="300">
+			<h1 style="color: white">Acesso Professor</h1>
 		</div>
 	</div>
 		<%
@@ -104,6 +104,20 @@
        window.location.href = "screenClassTeacher.jsp?id=" + materiaId + "&materia=" + materiaNome + "&turma=" + turmaJs + "&idTurma=" + turmaId + "&idProfessor=" + idProfessor;
       });
     });
+    
+ // Selecionando todos os inputs do tipo number
+    var inputs = document.querySelectorAll('input[type="number"]');
+
+    // Adicionando um listener de evento 'input' para cada input
+    inputs.forEach(function(input) {
+        input.addEventListener('input', function() {
+            if (input.value !== '') {
+                var valor = parseFloat(input.value);
+                input.value = valor.toFixed(1); // Limitando para uma casa decimal
+            }
+        });
+    });
+
     </script>
 </body>
 </html>

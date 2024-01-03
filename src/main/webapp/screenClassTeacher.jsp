@@ -11,10 +11,10 @@
 <script src="js/bootstrap.js.map"></script>
 </head>
 <body>
-	<div class = "header">
+	<div class = "header" style="background-color: rgb(63 , 63, 202);">
 		<div class="icons">
-			<img src="imagens/logobranca.png" width="100">
-			<h1 style="color: white">Colégio Evolução - Acesso Professor</h1>
+			<img src="imagens\Captura de tela 2024-01-02 174742-fotor-bg-remover-20240102174819.png" width="300">
+			<h1 style="color: white;  margin-left:220px" >Controle de Notas</h1>
 		</div>
 	</div>
 <%@ page import="java.io.FileInputStream" %>
@@ -46,8 +46,6 @@
         	stAlunosMat.setInt(1, Integer.parseInt(request.getParameter("id")));
 
         	rsNotas = stAlunosMat.executeQuery();%>
-        	<h1 class="titleTeacher">Segue abaixo alunos de <%=materiaJs%> da turma <%=turmaJs%></h1>
-        	<button type="submit" class="btn-primary" onclick="planoAulaCaminho()" id="planoaula">Atualizar Nota</button>
 
 <div class="tableDiv">
 			<table class="table">
@@ -91,7 +89,6 @@
     </tbody>
     </table> 
     </div>
-    
 <script>
 var buttonsAula = document.querySelectorAll('.btn-primary');
 

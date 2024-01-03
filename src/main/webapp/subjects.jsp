@@ -36,15 +36,15 @@
                 <div class="card-body d-flex flex-column align-items-center">
                 <h3 class="titleNota">Atualize Plano de Aula</h3>
                 <%
-                Connection conexao = ConectionMysql.conectar();
+            /*    Connection conexao = ConectionMysql.conectar();
                 PreparedStatement selectSubject = null;
             	ResultSet rsSubject = null;
             	
             	selectSubject = conexao.prepareStatement("SELECT unidade, asuntos FROM plano_de_aula WHERE id_materia = ?");
-            	selectSubject.setInt(1, Integer.parseInt(request.getParameter("idMateria")));
+            //	selectSubject.setInt(1, Integer.parseInt(request.getParameter("idMateria")));
             	
-            	rsSubject = selectSubject.executeQuery();
-                %>
+            	//rsSubject = selectSubject.executeQuery();
+                /*%>*/
                 	     
 	                    <label>Primeiro Trimestre</label> 
 	                    <textarea class="form-control rounded-0" <% while(rsSubject.next()){ if(rsSubject.getInt("unidade") == 1){%>value="<%=rsSubject.getString("asuntos") %>" <%}} %>id="unidade1" rows="3"></textarea>

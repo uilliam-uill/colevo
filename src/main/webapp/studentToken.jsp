@@ -35,7 +35,7 @@
     if (conexao != null) {
         try{
         	getStudentData = conexao.prepareStatement("SELECT aluno.id_aluno, pessoa.nome, notas.primeira_und, notas.segunda_und, " +
-        		" notas.terceira_und, notas.recuperacao, notas.nota_final, notas.aprovado, pessoa.cpf " + 
+        		" notas.terceira_und, notas.prova_final, notas.nota_final, notas.media_nota, notas.aprovado, pessoa.cpf " + 
         		" FROM notas INNER JOIN aluno ON aluno.id_aluno = notas.id_aluno INNER JOIN pessoa ON pessoa.id_pessoa " + 
         		" = aluno.id_pessoa where aluno.id_aluno = ?;");
         	getStudentData.setInt(1, Integer.parseInt(request.getParameter("id")));
@@ -78,13 +78,13 @@
 	                    <button class="btn-primary" id="unidadeTres">Acessar Notas</button>
 	                    </div> 
 	               <form>
-	                    <label>Prova Final</label> 
-	                 	<input type="number" name="notarecuperacao" step="0.1" id="recuperacaoId" class="form-control" onchange="noteRecu()" value="<%=rsStudentData.getDouble("recuperacao") %>">
+	                    <label style="color: red; font-weight: bolder">Prova Final</label> 
+	                 	<input type="number" name="notarecuperacao" id="recuperacaoId" class="form-control" onchange="noteRecu()" value="<%=rsStudentData.getDouble("prova_final") %>">
    
 	                    <label>Somatório de Notas</label> 
 	                    <input type="number" name="notafinal" class="form-control" step="0.1" id="somaNotas" value="<%=rsStudentData.getDouble("nota_final") %>" readonly> <br>
 	                    <label>Média de Notas</label> 
-	                    <input type="number" name="notafinal" class="form-control" id="mediaFinal" value="<%=rsStudentData.getDouble("nota_final") %>" readonly> <br>
+	                    <input type="number" name="notafinal" class="form-control" step="0.1"  id="mediaFinal" value="<%=rsStudentData.getDouble("nota_final") %>" readonly> <br>
 	                    <label>Aprovação:</label>
 	                    <input type="radio" name="status" value="true" <% if (rsStudentData.getBoolean("aprovado")) { %> checked <% } %> readonly>
 	                    <label>Sim</label> 
@@ -139,7 +139,7 @@ if(conexao != null && request.getParameter("idAluno") != null){
 		var two_unid = parseFloat(document.getElementById('unidTwo').value) || 0;
 		var three_unid = parseFloat(document.getElementById('unidThree').value) || 0;
 		var recuperacao = parseFloat(document.getElementById('recuperacaoId').value) || 0;
-		var finalGrade = one_unid + two_unid + three_unid + recuperacao;
+		var finalGrade = one_unid + two_unid + three_unid;
 		var medianota = finalGrade/3;
 		if(medianota > 5.6 && medianota<6){
 			medianota = 6;
@@ -147,7 +147,7 @@ if(conexao != null && request.getParameter("idAluno") != null){
 		document.getElementById('somaNotas').value = finalGrade;
 		document.getElementById('mediaFinal').value = medianota;
 		
-		if (finalGrade > 18.0) {
+		if (medianota >= 6) {
 			document.querySelector('input[name="status"][value="true"]').checked = true;
 		} else {
 			document.querySelector('input[name="status"][value="false"]').checked = true;
@@ -270,9 +270,10 @@ if(conexao != null && request.getParameter("idAluno") != null){
 	    var idMateria = urlParams.get('idmateria');
 	    var mediaFinal = document.getElementById('mediaFinal').value;
 	    var notaFinal = document.getElementById('somaNotas').value;
+	    var prova_final = document.getElementById('recuperacaoId').value;
 	    // Monta a URL corretamente com os parâmetros
 	    window.location.href = "updateApproved.jsp?idAluno=" + idAluno + "&idMateria=" + idMateria + "&aprovado=" + aprovado
-	    		+ "&medianota=" + mediaFinal + "&notaFinal=" + notaFinal;
+	    		+ "&medianota=" + mediaFinal + "&notaFinal=" + notaFinal + "&provafinal=" + prova_final;
 	}
 	
 	//inserir nota recuperação
@@ -281,7 +282,7 @@ if(conexao != null && request.getParameter("idAluno") != null){
 	    var two_unidR = parseFloat(document.getElementById('unidTwo').value) || 0;
 	    var three_unidR = parseFloat(document.getElementById('unidThree').value) || 0;
 	    var recuperacaonotaR = parseFloat(document.getElementById('recuperacaoId').value) || 0;
-	    var finalGradeR = one_unidR + two_unidR + three_unidR + recuperacaonotaR;
+	    var finalGradeR = one_unidR + two_unidR + three_unidR;
 	    var medianotaR = finalGradeR / 3; // Dividindo por 4 (3 unidades + recuperação)
 
 	    document.getElementById('somaNotas').value = finalGradeR.toFixed(1); // Atualiza a soma das notas
@@ -292,22 +293,26 @@ if(conexao != null && request.getParameter("idAluno") != null){
 	        document.querySelector('input[name="status"][value="true"]').checked = true;
 	    } else {
 	        document.querySelector('input[name="status"][value="false"]').checked = true;
-	    }
+	    }	    
 	}
+	 var untres = document.getElementById('unidadeTres');
+	 untres.addEventListener('input', function() {
+         // Obtém o valor atual do input e converte para número com uma casa decimal
+         this.value = parseFloat(this.value).toFixed(1);
+     });
 	
-	// Selecionando todos os inputs do tipo number
-	var inputs = document.querySelectorAll('input[type="number"]');
-
-	// Adicionando um listener de evento 'input' para cada input
-	inputs.forEach(function(input) {
-	    input.addEventListener('input', function() {
-	        if (input.value !== '') {
-	            var valor = parseFloat(input.value);
-	            input.value = valor.toFixed(1); // Limitando para uma casa decimal
-	        }
-	    });
-	});
-
-
+	 var unddois = document.getElementById('unidadeDois');
+	 unddois.addEventListener('input', function() {
+         // Obtém o valor atual do input e converte para número com uma casa decimal
+         this.value = parseFloat(this.value).toFixed(1);
+     });
+     
+     var unum = document.getElementById('unidadeUm');
+     unum.addEventListener('input', function() {
+         // Obtém o valor atual do input e converte para número com uma casa decimal
+         this.value = parseFloat(this.value).toFixed(1);
+     });
+     
+     
 </script>
 </html>

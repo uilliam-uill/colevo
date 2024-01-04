@@ -114,7 +114,7 @@
                 		<input type="number" id="notaRpt" name="rpt" onchange="somaNota()" value="<%=notaRpt %>">
                 		<br>
                 		<label>Média trimestral</label>
-                		<input type="number" id="soma" step="0.1" name="notaFinal" value="" readonly> <br>
+                		<input type="number" id="soma" name="notaFinal" value="" readonly> <br>
                 		<button type="button" onclick="updateNotas()" class="btn btn-success">Salvar</button>
                 </div>
             </div>
@@ -139,6 +139,14 @@
         var rptValue = parseFloat(document.getElementById('notaRpt').value) || 0; // Renomeando a variável rpt
         var finalGrade = ad + aps + as + aft + rptValue;
         document.getElementById('soma').value = finalGrade;
+        var somaIn = document.getElementById('soma');
+        somaIn.addEventListener('input', function() {
+            // Obtém o valor atual do input e converte para número com uma casa decimal
+            this.value = parseFloat(this.value).toFixed(1);
+        });
+        if(parseFloat(document.getElementById('soma').value) == 5.9){
+        	document.getElementById('soma').value = 6.0;
+        }
          }
 
     function updateNotas() {
@@ -157,7 +165,7 @@
             "&notaAsOuSasum=" + parseFloat(document.getElementById('sas1ouas').value) +
             "&notaAftOuSasdois=" + parseFloat(document.getElementById('sas2ouaft').value) +
             "&notaFinal=" + document.getElementById('soma').value +
-            "&idProfessor=" + urlParams.get('idprofessor') + "&rpt=" + rptWn;
+            "&idProfessor=" + urlParams.get('idprofessor') + "&rpt=" + rptWn + "&mediaTrimestral=" + parseFloat(document.getElementById('soma').value);
     }
     
     var inputMf = document.getElementById('soma');
@@ -174,15 +182,30 @@
         }
     }
     
-    var inputs = document.querySelectorAll('input[type="number"]');
+    document.addEventListener('DOMContentLoaded', function() {
+	    var inputs = document.querySelectorAll('input[type="number"]');
 
-    inputs.forEach(function(input) {
-        input.addEventListener('input', function() {
-            if (input.value !== '') {
-                var valor = parseFloat(input.value);
-                input.value = valor.toFixed(1); 
-            }
-        });
-    });
+	    inputs.forEach(function(input) {
+	        input.addEventListener('click', function() {
+	            var valorAtual = parseFloat(input.value);
+	            var novoValor = (valorAtual + 0.1).toFixed(1);
+	            input.value = novoValor;
+	        });
+	    });
+	});
+    
+    var inputs = document.getElementById('soma');
+
+    // Itera sobre todos os inputs encontrados
+    for (var i = 0; i < inputs.length; i++) {
+        // Verifica se o input é do tipo 'number'
+        if (inputs[i].type === 'number') {
+            // Adiciona um listener para o evento 'input' em cada input
+            inputs[i].addEventListener('input', function() {
+                // Obtém o valor atual do input e converte para número com uma casa decimal
+                this.value = parseFloat(this.value).toFixed(1);
+            });
+        }
+    }
 </script>
 </html>

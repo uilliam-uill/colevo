@@ -35,28 +35,19 @@
             <div class="card shadow border">
                 <div class="card-body d-flex flex-column align-items-center">
                 <h3 class="titleNota">Atualize Plano de Aula</h3>
-                <%
-            /*    Connection conexao = ConectionMysql.conectar();
-                PreparedStatement selectSubject = null;
-            	ResultSet rsSubject = null;
-            	
-            	selectSubject = conexao.prepareStatement("SELECT unidade, asuntos FROM plano_de_aula WHERE id_materia = ?");
-            //	selectSubject.setInt(1, Integer.parseInt(request.getParameter("idMateria")));
-            	
-            	//rsSubject = selectSubject.executeQuery();
-                /*%>*/
+               
                 	     
 	                    <label>Primeiro Trimestre</label> 
-	                    <textarea class="form-control rounded-0" <% while(rsSubject.next()){ if(rsSubject.getInt("unidade") == 1){%>value="<%=rsSubject.getString("asuntos") %>" <%}} %>id="unidade1" rows="3"></textarea>
+	                    <textarea class="form-control rounded-0" id="unidade1" rows="3"></textarea>
 
 						<label>Segundo Trimestre</label> 
-	                    <textarea class="form-control rounded-0"  <%while(rsSubject.next()){ if(rsSubject.getInt("unidade") == 2){%>value="<%=rsSubject.getString("asuntos") %>" <%}} %> id="unidade2" rows="3"></textarea>
+	                    <textarea class="form-control rounded-0" id="unidade2" rows="3"></textarea>
 						
 						<label>Terceiro Trimestre</label> 
-	                    <textarea class="form-control rounded-0"  <%while(rsSubject.next()){ if(rsSubject.getInt("unidade") == 3){%>value="<%=rsSubject.getString("asuntos") %>" <%}} %> id="unidade3" rows="3"></textarea>
+	                    <textarea class="form-control rounded-0"  id="unidade3" rows="3"></textarea>
 	                    
 	                    <label>Recuperação</label> 
-	                    <textarea class="form-control rounded-0"  <%while(rsSubject.next()){ if(rsSubject.getInt("unidade") == 4){%>value="<%=rsSubject.getString("asuntos") %>" <%}}%> id="recuperacao" rows="3"></textarea>
+	                    <textarea class="form-control rounded-0" id="recuperacao" rows="3"></textarea>
 						<br> <br>
 						<button type="button" class="btn btn-success" onclick="planoDeAula()">Salvar plano de aula</button>
                 </div>

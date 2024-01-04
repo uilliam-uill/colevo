@@ -40,25 +40,28 @@
         ResultSet rsNotas = null;
         try {
         	stAlunosMat = conexao.prepareStatement("SELECT aluno.id_aluno, pessoa.nome, notas.primeira_und, notas.segunda_und, notas.terceira_und," +
-            	       " notas.recuperacao, notas.nota_final, notas.aprovado " +
+            	       " notas.prova_final, notas.nota_final, notas.aprovado, notas.media_nota " +
             	       " FROM notas INNER JOIN aluno ON aluno.id_aluno = notas.id_aluno" +
             	       " INNER JOIN pessoa ON pessoa.id_pessoa = aluno.id_pessoa WHERE notas.id_materia = ?");
         	stAlunosMat.setInt(1, Integer.parseInt(request.getParameter("id")));
 
         	rsNotas = stAlunosMat.executeQuery();%>
+<br> <br>
+<button type="button" class="btn btn-outline-primary" onclick="planoDeAula()">Atualize seu plano de aula</button>
 
 <div class="tableDiv">
 			<table class="table">
 				<thead class="thead-light">
 				    <tr>
-				      <th scope="col">Código do Aluno</th>
-				      <th scope="col">Código da Matéria</th>
+				      <th style="width: 50px;">Código do Aluno</th>
+				      <th style="width: 50px;">Código da Matéria</th>
 				      <th scope="col">Nome</th>
 				      <th scope="col">Primeria Unidade</th>
 				      <th scope="col">Segunda Unidade</th>
 				      <th scope="col">Terceira Unidade</th>
-				      <th scope="col">Recuperação</th>
+				      <th scope="col">Prova Final</th>
 				      <th scope="col">Nota Final</th>
+				      <th scope="col">Média de Notas</th>
 				      <th scope="col">Aprovado</th>
 				    </tr>
   				</thead>
@@ -71,12 +74,18 @@
 							<td><%=rsNotas.getDouble("primeira_und")%></td>
 							<td><%=rsNotas.getDouble("segunda_und")%></td>
 							<td><%=rsNotas.getDouble("terceira_und")%></td>
-							<td><%=rsNotas.getDouble("recuperacao")%></td>
+							<td><%=rsNotas.getDouble("prova_final")%></td>
 							<td><%= Double.parseDouble(rsNotas.getString("primeira_und")) +
          					Double.parseDouble(rsNotas.getString("segunda_und")) +
          					Double.parseDouble(rsNotas.getString("terceira_und")) %>
+         					<td><%=rsNotas.getDouble("media_nota") %></td>
 							</td>
-<td><%=rsNotas.getBoolean("aprovado")%></td>
+							<%if(rsNotas.getBoolean("aprovado") == true ||
+								rsNotas.getDouble("prova_final") >= 5){ %>
+								<td><p style="color: green">APROVADO</p></td>
+							<%}else{%>
+								<td><p style="color: red">RECUPERAÇÃO</p></td>
+							<% } %>
 							<td><button type="button" class="btn-primary">Atualizar Nota</button></td>
 						</tr>
 						<% } 
@@ -119,6 +128,21 @@ button.addEventListener('click', function() {
 });
 });
 
-    </script>
+var cells = document.querySelectorAll('td');
+
+cells.forEach(function(cell) {
+        // Obtém o valor atual da célula e converte para número com uma casa decimal
+        var valorAtual = parseFloat(this.textContent);
+        var novoValor = valorAtual.toFixed(1);
+
+        // Atualiza o valor da célula
+        this.textContent = novoValor;
+});
+
+function planoDeAula() {
+	window.location.href = "subjects.jsp";
+}
+
+</script>
 </body>
 </html>

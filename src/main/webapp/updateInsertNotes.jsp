@@ -92,19 +92,19 @@
 		
 			if(Integer.parseInt(request.getParameter("unidade").trim()) == 1){
 			    updateUnidade = conexao.prepareStatement("UPDATE notas SET primeira_und = ? WHERE id_aluno = ? AND id_materia = ?");
-			    updateUnidade.setDouble(1, mediaFinal);
+			    updateUnidade.setDouble(1, Double.parseDouble(request.getParameter("mediaTrimestral").trim()));
 			    updateUnidade.setInt(2, Integer.parseInt(request.getParameter("idAluno").trim()));
 			    updateUnidade.setInt(3, Integer.parseInt(request.getParameter("idMateria").trim()));
 			    updateUnidade.executeUpdate();
 			} else if(Integer.parseInt(request.getParameter("unidade").trim()) == 2){
 			    updateUnidade = conexao.prepareStatement("UPDATE notas SET segunda_und = ? WHERE id_aluno = ? AND id_materia = ?");
-			    updateUnidade.setDouble(1, mediaFinal);
+			    updateUnidade.setDouble(1, Double.parseDouble(request.getParameter("mediaTrimestral").trim()));
 			    updateUnidade.setInt(2, Integer.parseInt(request.getParameter("idAluno").trim()));
 			    updateUnidade.setInt(3, Integer.parseInt(request.getParameter("idMateria").trim()));
 			    updateUnidade.executeUpdate();
 			} else if(Integer.parseInt(request.getParameter("unidade").trim()) == 3){
 			    updateUnidade = conexao.prepareStatement("UPDATE notas SET terceira_und = ? WHERE id_aluno = ? AND id_materia = ?");
-			    updateUnidade.setDouble(1, mediaFinal);
+			    updateUnidade.setDouble(1, Double.parseDouble(request.getParameter("mediaTrimestral").trim()));
 			    updateUnidade.setInt(2, Integer.parseInt(request.getParameter("idAluno").trim()));
 			    updateUnidade.setInt(3, Integer.parseInt(request.getParameter("idMateria").trim()));
 			    updateUnidade.executeUpdate();

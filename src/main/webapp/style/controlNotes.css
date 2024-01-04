@@ -1,0 +1,49 @@
+@charset "ISO-8859-1";
+table{
+	background-color: rgb(63 , 63, 202);
+	color: white;
+	border-collapse: collapse;
+	border: 1px solid black;
+	width: 100%;
+	}
+	
+th{
+	border: 1px solid black;
+	padding: 5px;
+	width: calc(100% / 6);
+        }
+  
+.icons{
+	display: flex;
+	text-align: center;
+	align-items: center;
+		}
+
+.header{
+	background-color: rgb(63 , 63, 202);
+	justify-content: space-between;
+	}
+		
+.inputNotes {
+	width: 100%;
+	box-sizing: border-box;
+            /* Adicione qualquer estilo adicional desejado para os inputs */ /* Exemplo de preenchimento interno */
+        }
+        
+.inner-table {
+	border-collapse: collapse;
+	width: 100%;
+       }
+
+        
+.provas{
+	 border-right: 1px solid black;
+}        
+        
+#codigo{
+	width: 30px;
+}
+
+.provas{
+	width: 15px;
+}

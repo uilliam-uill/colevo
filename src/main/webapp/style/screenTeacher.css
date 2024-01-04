@@ -4,17 +4,6 @@ body{
 	margin: 0%;
 }
 
-.icons{
-	display: flex;
-	text-align: center;
-	align-items: center;
-}
-
-.header{
-	background-color: rgb(63 , 63, 202);
-	justify-content: space-between;
-}
-
 .titleTeacher{
 	color: rgb(63 , 63, 202);
 }

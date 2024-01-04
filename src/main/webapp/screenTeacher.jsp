@@ -101,7 +101,7 @@
        	var idProfessor = urlParams.get('idProfessor');
         
         // Fazer algo com o ID da matéria, como exibir em um console
-       window.location.href = "screenClassTeacher.jsp?id=" + materiaId + "&materia=" + materiaNome + "&turma=" + turmaJs + "&idTurma=" + turmaId + "&idProfessor=" + idProfessor;
+       window.location.href = "controlNotes.jsp?idmateria=" + materiaId + "&idturma=" + turmaId;
       });
     });
     

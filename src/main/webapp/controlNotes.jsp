@@ -30,6 +30,27 @@ PreparedStatement stNotes = null;
 ResultSet rsAlunoDate = null;
 ResultSet rsNotes = null;
 
+/*Double ad1 = 0.0;
+Double ad2 = 0.0;
+Double ad3 = 0.0;
+
+Double aps1 = 0.0;
+Double aps2 = 0.0;
+Double aps3 = 0.0;
+
+Double as1 = 0.0;
+Double as2 = 0.0;
+Double as3 = 0.0;
+
+Double aft1 = 0.0;
+Double aft2 = 0.0;
+Double aft3 = 0.0;
+
+Double rpt1 = 0.0;
+Double rpt2 = 0.0;
+Double rpt3 = 0.0;*/
+
+Double pf = 0.0;
 if (conexao != null) {
     	stDateAluno = conexao.prepareStatement("SELECT notas.primeira_und, notas.segunda_und, notas.terceira_und," +  
    				" notas.media_nota, notas.nota_final,notas.aprovado," +
@@ -49,20 +70,20 @@ if (conexao != null) {
 	
 <br> <br>
 	<table border="1">
-    <tr>
-        <td id="codigo">Nº</td>
-        <td>Aluno</td>
-        <td>1º TRIMESTRE</td>
-        <td>2º TRIMESTRE</td>
-        <td>3º TRIMESTRE</td>
-        <td>M.T</td>
+    <tr class="provas">
+        <td id="codigo" class="provas">Nº</td>
+        <td class="provas">Aluno</td>
+        <td class="provas">1º TRIMESTRE</td>
+        <td class="provas">2º TRIMESTRE</td>
+        <td class="provas">3º TRIMESTRE</td>
+        <td class="provas">M.T</td>
     </tr>
     <tr>
-        <td></td>
-        <td></td>
-        <td>
+        <td class="provas"></td>
+        <td class="provas"></td>
+        <td class="provas">
             <table class="inner-table">
-                <tr>
+                <tr class="provas">
                     <td class="provas">AD</td>
                     <td class="provas">APS</td>
                     <td class="provas">AS</td>
@@ -72,37 +93,38 @@ if (conexao != null) {
                 </tr>
             </table>
         </td>
-        <td>
+        <td class="provas">
             <table class="inner-table">
-                <tr>
-                    <td>AD</td>
-                    <td>APS</td>
-                    <td>AS</td>
-                    <td>AFT</td>
-                    <td>RPT</td>
-                    <td>M.T</td>
+                <tr class="provas">
+                    <td class="provas">AD</td>
+                    <td class="provas">APS</td>
+                    <td class="provas">AS</td>
+                    <td class="provas">AFT</td>
+                    <td class="provas">RPT</td>
+                    <td class="provas">M.T</td>
                 </tr>
             </table>
         </td>
         <!-- Adicionei mais tabelas para cada conjunto de inputs -->
-        <td>
+        <td class="provas">
             <table class="inner-table">
-                <tr>
-                    <td>AD</td>
-                    <td>APS</td>
-                    <td>AS</td>
-                    <td>AFT</td>
-                    <td>RPT</td>
-                    <td>M.T</td>
+                <tr class="provas">
+                    <td class="provas">AD</td>
+                    <td class="provas">APS</td>
+                    <td class="provas">AS</td>
+                    <td class="provas">AFT</td>
+                    <td class="provas">RPT</td>
+                    <td class="provas">M.T</td>
                 </tr>
             </table>
         </td>
-        <td>
+        <td class="provas">
             <table class="inner-table">
-                <tr>
-                    <td>MF</td>
-                    <td>TP</td>
-                    <td>RS</td>
+                <tr class="provas">
+                    <td class="provas">MF</td>
+                    <td class="provas">TP</td>
+                    <td class="provas">RS</td>
+                    <td class="provas">PF</td>
                 </tr>
             </table>
         </td>
@@ -115,9 +137,37 @@ if (conexao != null) {
     	stNotes.setInt(2, Integer.parseInt(request.getParameter("idmateria")));
     	stNotes.setInt(3, Integer.parseInt(request.getParameter("idturma")));
     	
+    	double ad1 = 0.0, aps1 = 0.0, as1 = 0.0, aft1 = 0.0, rpt1 = 0.0;
+		double ad2 = 0.0, aps2 = 0.0, as2 = 0.0, aft2 = 0.0, rpt2 = 0.0;
+		double ad3 = 0.0, aps3 = 0.0, as3 = 0.0, aft3 = 0.0, rpt3 = 0.0;
     	
     	rsNotes = stNotes.executeQuery();
-    while(rsAlunoDate.next() && rsNotes.next()){ %>
+    while(rsAlunoDate.next() && rsNotes.next()){
+		int unidade = rsNotes.getInt("unidade");
+        int idAvaliacao = rsNotes.getInt("id_avaliacao");
+        double notaTirada = rsNotes.getDouble("nota_tirada");
+		if(unidade == 1){
+            if(idAvaliacao == 2){ ad1 = notaTirada; }
+            if(idAvaliacao == 3){ aps1 = notaTirada; }
+            if(idAvaliacao == 4){ as1 = notaTirada; }
+            if(idAvaliacao == 5){ aft1 = notaTirada; }
+            if(idAvaliacao == 8){ rpt1 = notaTirada; }
+       }
+		if(unidade == 2){
+            if(idAvaliacao == 2){ ad2 = notaTirada; }
+            if(idAvaliacao == 3){ aps2 = notaTirada; }
+            if(idAvaliacao == 4){ as2 = notaTirada; }
+            if(idAvaliacao == 5){ aft2 = notaTirada; }
+            if(idAvaliacao == 8){ rpt2 = notaTirada; }
+       }
+		if(unidade == 3){
+            if(idAvaliacao == 2){ ad3 = notaTirada; }
+            if(idAvaliacao == 3){ aps3 = notaTirada; }
+            if(idAvaliacao == 4){ as3 = notaTirada; }
+            if(idAvaliacao == 5){ aft3 = notaTirada; }
+            if(idAvaliacao == 8){ rpt3 = notaTirada; }
+       }
+    %>
     <tr>
         <td><input type="text" value="<%=rsAlunoDate.getInt("id_aluno") %>" style="width: 50px;"></td>
         <td><input type="text" value="<%=rsAlunoDate.getString("nome") %>"></td>
@@ -125,22 +175,22 @@ if (conexao != null) {
             <table class="inner-table">
                 <tr>
                     <td><input type="text" class="inputNotes"
-                    value = "<%= (rsNotes.getInt("unidade") == 1 && rsNotes.getInt("id_avaliacao") == 2) ? rsNotes.getInt("nota_tirada") : "0.0" %>">
+                    value = "<%=ad1 %>">
                     </td>
                     <td><input type="text" class="inputNotes"
-                    value = "<%= (rsNotes.getInt("unidade") == 1 && rsNotes.getInt("id_avaliacao") == 3) ? rsNotes.getInt("nota_tirada") : "0.0" %>">
+                    value = "<%=aps1%>">
                     </td>
                     <td><input type="text" class="inputNotes"
-                    value = "<%= (rsNotes.getInt("unidade") == 1 && rsNotes.getInt("id_avaliacao") == 4) ? rsNotes.getInt("nota_tirada") : "0.0" %>">
+                    value = "<%=as1 %>">
                     </td>
                     <td><input type="text" class="inputNotes"
-                    value = "<%= (rsNotes.getInt("unidade") == 1 && rsNotes.getInt("id_avaliacao") == 5) ? rsNotes.getInt("nota_tirada") : "0.0" %>">
+                    value = "<%=aft1%>">
                     </td>
                     <td><input type="text" class="inputNotes"
-                    value = "<%= (rsNotes.getInt("unidade") == 1 && rsNotes.getInt("id_avaliacao") == 8) ? rsNotes.getInt("nota_tirada") : "0.0" %>">
+                    value = "<%=rpt1%>">	
                     </td>
                     <td><input type="text" class="inputNotes"
-                    value = "<%=rsAlunoDate.getDouble("media_nota")%>">
+                    value = "<%=rsAlunoDate.getDouble("primeira_und")%>">
                     </td>
                 </tr>
             </table>
@@ -150,22 +200,22 @@ if (conexao != null) {
             <table class="inner-table">
               <tr>
                     <td><input type="text" class="inputNotes"
-                    value = "<%= (rsNotes.getInt("unidade") == 2 && rsNotes.getInt("id_avaliacao") == 2) ? rsNotes.getInt("nota_tirada") : "0.0" %>">
+                    value = "<%=ad2 %>">
                     </td>
                     <td><input type="text" class="inputNotes"
-                    value = "<%= (rsNotes.getInt("unidade") == 2 && rsNotes.getInt("id_avaliacao") == 3) ? rsNotes.getInt("nota_tirada") : "0.0" %>">
+                    value = "<%=aps2%>">
                     </td>
                     <td><input type="text" class="inputNotes"
-                    value = "<%= (rsNotes.getInt("unidade") == 2 && rsNotes.getInt("id_avaliacao") == 4) ? rsNotes.getInt("nota_tirada") : "0.0" %>">
+                    value = "<%=as2 %>">
                     </td>
                     <td><input type="text" class="inputNotes"
-                    value = "<%= (rsNotes.getInt("unidade") == 2 && rsNotes.getInt("id_avaliacao") == 5) ? rsNotes.getInt("nota_tirada") : "0.0" %>">
+                    value = "<%=aft2%>">
                     </td>
                     <td><input type="text" class="inputNotes"
-                    value = "<%= (rsNotes.getInt("unidade") == 2 && rsNotes.getInt("id_avaliacao") == 8) ? rsNotes.getInt("nota_tirada") : "0.0" %>">
+                    value = "<%=rpt2%>">
                     </td>
                     <td><input type="text" class="inputNotes"
-                    value = "<%=rsAlunoDate.getDouble("primeira_und")%>">
+                    value = "<%=rsAlunoDate.getDouble("segunda_und")%>">
                     </td>
                 </tr>
             </table>
@@ -174,22 +224,22 @@ if (conexao != null) {
             <table class="inner-table">
                <tr>
                     <td><input type="text" class="inputNotes"
-                    value = "<%= (rsNotes.getInt("unidade") == 3 && rsNotes.getInt("id_avaliacao") == 2) ? rsNotes.getInt("nota_tirada") : "0.0" %>">
+                    value = "<%=ad3 %>">
                     </td>
                     <td><input type="text" class="inputNotes"
-                    value = "<%= (rsNotes.getInt("unidade") == 3 && rsNotes.getInt("id_avaliacao") == 3) ? rsNotes.getInt("nota_tirada") : "0.0" %>">
+                    value = "<%=aps3%>">
                     </td>
                     <td><input type="text" class="inputNotes"
-                    value = "<%= (rsNotes.getInt("unidade") == 3 && rsNotes.getInt("id_avaliacao") == 4) ? rsNotes.getInt("nota_tirada") : "0.0" %>">
+                    value = "<%=as3 %>">
                     </td>
                     <td><input type="text" class="inputNotes"
-                    value = "<%= (rsNotes.getInt("unidade") == 3 && rsNotes.getInt("id_avaliacao") == 5) ? rsNotes.getInt("nota_tirada") : "0.0" %>">
+                    value = "<%=aft3%>">
                     </td>
                     <td><input type="text" class="inputNotes"
-                    value = "<%= (rsNotes.getInt("unidade") == 3 && rsNotes.getInt("id_avaliacao") == 8) ? rsNotes.getInt("nota_tirada") : "0.0" %>">
+                    value = "<%=rpt3%>">
                     </td>
                     <td><input type="text" class="inputNotes"
-                    value = "<%=rsAlunoDate.getDouble("segunda_und")%>">
+                    value = "<%=rsAlunoDate.getDouble("terceira_und")%>">
                     </td>
                 </tr>
             </table>
@@ -210,6 +260,9 @@ if (conexao != null) {
                   		style="#id{background-color:red}"
                   <%}%>
                   >
+                    </td>
+                    <td><input type="text" class="inputNotes"
+                    value = "<%=rsAlunoDate.getDouble("nota_final")%>">
                     </td>
                 </tr>
             </table>

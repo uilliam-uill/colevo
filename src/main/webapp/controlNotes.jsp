@@ -1,5 +1,11 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +55,8 @@ Double aft3 = 0.0;
 Double rpt1 = 0.0;
 Double rpt2 = 0.0;
 Double rpt3 = 0.0;*/
-
+String nome = "";
+int idAluno = 0;
 Double pf = 0.0;
 if (conexao != null) {
     	stDateAluno = conexao.prepareStatement("SELECT notas.primeira_und, notas.segunda_und, notas.terceira_und," +  
@@ -130,7 +137,10 @@ if (conexao != null) {
         </td>
     </tr>
     <tr> <%
+   // Map<Integer, List<Double>> notasPorAluno = new HashMap<>();
     while(rsAlunoDate.next()){
+    	nome = rsAlunoDate.getString("nome");
+    	idAluno = rsAlunoDate.getInt("id_aluno");
     	stNotes = conexao.prepareStatement("SELECT nota_tirada, unidade, id_avaliacao, id_aluno " +
     			" FROM avaliacao WHERE id_aluno = ? AND id_materia = ? AND id_turma = ?;");
     	stNotes.setInt(1, rsAlunoDate.getInt("id_aluno"));
@@ -142,7 +152,7 @@ if (conexao != null) {
 		double ad3 = 0.0, aps3 = 0.0, as3 = 0.0, aft3 = 0.0, rpt3 = 0.0;
     	
     	rsNotes = stNotes.executeQuery();
-    while(rsAlunoDate.next() && rsNotes.next()){
+    	while(rsNotes.next()){
 		int unidade = rsNotes.getInt("unidade");
         int idAvaliacao = rsNotes.getInt("id_avaliacao");
         double notaTirada = rsNotes.getDouble("nota_tirada");
@@ -167,10 +177,28 @@ if (conexao != null) {
             if(idAvaliacao == 5){ aft3 = notaTirada; }
             if(idAvaliacao == 8){ rpt3 = notaTirada; }
        }
+	//	int i = i++;
+		/*List<Double> notasDoAluno = new ArrayList<>();
+		notasDoAluno.add(idAluno, ad1);
+		notasDoAluno.add(idAluno, aps1);
+		notasDoAluno.add(idAluno, as1);
+		notasDoAluno.add(idAluno, aft1);
+		notasDoAluno.add(idAluno, rpt1);
+		notasDoAluno.add(idAluno, ad2);
+		notasDoAluno.add(idAluno, aps2);
+		notasDoAluno.add(idAluno, as2);
+		notasDoAluno.add(idAluno, aft2);
+		notasDoAluno.add(idAluno, rpt2);
+		notasDoAluno.add(idAluno, ad3);
+		notasDoAluno.add(idAluno, aps3);
+		notasDoAluno.add(idAluno, as3);
+		notasDoAluno.add(idAluno, aft3);
+		notasDoAluno.add(idAluno, rpt3);*/
+    	}
     %>
     <tr>
-        <td><input type="text" value="<%=rsAlunoDate.getInt("id_aluno") %>" style="width: 50px;"></td>
-        <td><input type="text" value="<%=rsAlunoDate.getString("nome") %>"></td>
+        <td><input type="text" value="<%=idAluno%>" style="width: 50px;"></td>
+        <td><input type="text" value="<%=nome%>"></td>
         <td>
             <table class="inner-table">
                 <tr>
@@ -181,7 +209,7 @@ if (conexao != null) {
                     value = "<%=aps1%>">
                     </td>
                     <td><input type="text" class="inputNotes"
-                    value = "<%=as1 %>">
+                    value = "<%=as1%>">
                     </td>
                     <td><input type="text" class="inputNotes"
                     value = "<%=aft1%>">
@@ -206,13 +234,13 @@ if (conexao != null) {
                     value = "<%=aps2%>">
                     </td>
                     <td><input type="text" class="inputNotes"
-                    value = "<%=as2 %>">
+                    value = "<%=as2%>">
                     </td>
                     <td><input type="text" class="inputNotes"
                     value = "<%=aft2%>">
                     </td>
                     <td><input type="text" class="inputNotes"
-                    value = "<%=rpt2%>">
+                    value = "<%=rpt2%>">	
                     </td>
                     <td><input type="text" class="inputNotes"
                     value = "<%=rsAlunoDate.getDouble("segunda_und")%>">
@@ -230,7 +258,7 @@ if (conexao != null) {
                     value = "<%=aps3%>">
                     </td>
                     <td><input type="text" class="inputNotes"
-                    value = "<%=as3 %>">
+                    value = "<%=as3%>">
                     </td>
                     <td><input type="text" class="inputNotes"
                     value = "<%=aft3%>">
@@ -267,7 +295,7 @@ if (conexao != null) {
                 </tr>
             </table>
             </tr>
-        <%} } } %>
+        <%} }%>
 </table>
 </body>
 </html>

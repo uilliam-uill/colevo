@@ -78,7 +78,7 @@ if (conexao != null) {
 <br> <br>
 	<table border="1">
     <tr class="provas">
-        <td id="codigo" class="provas">Nº</td>
+        <td style="width: 10px;">Nº</td>
         <td class="provas">Aluno</td>
         <td class="provas">1º TRIMESTRE</td>
         <td class="provas">2º TRIMESTRE</td>
@@ -129,7 +129,7 @@ if (conexao != null) {
             <table class="inner-table">
                 <tr class="provas">
                     <td class="provas">MF</td>
-                    <td class="provas">TP</td>
+                    <td class="provas">SM</td>
                     <td class="provas">RS</td>
                     <td class="provas">PF</td>
                 </tr>
@@ -191,101 +191,101 @@ if (conexao != null) {
 		notasDoAluno.add(idAluno, rpt2);
 		notasDoAluno.add(idAluno, ad3);
 		notasDoAluno.add(idAluno, aps3);
-		notasDoAluno.add(idAluno, as3);
+		 notasDoAluno.add(idAluno, as3);
 		notasDoAluno.add(idAluno, aft3);
 		notasDoAluno.add(idAluno, rpt3);*/
     	}
     %>
     <tr>
-        <td><input type="text" value="<%=idAluno%>" style="width: 50px;"></td>
-        <td><input type="text" value="<%=nome%>"></td>
+        <td width="10px"><input type="text" id="id" value="<%=idAluno%>" style="width: 50px;" disabled="disabled"></td>
+        <td><input type="text" value="<%=nome%>" disabled="disabled"></td>
         <td>
             <table class="inner-table">
-                <tr>
-                    <td><input type="text" class="inputNotes"
-                    value = "<%=ad1 %>">
+                <tr data-id="1">
+                    <td><input type="text" class="inputNotes provas1"
+                    value = "<%=ad1 %>" id="ad1" onchange="somarNotasUm(this)">
                     </td>
-                    <td><input type="text" class="inputNotes"
-                    value = "<%=aps1%>">
+                    <td><input type="text" class="inputNotes provas1"
+                    value = "<%=aps1%>" id="aps1" onchange="somarNotasUm(this)">
                     </td>
-                    <td><input type="text" class="inputNotes"
-                    value = "<%=as1%>">
+                    <td><input type="text" class="inputNotes provas1"
+                    value = "<%=as1%>" id="as1" onchange="somarNotasUm(this)">
                     </td>
-                    <td><input type="text" class="inputNotes"
-                    value = "<%=aft1%>">
+                    <td><input type="text" class="inputNotes provas1"
+                    value = "<%=aft1%>" id="aft1" onchange="somarNotasUm(this)">
                     </td>
-                    <td><input type="text" class="inputNotes"
-                    value = "<%=rpt1%>">	
+                    <td><input type="text" class="inputNotes provas1"
+                    value = "<%=rpt1%>" id="rpt1" onchange="somarNotasUm(this)">
                     </td>
-                    <td><input type="text" class="inputNotes"
-                    value = "<%=rsAlunoDate.getDouble("primeira_und")%>">
+                    <td><input type="text" class="inputNotes" id="unidadeum" onchange="notaFim(this)"
+                    value = "<%=rsAlunoDate.getDouble("primeira_und")%>" class="unidaddeum">
                     </td>
                 </tr>
             </table>
         </td>
         <!-- Repetindo a estrutura para os demais conjuntos de inputs -->
         <td>
-            <table class="inner-table">
-              <tr>
-                    <td><input type="text" class="inputNotes"
-                    value = "<%=ad2 %>">
+            <table class="inner-table" id="trum">
+              <tr data-id="2">
+                    <td><input type="text" class="inputNotes provas2"
+                    value = "<%=ad2 %>" id="ad2" onchange="somarNotasDoisthis)">
                     </td>
-                    <td><input type="text" class="inputNotes"
-                    value = "<%=aps2%>">
+                    <td><input type="text" class="inputNotes provas2"
+                    value = "<%=aps2%>" id="aps2" onchange="somarNotasDois(this)">
                     </td>
-                    <td><input type="text" class="inputNotes"
-                    value = "<%=as2%>">
+                    <td><input type="text" class="inputNotes provas2"
+                    value = "<%=as2%>" id="as2" onchange="somarNotasDois(this)">
                     </td>
-                    <td><input type="text" class="inputNotes"
-                    value = "<%=aft2%>">
+                    <td><input type="text" class="inputNotes provas2"
+                    value = "<%=aft2%>" id="aft2" onchange="somarNotasDois(this)">
                     </td>
-                    <td><input type="text" class="inputNotes"
-                    value = "<%=rpt2%>">	
+                    <td><input type="text" class="inputNotes provas2"
+                    value = "<%=rpt2%>" id="rpt2" onchange="somarNotasDois(this)">
                     </td>
-                    <td><input type="text" class="inputNotes"
-                    value = "<%=rsAlunoDate.getDouble("segunda_und")%>">
-                    </td>
-                </tr>
-            </table>
-        </td>
-        <td>
-            <table class="inner-table">
-               <tr>
-                    <td><input type="text" class="inputNotes"
-                    value = "<%=ad3 %>">
-                    </td>
-                    <td><input type="text" class="inputNotes"
-                    value = "<%=aps3%>">
-                    </td>
-                    <td><input type="text" class="inputNotes"
-                    value = "<%=as3%>">
-                    </td>
-                    <td><input type="text" class="inputNotes"
-                    value = "<%=aft3%>">
-                    </td>
-                    <td><input type="text" class="inputNotes"
-                    value = "<%=rpt3%>">
-                    </td>
-                    <td><input type="text" class="inputNotes"
-                    value = "<%=rsAlunoDate.getDouble("terceira_und")%>">
+                    <td><input type="text" class="inputNotes" id="unidadedois" onchange="atualizarResultadoParaLinha(this)"
+                    value = "<%=rsAlunoDate.getDouble("segunda_und")%>" class="unidadedosis">
                     </td>
                 </tr>
             </table>
         </td>
         <td>
-            <table class="inner-table">
-                <tr>
-                    <td><input type="text" class="inputNotes"
-                    value = "<%= rsAlunoDate.getDouble("media_nota")%>">
+            <table class="inner-table" id="trdois">
+               <tr data-id="3">
+                    <td><input type="text" class="inputNotes provas3"
+                    value = "<%=ad3 %>" id="ad3" onchange="somarNotasTres(this)">
                     </td>
-                    <td><input type="text" class="inputNotes"
-                    value = "<%=rsAlunoDate.getDouble("nota_final")%>">
+                    <td><input type="text" class="inputNotes provas3"
+                    value = "<%=aps3%>" id="aps3" onchange="somarNotasTres(this)">
+                    </td>
+                    <td><input type="text" class="inputNotes provas3"
+                    value = "<%=as3%>" id="as3" onchange="somarNotasTres(this)">
+                    </td>
+                    <td><input type="text" class="inputNotes provas3"
+                    value = "<%=aft3%>"id="aft3" onchange="somarNotasTres(this)">
+                    </td>
+                    <td><input type="text" class="inputNotes provas3"
+                    value = "<%=rpt3%>" id="rpt3" onchange="somarNotasTres(this)">
+                    </td>
+                    <td><input type="text" class="inputNotes" id="unidadetres" 
+                    value = "<%=rsAlunoDate.getDouble("terceira_und")%>" class="ssunidadetres">
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table class="inner-table" id="trtres">
+                <tr class="notas">
+                    <td><input type="text" class="inputNotes" id="medianota"
+                    value = "<%= rsAlunoDate.getDouble("media_nota")%>" disabled="disabled">
+                    </td>
+                    <td><input type="text" class="inputNotes" id="somanota"
+                    value = "<%=rsAlunoDate.getDouble("nota_final")%>" >
                     </td>
                     <td><input type="text" class="inputNotes" id = "result"
                     <%if(rsAlunoDate.getBoolean("aprovado") == true){%>
-                    	style="#id{background-color:green}"
+                    	style="#result{background-color:green}"
                   <%  }else{%>
-                  		style="#id{background-color:red}"
+                  		style="#result{background-color:red}"
                   <%}%>
                   >
                     </td>
@@ -298,4 +298,84 @@ if (conexao != null) {
         <%} }%>
 </table>
 </body>
+<script>
+function somarNotasUm(input) {
+    let linha = input.closest('tr');
+    let ad1 = parseFloat(linha.querySelector('#ad1').value) || 0;
+    let aps1 = parseFloat(linha.querySelector('#aps1').value) || 0;
+    let as1 = parseFloat(linha.querySelector('#as1').value) || 0;
+    let aft1 = parseFloat(linha.querySelector('#aft1').value) || 0;
+    let rpt1 = parseFloat(linha.querySelector('#rpt1').value) || 0;
+    let unidadeum = ad1 + aps1 + as1 + aft1 + rpt1;
+    let unidadeUmInput = linha.querySelector('#unidadeum');
+    unidadeUmInput.value = unidadeum;
+}
+
+function somarNotasDois(input) {
+    let linha = input.closest('tr');
+   
+    let ad2 = parseFloat(linha.querySelector('#ad2').value) || 0;
+    let aps2 = parseFloat(linha.querySelector('#aps2').value) || 0;
+    let as2 = parseFloat(linha.querySelector('#as2').value) || 0;
+    let aft2 = parseFloat(linha.querySelector('#aft2').value) || 0;
+    let rpt2 = parseFloat(linha.querySelector('#rpt2').value) || 0;
+    let unidadedois = ad2 + aps2 + as2 + aft2 + rpt2;
+    let unidadeDoisInput = linha.querySelector('#unidadedois'); 
+    unidadeDoisInput.value = unidadedois;
+
+}
+
+function somarNotasTres(input) {
+    let linha = input.closest('tr');
+   
+    let ad3 = parseFloat(linha.querySelector('#ad3').value) || 0;
+    let aps3 = parseFloat(linha.querySelector('#aps3').value) || 0;
+    let as3 = parseFloat(linha.querySelector('#as3').value) || 0;
+    let aft3 = parseFloat(linha.querySelector('#aft3').value) || 0;
+    let rpt3 = parseFloat(linha.querySelector('#rpt3').value) || 0;
+    let unidadetres = ad3 + aps3 + as3 + aft3 + rpt3;
+    let unidadeTresInput = linha.querySelector('#unidadetres'); 
+    unidadeTresInput.value = unidadetres;
+}
+
+function notaFim(input){
+	let linha = input.closest('tr');
+	let um = parseFloat(linha.querySelector('#unidadeum').value) || 0;
+	let dois = parseFloat(linha.querySelector('#unidadedois').value) || 0;
+	let tres = parseFloat(linha.querySelector('#unidadetres').value) || 0;
+	let soma = linha.querySelector('#somanota'); 
+	let notasSoma = um + dois + tres;
+	soma.value = notasSoma;
+}
+
+document.querySelectorAll('.inner-table').forEach(table => {
+    table.querySelectorAll('.unidaddeum, .unidadedosis, .ssunidadetres').forEach(input => {
+        input.addEventListener('change', function() {
+            let linha = this.closest('tr');
+            atualizarResultadoParaLinha(linha);
+        });
+    });
+});
+
+function atualizarResultadoParaLinha(linha) {
+    let unidadeUm = parseFloat(linha.querySelector('.unidaddeum').value) || 0;
+    let unidadeDois = parseFloat(linha.querySelector('.unidadedosis').value) || 0;
+    let unidadeTres = parseFloat(linha.querySelector('.ssunidadetres').value) || 0;
+
+    let somaNotas = unidadeUm + unidadeDois + unidadeTres;
+    let mediaNota = somaNotas / 3;
+
+    let somaNotaElement = linha.querySelector('.somanota');
+    let mediaNotaElement = linha.querySelector('.medianota');
+    let resultElement = linha.querySelector('.result');
+
+    somaNotaElement.value = somaNotas.toFixed(2);
+    mediaNotaElement.value = mediaNota.toFixed(2);
+
+    let resultColor = mediaNota >= 7 ? 'green' : 'red';
+    resultElement.style.backgroundColor = resultColor;
+    resultElement.value = mediaNota.toFixed(2);
+}
+
+</script>
 </html>

@@ -57,10 +57,9 @@ Double rpt2 = 0.0;
 Double rpt3 = 0.0;*/
 String nome = "";
 int idAluno = 0;
-Double pf = 0.0;
 if (conexao != null) {
     	stDateAluno = conexao.prepareStatement("SELECT notas.primeira_und, notas.segunda_und, notas.terceira_und," +  
-   				" notas.media_nota, notas.nota_final,notas.aprovado," +
+   				" notas.media_nota, notas.nota_final,notas.aprovado, notas.prova_final, " +
     		    " pessoa.nome, pessoa.id_pessoa, aluno.id_aluno" +
     		    " FROM notas" +
     		    " INNER JOIN aluno ON notas.id_aluno = aluno.id_aluno" +
@@ -196,11 +195,11 @@ if (conexao != null) {
 		notasDoAluno.add(idAluno, rpt3);*/
     	}
     %>
-    <tr>
+    <tr id=<%=idAluno %>>
         <td width="10px"><input type="text" id="id" value="<%=idAluno%>" style="width: 50px;" disabled="disabled"></td>
         <td><input type="text" value="<%=nome%>" disabled="disabled"></td>
         <td>
-            <table class="inner-table">
+            <table class="inner-table" >
                 <tr data-id="1">
                     <td><input type="text" class="inputNotes provas1"
                     value = "<%=ad1 %>" id="ad1" onchange="somarNotasUm(this)">
@@ -217,7 +216,7 @@ if (conexao != null) {
                     <td><input type="text" class="inputNotes provas1"
                     value = "<%=rpt1%>" id="rpt1" onchange="somarNotasUm(this)">
                     </td>
-                    <td><input type="text" class="inputNotes" id="unidadeum" onchange="notaFim(this)"
+                    <td><input type="text" class="inputNotes" id="unidadeum"
                     value = "<%=rsAlunoDate.getDouble("primeira_und")%>" class="unidaddeum">
                     </td>
                 </tr>
@@ -228,7 +227,7 @@ if (conexao != null) {
             <table class="inner-table" id="trum">
               <tr data-id="2">
                     <td><input type="text" class="inputNotes provas2"
-                    value = "<%=ad2 %>" id="ad2" onchange="somarNotasDoisthis)">
+                    value = "<%=ad2 %>" id="ad2" onchange="somarNotasDois(this)">
                     </td>
                     <td><input type="text" class="inputNotes provas2"
                     value = "<%=aps2%>" id="aps2" onchange="somarNotasDois(this)">
@@ -242,7 +241,7 @@ if (conexao != null) {
                     <td><input type="text" class="inputNotes provas2"
                     value = "<%=rpt2%>" id="rpt2" onchange="somarNotasDois(this)">
                     </td>
-                    <td><input type="text" class="inputNotes" id="unidadedois" onchange="atualizarResultadoParaLinha(this)"
+                    <td><input type="text" class="inputNotes" id="unidadedois"
                     value = "<%=rsAlunoDate.getDouble("segunda_und")%>" class="unidadedosis">
                     </td>
                 </tr>
@@ -267,7 +266,7 @@ if (conexao != null) {
                     value = "<%=rpt3%>" id="rpt3" onchange="somarNotasTres(this)">
                     </td>
                     <td><input type="text" class="inputNotes" id="unidadetres" 
-                    value = "<%=rsAlunoDate.getDouble("terceira_und")%>" class="ssunidadetres">
+                    value = "<%=rsAlunoDate.getDouble("terceira_und")%>" class="ssunidadetres"> 
                     </td>
                 </tr>
             </table>
@@ -275,22 +274,34 @@ if (conexao != null) {
         <td>
             <table class="inner-table" id="trtres">
                 <tr class="notas">
+                <%
+                double pf = rsAlunoDate.getDouble("prova_final");
+                double soma_nota = 
+                rsAlunoDate.getDouble("primeira_und") + 
+                rsAlunoDate.getDouble("segunda_und") +
+                rsAlunoDate.getDouble("terceira_und");
+                
+                double media_nota = soma_nota/3;
+                
+                if(media_nota == 5.7){
+                	media_nota = 6.0;
+                }
+                %>
+                
                     <td><input type="text" class="inputNotes" id="medianota"
-                    value = "<%= rsAlunoDate.getDouble("media_nota")%>" disabled="disabled">
+                    value = "<%= media_nota%>">
                     </td>
                     <td><input type="text" class="inputNotes" id="somanota"
-                    value = "<%=rsAlunoDate.getDouble("nota_final")%>" >
+                    value = "<%=soma_nota%>" >
                     </td>
-                    <td><input type="text" class="inputNotes" id = "result"
-                    <%if(rsAlunoDate.getBoolean("aprovado") == true){%>
-                    	style="#result{background-color:green}"
-                  <%  }else{%>
-                  		style="#result{background-color:red}"
-                  <%}%>
-                  >
+                    <td> <%if(media_nota >= 6 || pf >= 5){%> 
+                    <input type="checkbox" id="meuCheckbox" checked>
+                    <%}else{ %>
+                    	<input type="checkbox" id="meuCheckbox">
+                    <%} %>
                     </td>
-                    <td><input type="text" class="inputNotes"
-                    value = "<%=rsAlunoDate.getDouble("nota_final")%>">
+                    <td><input type="text" class="inputNotes" id="somanota"
+                    value = "<%=pf%>" >
                     </td>
                 </tr>
             </table>
@@ -300,15 +311,20 @@ if (conexao != null) {
 </body>
 <script>
 function somarNotasUm(input) {
+	let unidadeum = 0;
+	unidadeTwo = 0;
+	unidadetres = 0;
     let linha = input.closest('tr');
     let ad1 = parseFloat(linha.querySelector('#ad1').value) || 0;
     let aps1 = parseFloat(linha.querySelector('#aps1').value) || 0;
     let as1 = parseFloat(linha.querySelector('#as1').value) || 0;
     let aft1 = parseFloat(linha.querySelector('#aft1').value) || 0;
     let rpt1 = parseFloat(linha.querySelector('#rpt1').value) || 0;
-    let unidadeum = ad1 + aps1 + as1 + aft1 + rpt1;
+    unidadeum = ad1 + aps1 + as1 + aft1 + rpt1;
     let unidadeUmInput = linha.querySelector('#unidadeum');
     unidadeUmInput.value = unidadeum;
+    
+    somarNotasFinal(input);
 }
 
 function somarNotasDois(input) {
@@ -319,10 +335,11 @@ function somarNotasDois(input) {
     let as2 = parseFloat(linha.querySelector('#as2').value) || 0;
     let aft2 = parseFloat(linha.querySelector('#aft2').value) || 0;
     let rpt2 = parseFloat(linha.querySelector('#rpt2').value) || 0;
-    let unidadedois = ad2 + aps2 + as2 + aft2 + rpt2;
+    unidadeTwo = ad2 + aps2 + as2 + aft2 + rpt2;
     let unidadeDoisInput = linha.querySelector('#unidadedois'); 
-    unidadeDoisInput.value = unidadedois;
+    unidadeDoisInput.value = unidadeTwo;
 
+    somarNotasFinal(input);
 }
 
 function somarNotasTres(input) {
@@ -333,49 +350,30 @@ function somarNotasTres(input) {
     let as3 = parseFloat(linha.querySelector('#as3').value) || 0;
     let aft3 = parseFloat(linha.querySelector('#aft3').value) || 0;
     let rpt3 = parseFloat(linha.querySelector('#rpt3').value) || 0;
-    let unidadetres = ad3 + aps3 + as3 + aft3 + rpt3;
+    unidadetres = ad3 + aps3 + as3 + aft3 + rpt3;
     let unidadeTresInput = linha.querySelector('#unidadetres'); 
     unidadeTresInput.value = unidadetres;
 }
 
-function notaFim(input){
+function trimestreUm(input) {
 	let linha = input.closest('tr');
-	let um = parseFloat(linha.querySelector('#unidadeum').value) || 0;
-	let dois = parseFloat(linha.querySelector('#unidadedois').value) || 0;
-	let tres = parseFloat(linha.querySelector('#unidadetres').value) || 0;
-	let soma = linha.querySelector('#somanota'); 
-	let notasSoma = um + dois + tres;
-	soma.value = notasSoma;
+	unidadeum = linha.querySelector('#unidadeum');
 }
 
-document.querySelectorAll('.inner-table').forEach(table => {
-    table.querySelectorAll('.unidaddeum, .unidadedosis, .ssunidadetres').forEach(input => {
-        input.addEventListener('change', function() {
-            let linha = this.closest('tr');
-            atualizarResultadoParaLinha(linha);
-        });
-    });
+function trimestreDois(input) {
+	let linha = input.closest('tr');
+	let unidadeTresInput = linha.querySelector('#unidadedois');
+}
+
+function trimestreTres(input) {
+	let linha = input.closest('tr');
+	unidadetres = linha.querySelector('#unidadetres');
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+	trimestreUm(input)
+	trimestreDois(input)
+	trimestreTres(input)
 });
-
-function atualizarResultadoParaLinha(linha) {
-    let unidadeUm = parseFloat(linha.querySelector('.unidaddeum').value) || 0;
-    let unidadeDois = parseFloat(linha.querySelector('.unidadedosis').value) || 0;
-    let unidadeTres = parseFloat(linha.querySelector('.ssunidadetres').value) || 0;
-
-    let somaNotas = unidadeUm + unidadeDois + unidadeTres;
-    let mediaNota = somaNotas / 3;
-
-    let somaNotaElement = linha.querySelector('.somanota');
-    let mediaNotaElement = linha.querySelector('.medianota');
-    let resultElement = linha.querySelector('.result');
-
-    somaNotaElement.value = somaNotas.toFixed(2);
-    mediaNotaElement.value = mediaNota.toFixed(2);
-
-    let resultColor = mediaNota >= 7 ? 'green' : 'red';
-    resultElement.style.backgroundColor = resultColor;
-    resultElement.value = mediaNota.toFixed(2);
-}
-
 </script>
 </html>

@@ -75,7 +75,7 @@ if (conexao != null) {
 	</div>
 	
 <br> <br>
-	<table border="1">
+	<table border="1" id="datesStudent">
     <tr class="provas">
         <td style="width: 10px;">Nº</td>
         <td class="provas">Aluno</td>
@@ -199,7 +199,7 @@ if (conexao != null) {
         <td width="10px"><input type="text" id="id" value="<%=idAluno%>" style="width: 50px;" disabled="disabled"></td>
         <td><input type="text" value="<%=nome%>" disabled="disabled"></td>
         <td>
-            <table class="inner-table" >
+            <table class="inner-table" id="quarterOne">
                 <tr data-id="1">
                     <td><input type="text" class="inputNotes provas1"
                     value = "<%=ad1 %>" id="ad1" onchange="somarNotasUm(this)">
@@ -224,7 +224,7 @@ if (conexao != null) {
         </td>
         <!-- Repetindo a estrutura para os demais conjuntos de inputs -->
         <td>
-            <table class="inner-table" id="trum">
+            <table class="inner-table" id="quarterTwo">
               <tr data-id="2">
                     <td><input type="text" class="inputNotes provas2"
                     value = "<%=ad2 %>" id="ad2" onchange="somarNotasDois(this)">
@@ -248,7 +248,7 @@ if (conexao != null) {
             </table>
         </td>
         <td>
-            <table class="inner-table" id="trdois">
+            <table class="inner-table" id="quarterThree">
                <tr data-id="3">
                     <td><input type="text" class="inputNotes provas3"
                     value = "<%=ad3 %>" id="ad3" onchange="somarNotasTres(this)">
@@ -272,7 +272,7 @@ if (conexao != null) {
             </table>
         </td>
         <td>
-            <table class="inner-table" id="trtres">
+            <table class="inner-table" id="quartetFinish">
                 <tr class="notas">
                 <%
                 double pf = rsAlunoDate.getDouble("prova_final");
@@ -308,6 +308,8 @@ if (conexao != null) {
             </tr>
         <%} }%>
 </table>
+<br> <br> 
+<button type="button" class="btn btn-primary btn-lg btn-block" onclick="sendDates()">Processar Dados</button>
 </body>
 <script>
 function somarNotasUm(input) {
@@ -342,38 +344,52 @@ function somarNotasDois(input) {
     somarNotasFinal(input);
 }
 
-function somarNotasTres(input) {
-    let linha = input.closest('tr');
-   
-    let ad3 = parseFloat(linha.querySelector('#ad3').value) || 0;
-    let aps3 = parseFloat(linha.querySelector('#aps3').value) || 0;
-    let as3 = parseFloat(linha.querySelector('#as3').value) || 0;
-    let aft3 = parseFloat(linha.querySelector('#aft3').value) || 0;
-    let rpt3 = parseFloat(linha.querySelector('#rpt3').value) || 0;
-    unidadetres = ad3 + aps3 + as3 + aft3 + rpt3;
-    let unidadeTresInput = linha.querySelector('#unidadetres'); 
-    unidadeTresInput.value = unidadetres;
-}
+function sendDates() {
+    var tableStudent = document.querySelector('#datesStudent');
+    var quarterOne = document.querySelector('#quarterOne');
+    var quarterTwo = document.querySelector('#quarterTwo');
+    var quarterThree = document.querySelector('#quarterThree');
+    var quarterFinish = document.querySelector('#quartetFinish');
 
-function trimestreUm(input) {
-	let linha = input.closest('tr');
-	unidadeum = linha.querySelector('#unidadeum');
-}
+    // Função para coletar dados de cada linha e criar objetos separados para cada pessoa
+    function coletarDados(rows, data) {
+        for (var j = 0; j < rows.length; j++) {
+            var cells = rows[j].querySelectorAll('input');
+            var linhaData = {}; // Objeto para armazenar os dados de uma pessoa
 
-function trimestreDois(input) {
-	let linha = input.closest('tr');
-	let unidadeTresInput = linha.querySelector('#unidadedois');
-}
+            for (var i = 0; i < cells.length; i++) {
+                var cell = cells[i];
+                linhaData[cell.id] = cell.value;
+            }
 
-function trimestreTres(input) {
-	let linha = input.closest('tr');
-	unidadetres = linha.querySelector('#unidadetres');
-}
+            data.push(linhaData); // Armazenar os dados da pessoa no array correspondente
+        }
+    }
 
-window.addEventListener('DOMContentLoaded', function() {
-	trimestreUm(input)
-	trimestreDois(input)
-	trimestreTres(input)
-});
+    var dadosStudent = [];
+    var dadosOne = [];
+    var dadosTwo = [];
+    var dadosThree = [];
+    var dadosFinish = [];
+
+    coletarDados(tableStudent.querySelectorAll('tr'), dadosStudent);
+    // Coletar dados para outros quartos, se necessário
+
+    console.log(dadosStudent); // Verificar os dados coletados no console
+
+    // Enviar dados para o servidor usando fetch
+    fetch('/ColegioEvolucao/src/main/java/ServelEvolucao.java', {
+        method: 'POST',
+        body: JSON.stringify(dadosStudent), // Aqui enviamos os dados dos estudantes coletados
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Lógica após enviar os dados para o servidor, se necessário
+    })
+    .catch(error => console.error('Erro:', error));
+}
 </script>
 </html>

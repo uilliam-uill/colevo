@@ -351,18 +351,17 @@ function sendDates() {
     var quarterThree = document.querySelector('#quarterThree');
     var quarterFinish = document.querySelector('#quartetFinish');
 
-    // Função para coletar dados de cada linha e criar objetos separados para cada pessoa
     function coletarDados(rows, data) {
         for (var j = 0; j < rows.length; j++) {
             var cells = rows[j].querySelectorAll('input');
-            var linhaData = {}; // Objeto para armazenar os dados de uma pessoa
+            var linhaData = {}; 
 
             for (var i = 0; i < cells.length; i++) {
                 var cell = cells[i];
                 linhaData[cell.id] = cell.value;
             }
 
-            data.push(linhaData); // Armazenar os dados da pessoa no array correspondente
+            data.push(linhaData); 
         }
     }
 
@@ -373,21 +372,15 @@ function sendDates() {
     var dadosFinish = [];
 
     coletarDados(tableStudent.querySelectorAll('tr'), dadosStudent);
-    // Coletar dados para outros quartos, se necessário
 
-    console.log(dadosStudent); // Verificar os dados coletados no console
-
-    // Enviar dados para o servidor usando fetch
-    fetch('/ColegioEvolucao/src/main/java/ServelEvolucao.java', {
+    fetch('src/main/java/ServelEvolucao', {
         method: 'POST',
-        body: JSON.stringify(dadosStudent), // Aqui enviamos os dados dos estudantes coletados
         headers: {
             'Content-Type': 'application/json'
         }
     })
     .then(response => response.json())
     .then(data => {
-        // Lógica após enviar os dados para o servidor, se necessário
     })
     .catch(error => console.error('Erro:', error));
 }

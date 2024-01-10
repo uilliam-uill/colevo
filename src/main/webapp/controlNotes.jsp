@@ -300,7 +300,7 @@ if (conexao != null) {
                     	<input type="checkbox" id="meuCheckbox">
                     <%} %>
                     </td>
-                    <td><input type="text" class="inputNotes" id="somanota"
+                    <td><input type="text" class="inputNotes" id="provaFinal"
                     value = "<%=pf%>" >
                     </td>
                 </tr>
@@ -328,7 +328,7 @@ function somarNotasUm(input) {
     
     somarNotasFinal(input);
 }
-
+0
 function somarNotasDois(input) {
     let linha = input.closest('tr');
    
@@ -344,24 +344,49 @@ function somarNotasDois(input) {
     somarNotasFinal(input);
 }
 
+function somarNotasTres(input) {
+    let linha = input.closest('tr');
+   
+    let ad3 = parseFloat(linha.querySelector('#ad3').value) || 0;
+    let aps3 = parseFloat(linha.querySelector('#aps3').value) || 0;
+    let as3 = parseFloat(linha.querySelector('#as3').value) || 0;
+    let aft3 = parseFloat(linha.querySelector('#aft3').value) || 0;
+    let rpt3 = parseFloat(linha.querySelector('#rpt3').value) || 0;
+    unidadetres = ad3 + aps3 + as3 + aft3 + rpt3;
+    let unidadeTresInput = linha.querySelector('#unidadetres'); 
+    unidadeTresInput.value = unidadetres;
+
+    somarNotasFinal(input);
+}
+
+
 function sendDates() {
     var tableStudent = document.querySelector('#datesStudent');
     var quarterOne = document.querySelector('#quarterOne');
     var quarterTwo = document.querySelector('#quarterTwo');
     var quarterThree = document.querySelector('#quarterThree');
     var quarterFinish = document.querySelector('#quartetFinish');
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    
 
     function coletarDados(rows, data) {
+    	var idMateria = urlParams.get('idmateria');
+        var idTurma = urlParams.get('idturma');
         for (var j = 0; j < rows.length; j++) {
             var cells = rows[j].querySelectorAll('input');
             var linhaData = {}; 
-
+            var idMateria = urlParams.get('idmateria');
+            var idTurma = urlParams.get('idturma');
+            linhaData['idMateria'] = idMateria;
+            linhaData['idTurma'] = idTurma;
             for (var i = 0; i < cells.length; i++) {
                 var cell = cells[i];
                 linhaData[cell.id] = cell.value;
             }
-
+			
             data.push(linhaData); 
+            console.log(linhaData);
         }
     }
 

@@ -312,10 +312,9 @@ if (conexao != null) {
 <button type="button" class="btn btn-primary btn-lg btn-block" onclick="sendDates()">Processar Dados</button>
 </body>
 <script>
+
 function somarNotasUm(input) {
-	let unidadeum = 0;
-	unidadeTwo = 0;
-	unidadetres = 0;
+    let unidadeum = 0.0;
     let linha = input.closest('tr');
     let ad1 = parseFloat(linha.querySelector('#ad1').value) || 0;
     let aps1 = parseFloat(linha.querySelector('#aps1').value) || 0;
@@ -324,14 +323,15 @@ function somarNotasUm(input) {
     let rpt1 = parseFloat(linha.querySelector('#rpt1').value) || 0;
     unidadeum = ad1 + aps1 + as1 + aft1 + rpt1;
     let unidadeUmInput = linha.querySelector('#unidadeum');
-    unidadeUmInput.value = unidadeum;
+    unidadeUmInput.value = unidadeum.toFixed(2); // Limitando para duas casas decimais
     
     somarNotasFinal(input);
 }
-0
+
+
 function somarNotasDois(input) {
     let linha = input.closest('tr');
-   
+
     let ad2 = parseFloat(linha.querySelector('#ad2').value) || 0;
     let aps2 = parseFloat(linha.querySelector('#aps2').value) || 0;
     let as2 = parseFloat(linha.querySelector('#as2').value) || 0;
@@ -346,7 +346,7 @@ function somarNotasDois(input) {
 
 function somarNotasTres(input) {
     let linha = input.closest('tr');
-   
+
     let ad3 = parseFloat(linha.querySelector('#ad3').value) || 0;
     let aps3 = parseFloat(linha.querySelector('#aps3').value) || 0;
     let as3 = parseFloat(linha.querySelector('#as3').value) || 0;
@@ -359,19 +359,17 @@ function somarNotasTres(input) {
     somarNotasFinal(input);
 }
 
-
 function sendDates() {
     var tableStudent = document.querySelector('#datesStudent');
     var quarterOne = document.querySelector('#quarterOne');
     var quarterTwo = document.querySelector('#quarterTwo');
     var quarterThree = document.querySelector('#quarterThree');
     var quarterFinish = document.querySelector('#quartetFinish');
-    
+
     const urlParams = new URLSearchParams(window.location.search);
-    
 
     function coletarDados(rows, data) {
-    	var idMateria = urlParams.get('idmateria');
+        var idMateria = urlParams.get('idmateria');
         var idTurma = urlParams.get('idturma');
         for (var j = 0; j < rows.length; j++) {
             var cells = rows[j].querySelectorAll('input');
@@ -384,7 +382,7 @@ function sendDates() {
                 var cell = cells[i];
                 linhaData[cell.id] = cell.value;
             }
-			
+
             data.push(linhaData); 
             console.log(linhaData);
         }
@@ -398,16 +396,17 @@ function sendDates() {
 
     coletarDados(tableStudent.querySelectorAll('tr'), dadosStudent);
 
-    fetch('src/main/java/ServelEvolucao', {
+    fetch('http://localhost:8080/ColegioEvolucao/EvolucaoServlet', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify(dadosStudent)  // Adicione esta linha para enviar os dados no corpo da requisição
     })
     .then(response => response.json())
     .then(data => {
+        console.log(data);
     })
-    .catch(error => console.error('Erro:', error));
 }
 </script>
 </html>

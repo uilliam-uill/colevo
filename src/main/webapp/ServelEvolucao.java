@@ -14,6 +14,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,15 +24,15 @@ import jakarta.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ServelEvolucao
  */
+@WebServlet("/ServelEvolucao")
 public class ServelEvolucao extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ServelEvolucao() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -45,8 +46,10 @@ public class ServelEvolucao extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 StringBuilder sb = new StringBuilder();
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        Connection conexao = null; 
+        try {
+		 	StringBuilder sb = new StringBuilder();
 	        BufferedReader reader = request.getReader();
 	        String line;
 	        while ((line = reader.readLine()) != null) {
@@ -55,8 +58,9 @@ public class ServelEvolucao extends HttpServlet {
 	        ObjectMapper objectMapper = new ObjectMapper();
 	        Map<String, Object> jsonData = objectMapper.readValue(sb.toString(), Map.class);
 
-	        Connection conexao = ConectionMysql.conectar();
+	        conexao = ConectionMysql.conectar();
 	        for (Map.Entry<String, Object> entry : jsonData.entrySet()) {
+	          try {
 	        	String id = entry.getKey();
 	        	Map<String, Object> studentData = (Map<String, Object>) entry.getValue();
 	        	int idTurma = (int) studentData.get("idTurma");
@@ -77,7 +81,7 @@ public class ServelEvolucao extends HttpServlet {
 	            student.setRpt2((Double) studentData.get("rpt2"));
 	            
 	            student.setAd3((Double) studentData.get("ad3"));
-	            student.setAs2((Double) studentData.get("as3"));
+	            student.setAs((Double) studentData.get("as3"));
 	            student.setAps3((Double) studentData.get("aps3"));
 	            student.setAft3((Double) studentData.get("aft3"));
 	            student.setRpt3((Double) studentData.get("rpt3"));
@@ -132,7 +136,7 @@ public class ServelEvolucao extends HttpServlet {
 	            	aprovado = false;
 	            }
 	            
-	            try {
+	           
 					PreparedStatement st1 = conexao.prepareStatement("INSERT INTO avaliacao (id_aluno, id_materia, "
 							+ " id_turma, nota_tirada, unidade, id_avaliacao)  VALUES (?, ?, ?, ?, ?, ?) ON "
 							+ " DUPLICATE KEY UPDATE nota_tirada = ?");
@@ -177,7 +181,7 @@ public class ServelEvolucao extends HttpServlet {
 					st1.setInt(2, idMateria);
 					st1.setInt(3, idTurma);
 					st1.setDouble(4, student.getRpt1());
-					st1.setInt(5, 1);
+				 	st1.setInt(5, 1);
 					st1.setInt(6, 8);
 					st1.setDouble(7, student.getRpt1());
 					st1.execute();
@@ -204,10 +208,10 @@ public class ServelEvolucao extends HttpServlet {
 					st1.setInt(1, student.getId());
 					st1.setInt(2, idMateria);
 					st1.setInt(3, idTurma);
-					st1.setDouble(4, student.getAps1());
+					st1.setDouble(4, student.getAps2());
 					st1.setInt(5, 1);
 					st1.setInt(6, 3);
-					st1.setDouble(7, student.getAps1());
+					st1.setDouble(7, student.getAps2());
 					st1.execute();
 					
 					st1.setInt(1, student.getId());
@@ -274,18 +278,27 @@ public class ServelEvolucao extends HttpServlet {
 					st1.setDouble(7, student.getRpt3());
 					st1.execute();
 					PreparedStatement st2 = conexao.prepareStatement
-							("UPDATE notas SET primeira_und = ? SET segunda_und = ? SET terceira_und = ? WHERE id_aluno = ? AND id_materia = ?");
+						    ("UPDATE notas SET primeira_und = ?, segunda_und = ?, terceira_und = ? WHERE id_aluno = ? AND id_materia = ?");
 					st2.setDouble(1, trimestreUm);
 					st2.setDouble(2, trimestreDois);
 					st2.setDouble(3, trimestreTres);
 					st2.setDouble(4, student.getId());
 					st2.setDouble(5, idMateria);
 					st2.execute();
-				} catch (SQLException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+	        } 
 	        }
-	}
-
+	} finally {
+        if (conexao != null) {
+            try {
+                conexao.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
 }

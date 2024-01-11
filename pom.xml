@@ -60,5 +60,7 @@
 				necessário -->
 			</plugin>
 		</plugins>
+		
 	</build>
+	
 </project>

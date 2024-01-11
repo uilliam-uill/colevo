@@ -99,9 +99,9 @@
 
         // Capturando o valor do parâmetro 'idmateria'
        	var idProfessor = urlParams.get('idProfessor');
-        
-        // Fazer algo com o ID da matéria, como exibir em um console
-       window.location.href = "controlNotes.jsp?idmateria=" + materiaId + "&idturma=" + turmaId;
+
+        window.location.href = "controlNotes.jsp?idmateria=" + materiaId + "&idturma=" + turmaId;
+
       });
     });
     

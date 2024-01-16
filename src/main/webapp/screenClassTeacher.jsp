@@ -14,7 +14,7 @@
 	<div class = "header" style="background-color: rgb(63 , 63, 202);">
 		<div class="icons">
 			<img src="imagens\Captura de tela 2024-01-02 174742-fotor-bg-remover-20240102174819.png" width="300">
-			<h1 style="color: white;  margin-left:220px" >Controle de Notas</h1>
+			<h1 style="color: white;  margin-left:220px; margin-top: 50px" >Controle de Notas</h1>
 		</div>
 	</div>
 <%@ page import="java.io.FileInputStream" %>
@@ -50,9 +50,9 @@
 <button type="button" class="btn btn-outline-primary" onclick="planoDeAula()">Atualize seu plano de aula</button>
 
 <div class="tableDiv">
-			<table class="table">
+			<table class="table tableText" border="3px">
 				<thead class="thead-light">
-				    <tr>
+				    <tr class="trBlue">
 				      <th style="width: 50px;">Código do Aluno</th>
 				      <th style="width: 50px;">Código da Matéria</th>
 				      <th scope="col">Nome</th>
@@ -63,6 +63,7 @@
 				      <th scope="col">Nota Final</th>
 				      <th scope="col">Média de Notas</th>
 				      <th scope="col">Aprovado</th>
+				      <th scope="col">    </th>
 				    </tr>
   				</thead>
 	            <% while (rsNotas.next()) { %> 

@@ -8,9 +8,25 @@ body{
 	color: rgb(63 , 63, 202);
 }
 
+.trBlue{
+	background-color:  rgb(63 , 63, 202);
+	color: white}
+
 a{
 	color: white;
 	text-decoration: none;
+}
+
+.header{
+	background-color: rgb(63, 63, 202);
+}
+
+.tableText{
+	font-size: Noto Sans;
+}
+
+.icons{
+	display: flex;
 }
 
 .tableClass{

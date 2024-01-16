@@ -3,7 +3,7 @@ table{
 	color: white;
 	border-collapse: collapse;
 	border: 1px solid black;
-	width: 100%;
+	width: 100%;	
 	}
 	
 tr{
@@ -17,7 +17,8 @@ th, td{
         }
         
 table td {
-	font-size: 15px; /* Tamanho de fonte desejado */
+	font-size: 12px; /* Tamanho de fonte desejado */
+	font-family: FreeMono;
 }        
   
 .icons{

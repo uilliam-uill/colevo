@@ -5,13 +5,13 @@
          version="4.0">
 
     <servlet>
-        <servlet-name>EvolucaoServlet</servlet-name>
-        <servlet-class>webapp.ServelEvolucao</servlet-class>
+        <servlet-name>ServelEvolucao</servlet-name>
+        <servlet-class>ColegioEvolucao.webapp.Web-INF.ServelEvolucao</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>EvolucaoServlet</servlet-name>
-        <url-pattern>/Evolucao</url-pattern>
+        <servlet-name>ServelEvolucao</servlet-name>
+        <url-pattern>/evolucao</url-pattern>
     </servlet-mapping>
 
 </web-app>

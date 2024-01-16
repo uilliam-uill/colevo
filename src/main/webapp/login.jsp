@@ -1,6 +1,8 @@
 <%@page import="javaClass.Teacher"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +21,7 @@
           <div class="row g-0">
             <div class="col-lg-6" style = "background-color: white">
               <div class="card-body p-md-5 mx-md-4" style = "background-color: white">
-
+ 
                 <div class="text-center">
                   <img src="imagens/Captura_de_tela_2023-12-11_153011-removebg-preview.png"
                     style="width: 185px;" alt="logo">

@@ -1,16 +1,11 @@
-
-
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.sql.*;
-import javaClass.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Map;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.ServletException;
@@ -19,15 +14,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-
-
 /**
  * Servlet implementation class ServelEvolucao
  */
-@WebServlet("/ServelEvolucao")
+@WebServlet({ "/ServelEvolucao", "/evolucao" })
 public class ServelEvolucao extends HttpServlet {
     private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -35,38 +28,37 @@ public class ServelEvolucao extends HttpServlet {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String contentType = request.getContentType();
+        PreparedStatement st1 = null;
+        PreparedStatement st2 = null;
+        if (contentType != null && contentType.contains("application/json")) {
+            Connection conexao = null;
+            
+            try {
+                StringBuilder sb = new StringBuilder();
+                BufferedReader reader = request.getReader();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-        Connection conexao = null; 
-        try {
-		 	StringBuilder sb = new StringBuilder();
-	        BufferedReader reader = request.getReader();
-	        String line;
-	        while ((line = reader.readLine()) != null) {
-	            sb.append(line);
-	        }
-	        ObjectMapper objectMapper = new ObjectMapper();
-	        Map<String, Object> jsonData = objectMapper.readValue(sb.toString(), Map.class);
+                ObjectMapper objectMapper = new ObjectMapper();
+                Map<String, Object> jsonData = objectMapper.readValue(sb.toString(), Map.class);
 
-	        conexao = ConectionMysql.conectar();
-	        for (Map.Entry<String, Object> entry : jsonData.entrySet()) {
-	          try {
-	        	String id = entry.getKey();
-	        	Map<String, Object> studentData = (Map<String, Object>) entry.getValue();
-	        	int idTurma = (int) studentData.get("idTurma");
-	        	int idMateria= (int) studentData.get("idMateria");
-	        	Student student = new Student();
-	        	student.setId((int) studentData.get("id"));
+                conexao = ConectionMysql.conectar();
+                for (Map.Entry<String, Object> entry : jsonData.entrySet()) {
+                    try {
+                        String id = entry.getKey();
+                        Map<String, Object> studentData = (Map<String, Object>) entry.getValue();
+                        int idTurma = (int) studentData.get("idTurma");
+                        int idMateria = (int) studentData.get("idMateria");
+                        Student student = new Student();
+                        student.setId((int) studentData.get("id"));
 	        	
 	        	student.setAd1((Double) studentData.get("ad1"));
 	            student.setAs1((Double) studentData.get("as1"));
@@ -123,7 +115,8 @@ public class ServelEvolucao extends HttpServlet {
 	            	if(trimestreTres == 5.9) {
 	            		trimestreTres = 6.0;
 	            	}
-	            
+	            student.setProvaFinal(0);
+	            student.setProvaFinal((Double) studentData.get("provaFinal"));
 	            Double somaNotas = trimestreUm + trimestreDois + trimestreTres;
 	            Double mediaNota = somaNotas/3;
 	            boolean aprovado = false;
@@ -137,7 +130,7 @@ public class ServelEvolucao extends HttpServlet {
 	            }
 	            
 	           
-					PreparedStatement st1 = conexao.prepareStatement("INSERT INTO avaliacao (id_aluno, id_materia, "
+					st1 = conexao.prepareStatement("INSERT INTO avaliacao (id_aluno, id_materia, "
 							+ " id_turma, nota_tirada, unidade, id_avaliacao)  VALUES (?, ?, ?, ?, ?, ?) ON "
 							+ " DUPLICATE KEY UPDATE nota_tirada = ?");
 					//insert notas trimestre um
@@ -277,28 +270,45 @@ public class ServelEvolucao extends HttpServlet {
 					st1.setInt(6, 8);
 					st1.setDouble(7, student.getRpt3());
 					st1.execute();
-					PreparedStatement st2 = conexao.prepareStatement
+				    st2 = conexao.prepareStatement
 						    ("UPDATE notas SET primeira_und = ?, segunda_und = ?, terceira_und = ? WHERE id_aluno = ? AND id_materia = ?");
 					st2.setDouble(1, trimestreUm);
 					st2.setDouble(2, trimestreDois);
 					st2.setDouble(3, trimestreTres);
-					st2.setDouble(4, student.getId());
-					st2.setDouble(5, idMateria);
+					st2.setInt(4, student.getId());
+					st2.setInt(5, idMateria);
 					st2.execute();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	        } 
-	        }
-	} finally {
-        if (conexao != null) {
-            try {
-                conexao.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (conexao != null) {
+                    try {
+                        if (st1 != null) {
+                            st1.close();
+                        }
+                        if (st2 != null) {
+                            st2.close();
+                        }
+                        conexao.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
+
+            PrintWriter out = response.getWriter();
+            out.println("<html><head><script>alert('Mensagem do Servlet');</script></head><body></body></html>");
+
+        } else {
+            response.setStatus(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
+            response.getWriter().write("Unsupported Media Type");
+            return;
         }
     }
-}
 }

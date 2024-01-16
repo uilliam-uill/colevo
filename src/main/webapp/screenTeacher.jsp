@@ -13,7 +13,7 @@
 	<div class = "header">
 		<div class="icons">
 			<img src="imagens\Captura de tela 2024-01-02 174742-fotor-bg-remover-20240102174819.png" width="300">
-			<h1 style="color: white">Acesso Professor</h1>
+			<h1 style="color: white; margin-left:220px; margin-top: 50px">Acesso Professor</h1>
 		</div>
 	</div>
 		<%
@@ -42,7 +42,7 @@
 <div class="tableClass">
 <table class="table">
 	 <thead class="thead-light">
-	    <tr>
+	    <tr class="trBlue">
 	      <th scope="col">Código da Turma</th>
 	      <th scope="col">Turma</th>
 	      <th scope="col">Código da Matéria</th>
@@ -101,6 +101,7 @@
        	var idProfessor = urlParams.get('idProfessor');
 
         window.location.href = "controlNotes.jsp?idmateria=" + materiaId + "&idturma=" + turmaId;
+        //window.location.href = "screenClassTeacher.jsp?id=" + materiaId + "&idTurma=" + turmaId + "&idProfessor="+ idProfessor;
 
       });
     });

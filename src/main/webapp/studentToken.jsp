@@ -14,7 +14,7 @@
 <div class = "header">
 		<div class="icons">
 			<img src="imagens\Captura de tela 2024-01-02 174742-fotor-bg-remover-20240102174819.png" width="300">
-			<h1 style="color: white">Desempenho do Aluno</h1>
+			<h1 style="color: white;   margin-left:220px; margin-top: 50px" >Desempenho do Aluno</h1>
 		</div>
 	</div>
 <%@ page import="java.io.FileInputStream" %>

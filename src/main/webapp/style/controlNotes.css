@@ -58,3 +58,17 @@ table td {
 #meuCheckbox{
 	padding: 5px;
 }
+
+ .bolinhaRed {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: red; /* Substitua "red" pela cor desejada */
+    }
+    
+     .bolinhaGreen {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background-color: green /* Substitua "red" pela cor desejada */
+    }

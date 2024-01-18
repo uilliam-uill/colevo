@@ -99,9 +99,13 @@
 
         // Capturando o valor do parâmetro 'idmateria'
        	var idProfessor = urlParams.get('idProfessor');
-
+		if(turmaId == 12){
+		 	window.location.href = "controlNotesTerceiroAno.jsp?idmateria=" + materiaId + "&idturma="
+	        + turmaId + "&turma=" + turmaJs.replace('º', '%C2%BA') + "&materia=" + materiaNome;
+		}else{
        	window.location.href = "controlNotes.jsp?idmateria=" + materiaId + "&idturma="
         + turmaId + "&turma=" + turmaJs.replace('º', '%C2%BA') + "&materia=" + materiaNome;
+		}
 
         //window.location.href = "screenClassTeacher.jsp?id=" + materiaId + "&idTurma=" + turmaId + "&idProfessor="+ idProfessor;
 

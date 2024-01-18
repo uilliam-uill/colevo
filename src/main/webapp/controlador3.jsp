@@ -28,22 +28,22 @@
 
 		String[] ad1Strings = request.getParameterValues("ad1");
 		String[] aps1Strings = request.getParameterValues("aps1");
-		String[] as1Strings = request.getParameterValues("as1");
-		String[] aft1Strings = request.getParameterValues("aft1");
+		String[] sas11Strings = request.getParameterValues("sas11");
+		String[] sas21Strings = request.getParameterValues("sas21");
 		String[] rpt1Strings = request.getParameterValues("rpt1");
 		String[] trimestre1String = request.getParameterValues("unidadeum");
 
 		String[] ad2Strings = request.getParameterValues("ad2");
 		String[] aps2Strings = request.getParameterValues("aps2");
-		String[] as2Strings = request.getParameterValues("as2");
-		String[] aft2Strings = request.getParameterValues("aft2");
+		String[] sas12Strings = request.getParameterValues("sas12");
+		String[] sas22Strings = request.getParameterValues("sas22");
 		String[] rpt2Strings = request.getParameterValues("rpt2");
 		String[] trimestre2String = request.getParameterValues("unidadedois");
 
 		String[] ad3Strings = request.getParameterValues("ad3");
 		String[] aps3Strings = request.getParameterValues("aps3");
-		String[] as3Strings = request.getParameterValues("as3");
-		String[] aft3Strings = request.getParameterValues("aft3");
+		String[] sas13Strings = request.getParameterValues("sas13");
+		String[] sas23Strings = request.getParameterValues("sas23");
 		String[] rpt3Strings = request.getParameterValues("rpt3");
 		String[] trimestre3String = request.getParameterValues("unidadetres");
 
@@ -75,23 +75,23 @@
 		insertNotes.execute();
 
 		insertNotes = conexao.prepareStatement("INSERT INTO avaliacao (id_aluno, id_materia, "
-				+ " id_turma, nota_tirada, unidade, id_avaliacao)  VALUES (?, ?, ?, ?, 1, 4) ON "
+				+ " id_turma, nota_tirada, unidade, id_avaliacao)  VALUES (?, ?, ?, ?, 1, 6) ON "
 				+ " DUPLICATE KEY UPDATE nota_tirada = ?");
 		insertNotes.setInt(1, Integer.parseInt(idAlunoStrings[i]));
 		insertNotes.setInt(2, Integer.parseInt(request.getParameter("idmateria")));
 		insertNotes.setInt(3, Integer.parseInt(request.getParameter("idturma")));
-		insertNotes.setDouble(4, Double.parseDouble(as1Strings[i].replace(",", ".")));
-		insertNotes.setDouble(5, Double.parseDouble(as1Strings[i].replace(",", ".")));
+		insertNotes.setDouble(4, Double.parseDouble(sas11Strings[i].replace(",", ".")));
+		insertNotes.setDouble(5, Double.parseDouble(sas11Strings[i].replace(",", ".")));
 		insertNotes.execute();
 
 		insertNotes = conexao.prepareStatement("INSERT INTO avaliacao (id_aluno, id_materia, "
-				+ " id_turma, nota_tirada, unidade, id_avaliacao)  VALUES (?, ?, ?, ?, 1, 5) ON "
+				+ " id_turma, nota_tirada, unidade, id_avaliacao)  VALUES (?, ?, ?, ?, 1, 7) ON "
 				+ " DUPLICATE KEY UPDATE nota_tirada = ?");
 		insertNotes.setInt(1, Integer.parseInt(idAlunoStrings[i]));
 		insertNotes.setInt(2, Integer.parseInt(request.getParameter("idmateria")));
 		insertNotes.setInt(3, Integer.parseInt(request.getParameter("idturma")));
-		insertNotes.setDouble(4, Double.parseDouble(aft1Strings[i].replace(",", ".")));
-		insertNotes.setDouble(5, Double.parseDouble(aft1Strings[i].replace(",", ".")));
+		insertNotes.setDouble(4, Double.parseDouble(sas21Strings[i].replace(",", ".")));
+		insertNotes.setDouble(5, Double.parseDouble(sas21Strings[i].replace(",", ".")));
 		insertNotes.execute();
 
 		insertNotes = conexao.prepareStatement("INSERT INTO avaliacao (id_aluno, id_materia, "
@@ -105,7 +105,7 @@
 		insertNotes.execute();
 
 		Double triUm = Double.parseDouble(ad1Strings[i].replace(",", ".")) + Double.parseDouble(aps1Strings[i].replace(",", "."))
-				+ Double.parseDouble(as1Strings[i].replace(",", ".")) + Double.parseDouble(aft1Strings[i].replace(",", "."))
+				+ Double.parseDouble(sas11Strings[i].replace(",", ".")) + Double.parseDouble(sas21Strings[i].replace(",", "."))
 				+ Double.parseDouble(rpt1Strings[i].replace(",", "."));
 		//trimestre dois
 		insertNotes = conexao.prepareStatement("INSERT INTO avaliacao (id_aluno, id_materia, "
@@ -129,23 +129,23 @@
 		insertNotes.execute();
 
 		insertNotes = conexao.prepareStatement("INSERT INTO avaliacao (id_aluno, id_materia, "
-				+ " id_turma, nota_tirada, unidade, id_avaliacao)  VALUES (?, ?, ?, ?, 2, 4) ON "
+				+ " id_turma, nota_tirada, unidade, id_avaliacao)  VALUES (?, ?, ?, ?, 2, 6) ON "
 				+ " DUPLICATE KEY UPDATE nota_tirada = ?");
 		insertNotes.setInt(1, Integer.parseInt(idAlunoStrings[i]));
 		insertNotes.setInt(2, Integer.parseInt(request.getParameter("idmateria")));
 		insertNotes.setInt(3, Integer.parseInt(request.getParameter("idturma")));
-		insertNotes.setDouble(4, Double.parseDouble(as2Strings[i].replace(",", ".")));
-		insertNotes.setDouble(5, Double.parseDouble(as2Strings[i].replace(",", ".")));
+		insertNotes.setDouble(4, Double.parseDouble(sas12Strings[i].replace(",", ".")));
+		insertNotes.setDouble(5, Double.parseDouble(sas12Strings[i].replace(",", ".")));
 		insertNotes.execute();
 
 		insertNotes = conexao.prepareStatement("INSERT INTO avaliacao (id_aluno, id_materia, "
-				+ " id_turma, nota_tirada, unidade, id_avaliacao)  VALUES (?, ?, ?, ?, 2, 5) ON "
+				+ " id_turma, nota_tirada, unidade, id_avaliacao)  VALUES (?, ?, ?, ?, 2, 7) ON "
 				+ " DUPLICATE KEY UPDATE nota_tirada = ?");
 		insertNotes.setInt(1, Integer.parseInt(idAlunoStrings[i]));
 		insertNotes.setInt(2, Integer.parseInt(request.getParameter("idmateria")));
 		insertNotes.setInt(3, Integer.parseInt(request.getParameter("idturma")));
-		insertNotes.setDouble(4, Double.parseDouble(aft2Strings[i].replace(",", ".")));
-		insertNotes.setDouble(5, Double.parseDouble(aft2Strings[i].replace(",", ".")));
+		insertNotes.setDouble(4, Double.parseDouble(sas22Strings[i].replace(",", ".")));
+		insertNotes.setDouble(5, Double.parseDouble(sas22Strings[i].replace(",", ".")));
 		insertNotes.execute();
 
 		insertNotes = conexao.prepareStatement("INSERT INTO avaliacao (id_aluno, id_materia, "
@@ -159,7 +159,7 @@
 		insertNotes.execute();
 
 		Double triDois = Double.parseDouble(ad2Strings[i].replace(",", ".")) + Double.parseDouble(aps2Strings[i].replace(",", "."))
-				+ Double.parseDouble(as2Strings[i].replace(",", ".")) + Double.parseDouble(aft2Strings[i].replace(",", "."))
+				+ Double.parseDouble(sas12Strings[i].replace(",", ".")) + Double.parseDouble(sas22Strings[i].replace(",", "."))
 				+ Double.parseDouble(rpt2Strings[i].replace(",", "."));
 		//trimestre tres
 
@@ -184,23 +184,23 @@
 		insertNotes.execute();
 
 		insertNotes = conexao.prepareStatement("INSERT INTO avaliacao (id_aluno, id_materia, "
-				+ " id_turma, nota_tirada, unidade, id_avaliacao)  VALUES (?, ?, ?, ?, 3, 4) ON "
+				+ " id_turma, nota_tirada, unidade, id_avaliacao)  VALUES (?, ?, ?, ?, 3, 6) ON "
 				+ " DUPLICATE KEY UPDATE nota_tirada = ?");
 		insertNotes.setInt(1, Integer.parseInt(idAlunoStrings[i]));
 		insertNotes.setInt(2, Integer.parseInt(request.getParameter("idmateria")));
 		insertNotes.setInt(3, Integer.parseInt(request.getParameter("idturma")));
-		insertNotes.setDouble(4, Double.parseDouble(as3Strings[i].replace(",", ".")));
-		insertNotes.setDouble(5, Double.parseDouble(as3Strings[i].replace(",", ".")));
+		insertNotes.setDouble(4, Double.parseDouble(sas13Strings[i].replace(",", ".")));
+		insertNotes.setDouble(5, Double.parseDouble(sas13Strings[i].replace(",", ".")));
 		insertNotes.execute();
 
 		insertNotes = conexao.prepareStatement("INSERT INTO avaliacao (id_aluno, id_materia, "
-				+ " id_turma, nota_tirada, unidade, id_avaliacao)  VALUES (?, ?, ?, ?, 3, 5) ON "
+				+ " id_turma, nota_tirada, unidade, id_avaliacao)  VALUES (?, ?, ?, ?, 3, 7) ON "
 				+ " DUPLICATE KEY UPDATE nota_tirada = ?");
 		insertNotes.setInt(1, Integer.parseInt(idAlunoStrings[i]));
 		insertNotes.setInt(2, Integer.parseInt(request.getParameter("idmateria")));
 		insertNotes.setInt(3, Integer.parseInt(request.getParameter("idturma")));
-		insertNotes.setDouble(4, Double.parseDouble(aft3Strings[i].replace(",", ".")));
-		insertNotes.setDouble(5, Double.parseDouble(aft3Strings[i].replace(",", ".")));
+		insertNotes.setDouble(4, Double.parseDouble(sas23Strings[i].replace(",", ".")));
+		insertNotes.setDouble(5, Double.parseDouble(sas23Strings[i].replace(",", ".")));
 		insertNotes.execute();
 
 		insertNotes = conexao.prepareStatement("INSERT INTO avaliacao (id_aluno, id_materia, "
@@ -213,7 +213,7 @@
 		insertNotes.setDouble(5, Double.parseDouble(rpt3Strings[i].replace(",", ".")));
 		insertNotes.execute();
 		Double triTres = Double.parseDouble(ad3Strings[i].replace(",", ".")) + Double.parseDouble(aps3Strings[i].replace(",", "."))
-				+ Double.parseDouble(as3Strings[i].replace(",", ".")) + Double.parseDouble(aft3Strings[i].replace(",", "."))
+				+ Double.parseDouble(sas23Strings[i].replace(",", ".")) + Double.parseDouble(sas13Strings[i].replace(",", "."))
 				+ Double.parseDouble(rpt3Strings[i].replace(",", "."));
 
 		//trimestre um media

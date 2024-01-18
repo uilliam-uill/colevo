@@ -55,56 +55,58 @@
 
 	<div class="header">
 		<div class="icons">
-			
+
 			<h1 style="color: white">Acesso Professor</h1>
 		</div>
 	</div>
 
 
 	<div class="apresentacao">
-  <div>
-    <img src="imagens\Captura de tela 2024-01-17 180901.png" width="250">
-  </div>
-  <div class="turma">
-    <div>
-      <h3>Turma:</h3>
-      <h7><%=request.getParameter("turma").replace("%AA%20", "º")%></h7>
-    </div>
-    <div>
-      <h3>Matéria:</h3>
-      <h7><%=request.getParameter("materia")%></h7>
-    </div>
-  </div>
-</div>
-<br> <br> <br>  
+		<div>
+			<img src="imagens\Captura de tela 2024-01-17 180901.png" width="250">
+		</div>
+		<div class="turma">
+			<div>
+				<h3>Turma:</h3>
+				<h7><%=request.getParameter("turma").replace("%AA%20", "º")%></h7>
+			</div>
+			<div>
+				<h3>Matéria:</h3>
+				<h7><%=request.getParameter("materia")%></h7>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<br>
 
-<div class="list">
-	<ul>
-		<li> AD - Atividade Diversificada</li>
-		<li> APS - Atividade Diversificada</li>
-		<li> AS - Atividade Diversificada</li>
-		<li> AFT - Atividade Diversificada</li>
-		<li> AD - Atividade Diversificada</li>
-	</ul>
-</div>
-<br>
-<div class="list">
-	<ul>
-		<li> MT - Media Trimestral</li>
-		<li> SM - Soma das Notas</li>
-		<li> MF - Media Final</li>
-		<li> ST - Status</li>
-		<li> PF - Prova Final</li>
-	</ul>
-</div>
-<br>  <br>
+	<div class="list">
+		<ul>
+			<li>AD - Atividade Diversificada</li>
+			<li>APS - Atividade Diversificada</li>
+			<li>SAS 1 - SAS Enem 1</li>
+			<li>SAS 2 - SAS Enem 2</li>
+		</ul>
+	</div>
+	<br>
+	<div class="list">
+		<ul>
+			<li>MT - Media Trimestral</li>
+			<li>SM - Soma das Notas</li>
+			<li>MF - Media Final</li>
+			<li>ST - Status</li>
+			<li>PF - Prova Final</li>
+		</ul>
+	</div>
+	<br>
+	<br>
 	<form method="post"
-		action="controlador69.jsp?idmateria=<%=request.getParameter("idmateria")%>&idturma=<%=request.getParameter("idturma")%>">
+		action="controlador3.jsp?idmateria=<%=request.getParameter("idmateria")%>&idturma=<%=request.getParameter("idturma")%>">
 		<table id="datesStudent">
 			<tr class="provas">
 				<td style="width: 10px;">Nº</td>
 				<td class="provas">Aluno</td>
-				<td class="provas" >1º TRIMESTRE</td>
+				<td class="provas">1º TRIMESTRE</td>
 				<td class="provas">2º TRIMESTRE</td>
 				<td class="provas">3º TRIMESTRE</td>
 				<td class="provas">RESULTADO FINAL</td>
@@ -115,11 +117,16 @@
 				<td class="provas">
 					<table class="inner-table">
 						<tr class="provas">
-							<td class="provas">AD <br> 2.0</td>
-							<td class="provas">APS <br> 3.0</td>
-							<td class="provas">AS <br> 1.0</td>
-							<td class="provas">AFT <br> 4.0</td>
-							<td class="provas">RPT <br> 3.0</td>
+							<td class="provas">AD <br> 2.0
+							</td>
+							<td class="provas">APS <br> 3.0
+							</td>
+							<td class="provas">SAS1 <br> 2.0
+							</td>
+							<td class="provas">SAS2 <br> 3.0
+							</td>
+							<td class="provas">RPT <br> 3.0
+							</td>
 							<td class="provas">M.T</td>
 						</tr>
 					</table>
@@ -127,11 +134,16 @@
 				<td class="provas">
 					<table class="inner-table">
 						<tr class="provas">
-							<td class="provas">AD <br> 2.0</td>
-							<td class="provas">APS <br> 3.0</td>
-							<td class="provas">AS <br> 1.0</td>
-							<td class="provas">AFT <br> 4.0</td>
-							<td class="provas">RPT <br> 3.0</td>
+							<td class="provas">AD <br> 2.0
+							</td>
+							<td class="provas">APS <br> 3.0
+							</td>
+							<td class="provas">SAS1 <br> 2.0
+							</td>
+							<td class="provas">SAS2 <br> 3.0
+							</td>
+							<td class="provas">RPT <br> 3.0
+							</td>
 							<td class="provas">M.T</td>
 						</tr>
 					</table>
@@ -140,11 +152,16 @@
 				<td class="provas">
 					<table class="inner-table">
 						<tr class="provas">
-							<td class="provas">AD <br> 2.0</td>
-							<td class="provas">APS <br> 3.0</td>
-							<td class="provas">AS <br> 1.0</td>
-							<td class="provas">AFT <br> 4.0</td>
-							<td class="provas">RPT <br> 3.0</td>
+							<td class="provas">AD <br> 2.0
+							</td>
+							<td class="provas">APS <br> 3.0
+							</td>
+							<td class="provas">SAS1 <br> 2.0
+							</td>
+							<td class="provas">SAS2 <br> 3.0
+							</td>
+							<td class="provas">RPT <br> 3.0
+							</td>
 							<td class="provas">M.T</td>
 						</tr>
 					</table>
@@ -155,7 +172,8 @@
 							<td class="provas">SM</td>
 							<td class="provas">MF</td>
 							<td class="provas">ST</td>
-							<td class="provas">PF <br> 5.0</td>
+							<td class="provas">PF <br> 5.0
+							</td>
 						</tr>
 					</table>
 				</td>
@@ -171,9 +189,9 @@
 					stNotes.setInt(2, Integer.parseInt(request.getParameter("idmateria")));
 					stNotes.setInt(3, Integer.parseInt(request.getParameter("idturma")));
 
-					double ad1 = 0.0, aps1 = 0.0, as1 = 0.0, aft1 = 0.0, rpt1 = 0.0;
-					double ad2 = 0.0, aps2 = 0.0, as2 = 0.0, aft2 = 0.0, rpt2 = 0.0;
-					double ad3 = 0.0, aps3 = 0.0, as3 = 0.0, aft3 = 0.0, rpt3 = 0.0;
+					double ad1 = 0.0, aps1 = 0.0, sas11 = 0.0, sas21 = 0.0, rpt1 = 0.0;
+					double ad2 = 0.0, aps2 = 0.0, sas12 = 0.0, sas22 = 0.0, rpt2 = 0.0;
+					double ad3 = 0.0, aps3 = 0.0, sas13 = 0.0, sas23 = 0.0, rpt3 = 0.0;
 
 					rsNotes = stNotes.executeQuery();
 					while (rsNotes.next()) {
@@ -187,11 +205,11 @@
 					if (idAvaliacao == 3) {
 						aps1 = notaTirada;
 					}
-					if (idAvaliacao == 4) {
-						as1 = notaTirada;
+					if (idAvaliacao == 6) {
+						sas11 = notaTirada;
 					}
-					if (idAvaliacao == 5) {
-						aft1 = notaTirada;
+					if (idAvaliacao == 7) {
+						sas21 = notaTirada;
 					}
 					if (idAvaliacao == 8) {
 						rpt1 = notaTirada;
@@ -204,32 +222,32 @@
 					if (idAvaliacao == 3) {
 						aps2 = notaTirada;
 					}
-					if (idAvaliacao == 4) {
-						as2 = notaTirada;
+					if (idAvaliacao == 6) {
+						sas12 = notaTirada;
 					}
-					if (idAvaliacao == 5) {
-						aft2 = notaTirada;
+					if (idAvaliacao == 7) {
+						sas22 = notaTirada;
 					}
 					if (idAvaliacao == 8) {
 						rpt2 = notaTirada;
 					}
 						}
 						if (unidade == 3) {
-					if (idAvaliacao == 2) {
-						ad3 = notaTirada;
-					}
-					if (idAvaliacao == 3) {
-						aps3 = notaTirada;
-					}
-					if (idAvaliacao == 4) {
-						as3 = notaTirada;
-					}
-					if (idAvaliacao == 5) {
-						aft3 = notaTirada;
-					}
-					if (idAvaliacao == 8) {
-						rpt3 = notaTirada;
-					}
+							if (idAvaliacao == 2) {
+								ad3 = notaTirada;
+							}
+							if (idAvaliacao == 3) {
+								aps3 = notaTirada;
+							}
+							if (idAvaliacao == 6) {
+								sas13 = notaTirada;
+							}
+							if (idAvaliacao == 7) {
+								sas23 = notaTirada;
+							}
+							if (idAvaliacao == 8) {
+								rpt3 = notaTirada;
+							}
 						}
 					}
 				%>
@@ -248,10 +266,10 @@
 								value="<%=aps1%>" id="aps1" name="aps1"
 								onchange="somarNotasUm(this)"></td>
 							<td><input type="text" class="inputNotes provas1"
-								value="<%=as1%>" id="as1" name="as1"
+								value="<%=sas11%>" id="sas11" name="sas11"
 								onchange="somarNotasUm(this)"></td>
 							<td><input type="text" class="inputNotes provas1"
-								value="<%=aft1%>" id="aft1" name="aft1"
+								value="<%=sas21%>" id="sas21" name="sas21"
 								onchange="somarNotasUm(this)"></td>
 							<td><input type="text" class="inputNotes provas1"
 								value="<%=rpt1%>" id="rpt1" name="rpt1"
@@ -274,10 +292,10 @@
 								value="<%=aps2%>" id="aps2" name="aps2"
 								onchange="somarNotasDois(this)"></td>
 							<td><input type="text" class="inputNotes provas2"
-								value="<%=as2%>" id="as2" name="as2"
+								value="<%=sas12%>" id="sas12" name="sas12"
 								onchange="somarNotasDois(this)"></td>
 							<td><input type="text" class="inputNotes provas2"
-								value="<%=aft2%>" id="aft2" name="aft2"
+								value="<%=sas22%>" id="sas22" name="sas22"
 								onchange="somarNotasDois(this)"></td>
 							<td><input type="text" class="inputNotes provas2"
 								value="<%=rpt2%>" id="rpt2" name="rpt2"
@@ -299,10 +317,10 @@
 								value="<%=aps3%>" id="aps3" name="aps3"
 								onchange="somarNotasTres(this)"></td>
 							<td><input type="text" class="inputNotes provas3"
-								value="<%=as3%>" id="as3" name="as3"
+								value="<%=sas13%>" id="sas13" name="sas13"
 								onchange="somarNotasTres(this)"></td>
 							<td><input type="text" class="inputNotes provas3"
-								value="<%=aft3%>" id="aft3" name="aft3"
+								value="<%=sas23%>" id="sas23" name="sas23"
 								onchange="somarNotasTres(this)"></td>
 							<td><input type="text" class="inputNotes provas3"
 								value="<%=rpt3%>" id="rpt3" name="rpt3"
@@ -330,20 +348,18 @@
 							%>
 							<td><input type="text" class="inputNotes" id="somanota"
 								value="<%=df.format(soma_nota)%>" readonly></td>
-								<td><input type="text" class="inputNotes" id="medianota"
+							<td><input type="text" class="inputNotes" id="medianota"
 								value="<%=df.format(media_nota)%>" readonly></td>
 							<td>
 								<div class="bolinha"></div> <%
  if (media_nota >= 6 || pf >= 5) {
  %>
-								<div class="bolinhaGreen"></div>
-								<%
-								} else {
-								%>
-								<div class="bolinhaRed"></div>
-								<%
-								}
-								%>
+								<div class="bolinhaGreen"></div> <%
+ } else {
+ %>
+								<div class="bolinhaRed"></div> <%
+ }
+ %>
 							</td>
 							<td><input type="text" class="inputNotes"
 								id="provaFinalNote" name="provaFinalNote" value="<%=pf%>"></td>
@@ -374,10 +390,10 @@
 		let linha = input.closest('tr');
 		let ad1 = parseFloat(linha.querySelector('#ad1').value) || 0;
 		let aps1 = parseFloat(linha.querySelector('#aps1').value) || 0;
-		let as1 = parseFloat(linha.querySelector('#as1').value) || 0;
-		let aft1 = parseFloat(linha.querySelector('#aft1').value) || 0;
+		let sas11 = parseFloat(linha.querySelector('#sas11').value) || 0;
+		let sas21 = parseFloat(linha.querySelector('#sas21').value) || 0;
 		let rpt1 = parseFloat(linha.querySelector('#rpt1').value) || 0;
-		unidadeum = ad1 + aps1 + as1 + aft1 + rpt1;
+		unidadeum = ad1 + aps1 + sas11 + sas21 + rpt1;
 		let unidadeUmInput = linha.querySelector('#unidadeum');
 		unidadeUmInput.value = unidadeum.toFixed(1);
 	}
@@ -387,10 +403,10 @@
 
 		let ad2 = parseFloat(linha.querySelector('#ad2').value) || 0;
 		let aps2 = parseFloat(linha.querySelector('#aps2').value) || 0;
-		let as2 = parseFloat(linha.querySelector('#as2').value) || 0;
-		let aft2 = parseFloat(linha.querySelector('#aft2').value) || 0;
+		let sas12 = parseFloat(linha.querySelector('#sas12').value) || 0;
+		let sas22 = parseFloat(linha.querySelector('#sas22').value) || 0;
 		let rpt2 = parseFloat(linha.querySelector('#rpt2').value) || 0;
-		unidadeTwo = ad2 + aps2 + as2 + aft2 + rpt2;
+		unidadeTwo = ad2 + aps2 + sas12 + sas22 + rpt2;
 		let unidadeDoisInput = linha.querySelector('#unidadedois');
 		unidadeDoisInput.value = unidadeTwo;
 	}
@@ -400,10 +416,10 @@
 
 		let ad3 = parseFloat(linha.querySelector('#ad3').value) || 0;
 		let aps3 = parseFloat(linha.querySelector('#aps3').value) || 0;
-		let as3 = parseFloat(linha.querySelector('#as3').value) || 0;
-		let aft3 = parseFloat(linha.querySelector('#aft3').value) || 0;
+		let sas13 = parseFloat(linha.querySelector('#sas13').value) || 0;
+		let sas23 = parseFloat(linha.querySelector('#sas23').value) || 0;
 		let rpt3 = parseFloat(linha.querySelector('#rpt3').value) || 0;
-		unidadetres = ad3 + aps3 + as3 + aft3 + rpt3;
+		unidadetres = ad3 + aps3 + sas13 + sas23 + rpt3;
 		let unidadeTresInput = linha.querySelector('#unidadetres');
 		unidadeTresInput.value = unidadetres;
 	}

@@ -77,17 +77,41 @@ table td {
 }
 
 .apresentacao{
-	flex-direction: column;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
-
-.turma {
-  display: flex;
-  justify-content: space-between;
+.turma,
+.turma div {
+    margin-right: 20px; /* Ajuste conforme necessário */
+  }
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
-.turma h3, .turma h7 {
-  margin: 2; /* Remover margens padrão */
+li {
+    display: inline-block;
+    margin-right: 10px; /* Adicione algum espaçamento entre as li, se desejar */
+}
+
+li {
+	 display: inline-block;
+    margin-right: 10px;
+    list-style-type: none; /* Remove o marcador padrão */
+}
+
+li::before{
+	content: "\25A0"; 
+    width: 1em; /* Ajuste a largura conforme necessário */
+    height: 1em; /* Ajuste a altura conforme necessário */
+    margin-right: 0.5em; /* Espaçamento entre o quadrado e*/
+    color: rgb(99,141,78);
+}
+  
+.list{
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

@@ -48,6 +48,7 @@
 	      <th scope="col">Código da Matéria</th>
 	      <th scope="col">Matéria</th>
 	      <th scope="col">Acessar</th>
+	       <th scope="col">Plano de Aula</th>
 	    </tr>
   	</thead>
   <tbody>
@@ -72,7 +73,8 @@
 							<td><%=rsMaterias.getString("serie")%></td>
 							<td><%=rsMaterias.getInt("id_materia")%></td>
 							<td><%=rsMaterias.getString("nome_materia")%></td>
-							<td><button class="btn-primary">Acessar</button></td>
+							<td><button class="btn-primary" id="acessar">Acessar</button></td>
+							<td><button class="btn-primary" id="pda">Plano de Aula</button></td>
 						</tr>
 						<% } 
         }catch (SQLException e) {
@@ -96,18 +98,25 @@
         var turmaId = this.closest('tr').querySelectorAll('td')[0].textContent;
         var materiaNome = this.closest('tr').querySelectorAll('td')[3].textContent;
         const urlParams = new URLSearchParams(window.location.search);
-
-        // Capturando o valor do parâmetro 'idmateria'
+    	var idProfessor = urlParams.get('idProfessor');
+    	
+        var buttonId = this.id;
+        switch(buttonId){
+        case 'acessar':
+    		if(turmaId == 12){
+    		 	window.location.href = "controlNotesTerceiroAno.jsp?idmateria=" + materiaId + "&idturma="
+    	        + turmaId + "&turma=" + turmaJs.replace('º', '%C2%BA') + "&materia=" + materiaNome;
+    		}else{
+           	window.location.href = "controlNotes.jsp?idmateria=" + materiaId + "&idturma="
+            + turmaId + "&turma=" + turmaJs.replace('º', '%C2%BA') + "&materia=" + materiaNome;
+    		}
+        	break;
+        	
+        case 'pda':
+        	window.location.href = "planoAula.jsp?idmateria=" + materiaId + "&turma=" + turmaJs + "&materia="+ materiaNome;
+        	break;
+        }
        	var idProfessor = urlParams.get('idProfessor');
-		if(turmaId == 12){
-		 	window.location.href = "controlNotesTerceiroAno.jsp?idmateria=" + materiaId + "&idturma="
-	        + turmaId + "&turma=" + turmaJs.replace('º', '%C2%BA') + "&materia=" + materiaNome;
-		}else{
-       	window.location.href = "controlNotes.jsp?idmateria=" + materiaId + "&idturma="
-        + turmaId + "&turma=" + turmaJs.replace('º', '%C2%BA') + "&materia=" + materiaNome;
-		}
-
-        //window.location.href = "screenClassTeacher.jsp?id=" + materiaId + "&idTurma=" + turmaId + "&idProfessor="+ idProfessor;
 
       });
     });

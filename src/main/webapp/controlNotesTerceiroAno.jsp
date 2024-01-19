@@ -33,7 +33,7 @@
 
 
 	<%
-	DecimalFormat df = new DecimalFormat("#.0");
+	DecimalFormat df = new DecimalFormat("#0.0");
 	Connection conexao = ConectionMysql.conectar();
 
 	PreparedStatement stDateAluno = null;
@@ -56,26 +56,28 @@
 	<div class="header">
 		<div class="icons">
 
-			<h1 style="color: white">Acesso Professor</h1>
+			<h1 style="color: white">Controle de Notas</h1>
 		</div>
 	</div>
 
 
 	<div class="apresentacao">
-		<div>
-			<img src="imagens\Captura de tela 2024-01-17 180901.png" width="250">
-		</div>
-		<div class="turma">
-			<div>
-				<h3>Turma:</h3>
-				<h7><%=request.getParameter("turma").replace("%AA%20", "º")%></h7>
-			</div>
-			<div>
-				<h3>Matéria:</h3>
-				<h7><%=request.getParameter("materia")%></h7>
-			</div>
-		</div>
-	</div>
+    <div class="imagem-container">
+        <img src="imagens\Captura de tela 2024-01-17 180901.png" width="250" style="margin-bottom: 20px;">
+    </div>
+    <div class="turma">
+        <div class="turmaMateria">
+            <h3>Turma:</h3>
+            <h3><%=request.getParameter("turma").replace("%AA%20", "º")%></h3>
+        </div>
+        <br>
+        <div class="turmaMateria" style="margin-top: 20px;">
+            <h3>Matéria:</h3>
+            <h3><%=request.getParameter("materia")%></h3>
+        </div>
+    </div>
+</div>
+
 	<br>
 	<br>
 	<br>
@@ -84,8 +86,9 @@
 		<ul>
 			<li>AD - Atividade Diversificada</li>
 			<li>APS - Atividade Diversificada</li>
-			<li>SAS 1 - SAS Enem 1</li>
-			<li>SAS 2 - SAS Enem 2</li>
+			<li>SAS1 - SAS Enem 1</li>
+			<li>SAS2 - SAS Enem 2</li>
+			<li>RPT - Recuperação Paralela Trimestral</li>
 		</ul>
 	</div>
 	<br>
@@ -233,21 +236,21 @@
 					}
 						}
 						if (unidade == 3) {
-							if (idAvaliacao == 2) {
-								ad3 = notaTirada;
-							}
-							if (idAvaliacao == 3) {
-								aps3 = notaTirada;
-							}
-							if (idAvaliacao == 6) {
-								sas13 = notaTirada;
-							}
-							if (idAvaliacao == 7) {
-								sas23 = notaTirada;
-							}
-							if (idAvaliacao == 8) {
-								rpt3 = notaTirada;
-							}
+					if (idAvaliacao == 2) {
+						ad3 = notaTirada;
+					}
+					if (idAvaliacao == 3) {
+						aps3 = notaTirada;
+					}
+					if (idAvaliacao == 6) {
+						sas13 = notaTirada;
+					}
+					if (idAvaliacao == 7) {
+						sas23 = notaTirada;
+					}
+					if (idAvaliacao == 8) {
+						rpt3 = notaTirada;
+					}
 						}
 					}
 				%>
@@ -381,8 +384,6 @@
 		<button type="submit" class="btn btn-primary btn-lg btn-block">Processar
 			Dados</button>
 	</form>
-	<br>
-	<br>
 </body>
 <script>
 	function somarNotasUm(input) {

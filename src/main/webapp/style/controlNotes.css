@@ -89,17 +89,20 @@ ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    font-size: 13px; 
 }
 
 li {
     display: inline-block;
     margin-right: 10px; /* Adicione algum espaçamento entre as li, se desejar */
+    font-size: 13px; 
 }
 
 li {
-	 display: inline-block;
+	display: inline-block;
     margin-right: 10px;
     list-style-type: none; /* Remove o marcador padrão */
+    font-size: 13px; 
 }
 
 li::before{
@@ -108,10 +111,56 @@ li::before{
     height: 1em; /* Ajuste a altura conforme necessário */
     margin-right: 0.5em; /* Espaçamento entre o quadrado e*/
     color: rgb(99,141,78);
+    font-size: 13px; 
 }
   
 .list{
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	
 }
+
+.turmaMateria {
+    display: flex;
+}
+
+.turmaMateria h3, .turmaMateria h3 {
+    margin: 0; /* Para remover a margem padrão dos elementos h3 e h7 */
+}
+
+
+.imagem-container {
+    margin-right: 300px; /* Ajuste o valor conforme necessário para afastar a imagem da turma e matéria */
+}
+
+.turma {
+    display: inline-block; /* Isso faz com que o bloco de turma e matéria fique na mesma linha */
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Isso faz com que os botões fiquem espaçados, colocando um à esquerda e outro à direita */
+}
+
+.planoAula {
+    margin-top: 20px; /* Adicione um espaçamento entre os botões */
+}
+
+@media only screen and (max-width: 600px) {
+    .apresentacao {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .imagem-container {
+        margin-right: 0;
+        margin-bottom: 20px;
+        width: 80%; 
+    }
+
+    .turma {
+        margin-top: 20px;
+    }
+}
+

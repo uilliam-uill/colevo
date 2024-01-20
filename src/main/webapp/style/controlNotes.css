@@ -147,6 +147,11 @@ li::before{
     margin-top: 20px; /* Adicione um espaçamento entre os botões */
 }
 
+#delete{
+	background-color: red;
+}
+
+
 @media only screen and (max-width: 600px) {
     .apresentacao {
         flex-direction: column;

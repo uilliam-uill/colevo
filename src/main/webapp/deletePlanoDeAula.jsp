@@ -27,13 +27,9 @@
 		PreparedStatement stPda = null;
 		Date dataInsert = null;
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			dataInsert = sdf.parse(request.getParameter("dataAula"));
 			stPda = conexao
-			.prepareStatement("INSERT INTO plano_de_aula (id_materia, dia_assunto, assunto)" + " VALUES (?,?,?)");
-			stPda.setInt(1, Integer.parseInt(request.getParameter("idMateria")));
-			stPda.setDate(2, new java.sql.Date(dataInsert.getTime()));
-			stPda.setString(3, request.getParameter("assuntosDia"));
+			.prepareStatement("DELETE FROM plano_de_aula WHERE id_pda = ?");
+			stPda.setInt(1, Integer.parseInt(request.getParameter("idaula")));
 			stPda.execute();
 		} catch (SQLException ex) {
 			// Tratamento de erro específico para o loop

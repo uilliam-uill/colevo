@@ -51,7 +51,7 @@
             <div class="card shadow border">
                 <div class="card-body d-flex flex-column align-items-center">
 						<h3 class="titleNota">Atualize o Plano de Aula</h3>
-						<form method="post" action="controladorPlanoDeAula.jsp?idmateria=">
+						<form method="post" action="controladorPlanoDeAula.jsp?idmateria=<%=request.getParameter("idmateria")%>">
 						<label>Código da Aula</label> <input type="text"
 								class="form-control" name="idAula" value="" readonly> <br>
 							<label>Código da Materia</label> <input type="text"
@@ -71,6 +71,68 @@
 			</div>
 		</div>
 	</div>
+	<table class="table">
+  <thead class="thead-dark">						
+    <tr>
+      <th scope="col">Id Materia</th>
+      <th scope="col">Data da Aula</th>
+      <th scope="col">Materia</th>
+      <th scope="col">Id Aula</th>
+      <th scope="col">Assunto</th>
+      <th scope="col">Atualizar</th>
+      <th scope="col">Deletar</th>
+    </tr>
+    
+    
+	<%	Connection conexao = ConectionMysql.conectar();
+		PreparedStatement srPda = null;
+		ResultSet rsPda = null;
+		try{
+			srPda = conexao.prepareStatement("SELECT * from plano_de_aula WHERE id_materia = ?");
+			srPda.setInt( 1,Integer.parseInt(request.getParameter("idmateria")));
+			rsPda = srPda.executeQuery();
+		
+		while(rsPda.next()){%>
+			<tr>
+			<td><%=rsPda.getInt("id_materia")%></td>
+			<td><%=rsPda.getDate("dia_assunto") %>
+			<td><%=request.getParameter("turma")%></td>
+			<td><%=rsPda.getInt("id_pda")%></td>
+			<td><%=rsPda.getString("assunto") %>
+			<td><button class="btn-primary" id="update">Atulizar</button></td>
+			<td><button class="btn-primary" id="delete">Deletar</button></td>
+			</tr>
+		<% } } catch (SQLException ex) {
+			ex.printStackTrace(); // Trate a exceção de rollback
+				} finally{
+				 ConectionMysql.closeConnection(conexao, srPda, rsPda);
+				 }%>
+		</thead>
+		</table>
+</table>
+	
 </body>
-<script></script>
+<script>
+    var buttons = document.querySelectorAll('.btn-primary');
+
+    // Iterar sobre cada botão para adicionar um evento de clique
+    buttons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        // Acessar o valor da terceira célula (índice 2, pois começamos do zero)   
+        var idmateria = this.closest('tr').querySelectorAll('td')[0].textContent;
+        var idaula = this.closest('tr').querySelectorAll('td')[3].textContent;
+        var buttonId = this.id;
+        switch(buttonId){
+        case 'delete':
+    		 	window.location.href = "controlNotesTerceiroAno.jsp?idaula=" + materiaId;
+        	break;
+        	
+        case 'pda':
+        	window.location.href = "planoAula.jsp?idmateria=" + materiaId + "&turma=" + turmaJs + "&materia="+ materiaNome;
+        	break;
+        }
+
+      });
+    });
+</script>
 </html>

@@ -1,0 +1,20 @@
+@charset "ISO-8859-1";
+body{
+	margin: 0%;
+	padding: 0%;
+}
+.iconsAdm{
+	display: flex;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+		}
+
+.headerAdm {
+  background-color: rgb(63 , 63, 202);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* Ajuste conforme necessário */
+}
+	

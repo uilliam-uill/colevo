@@ -48,6 +48,8 @@
 		String[] trimestre3String = request.getParameterValues("unidadetres");
 
 		String[] provaFinalStrings = request.getParameterValues("provaFinalNote");
+		
+		
 
 		PreparedStatement insertNotes = null;
 		PreparedStatement insertNotesTrimestres = null;

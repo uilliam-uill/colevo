@@ -95,6 +95,7 @@
         // Acessar o valor da terceira célula (índice 2, pois começamos do zero) 
         var materiaId = this.closest('tr').querySelectorAll('td')[2].textContent;
         var turmaJs = this.closest('tr').querySelectorAll('td')[1].textContent;   
+        var turmaCodificado = encodeURIComponent(turmaJs);
         var turmaId = this.closest('tr').querySelectorAll('td')[0].textContent;
         var materiaNome = this.closest('tr').querySelectorAll('td')[3].textContent;
         const urlParams = new URLSearchParams(window.location.search);
@@ -108,12 +109,13 @@
     	        + turmaId + "&turma=" + turmaJs.replace('º', '%C2%BA') + "&materia=" + materiaNome;
     		}else{
            	window.location.href = "controlNotes.jsp?idmateria=" + materiaId + "&idturma="
-            + turmaId + "&turma=" + turmaJs.replace('º', '%C2%BA') + "&materia=" + materiaNome;
+            + turmaId + "&turma=" + turmaCodificado + "&materia=" + materiaNome;
     		}
         	break;
         	
         case 'pda':
-        	window.location.href = "planoAula.jsp?idmateria=" + materiaId + "&turma=" + turmaJs + "&materia="+ materiaNome;
+        	window.location.href = "planoAula.jsp?idmateria=" + materiaId + "&turma=" + turmaCodificado + "&materia="+ materiaNome
+        			+ "&update=0";
         	break;
         }
        	var idProfessor = urlParams.get('idProfessor');

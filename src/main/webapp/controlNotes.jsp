@@ -15,6 +15,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    if (performance.navigation.type === 2) {
+        // A página foi acessada pelo histórico, então recarrega
+        window.location.reload();
+    }
+</script>
+
 </head>
 <body>
 	<%@ page import="java.io.FileInputStream"%>
@@ -82,10 +89,9 @@
 <div class="list">
 	<ul>
 		<li> AD - Atividade Diversificada</li>
-		<li> APS - Atividade Diversificada</li>
-		<li> AS - Atividade Diversificada</li>
-		<li> AFT - Atividade Diversificada</li>
-		<li> AD - Atividade Diversificada</li>
+		<li> APS - Avaliação Parcial Semanal</li>
+		<li> AS - Atividade Sistemática</li>
+		<li> AFT - Atividade Final Trimestral</li>
 		<li>RPT - Recuperação Paralela Trimestral</li>
 	</ul>
 </div>

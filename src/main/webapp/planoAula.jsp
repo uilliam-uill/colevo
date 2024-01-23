@@ -11,6 +11,12 @@
 <link rel="stylesheet" type="text/css" href="style/controlNotes.css">
 <link rel="stylesheet" type="text/css" href="style/planoAula.css">
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    if (performance.navigation.type === 2) {
+        // A página foi acessada pelo histórico, então recarrega
+        window.location.reload();
+    }
+</script>
 
 </head>
 
@@ -75,7 +81,11 @@
 							name="assuntosDia" rows="4"></textarea>
 					</div>
 					<button type="submit" class="btn btn-success" onclick="update()">Salvar
-						Aprovação</button>
+						Aprovação</button> <br>
+						<button class="btn-primary" id="semUpdate" onclick="limparUpdate()">
+						<img src="imagens/fechar.png">
+						Fechar Atualização
+						</button>
 				</div>
 			</div>
 		</div>
@@ -148,6 +158,7 @@
 										break;
 
 									case 'update':
+										document.getElementById('semUpdate').style.display = 'block';
 										var idaula = this.closest('tr')
 												.querySelectorAll('td')[3].textContent;
 										var dataaula = this.closest('tr')
@@ -158,8 +169,7 @@
 										// Atribuir os valores aos campos do formulário
 										document.getElementById('idAula').value = idaula;
 										document.getElementById('dataAula').value = dataaula;
-										document
-												.getElementById('textAreaExample1').value = assuntoTb;
+										document.getElementById('textAreaExample1').value = assuntoTb;
 										break;
 									}
 
@@ -177,10 +187,19 @@
 		if (assunto.trim() === '' || data.trim() === '') {
 			var alertPC = document.getElementById('preenchaCampos');
 			alertPC.style.display = 'block';
+			document.documentElement.scrollTop = 0;
 		}else{	window.location.href = "controladorPlanoDeAula.jsp?idMateria="
 				+ idmateria + "&idaula=" + idaula + "&assunto=" + assunto
 				+ "&data=" + dataFormatada;
 		}
+	}
+	
+	function limparUpdate(){
+		document.getElementById('idMateria').value = '';
+		document.getElementById('idAula').value = '';
+		document.getElementById('textAreaExample1').value = '';
+		document.getElementById('dataAula').value = '';
+		document.getElementById('semUpdate').style.display = 'none';
 	}
 </script>
 </html>

@@ -15,6 +15,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    if (performance.navigation.type === 2) {
+        // A página foi acessada pelo histórico, então recarrega
+        window.location.reload();
+    }
+</script>
+
 </head>
 <body>
 	<%@ page import="java.io.FileInputStream"%>
@@ -83,7 +90,7 @@
 	<div class="list">
 		<ul>
 			<li>AD - Atividade Diversificada</li>
-			<li>APS - Atividade Diversificada</li>
+			<li>APS - Avaliação Parcial Semanal</li>
 			<li>SAS 1 - SAS Enem 1</li>
 			<li>SAS 2 - SAS Enem 2</li>
 		</ul>

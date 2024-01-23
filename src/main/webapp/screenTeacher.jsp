@@ -60,9 +60,10 @@
         PreparedStatement stMaterias = null;
         ResultSet rsMaterias = null;
         try {
-            stMaterias = conexao.prepareStatement("SELECT materias.nome_materia, turma.serie,turma.id_turma, materias.id_materia" +
-            		" FROM materias INNER JOIN professor ON materias.id_professor = professor.id_professor INNER JOIN " +
-            		" turma ON materias.id_turma = turma.id_turma WHERE professor.id_professor = ?");
+            stMaterias = conexao.prepareStatement("SELECT materias.nome_materia, materias.id_materia, " +
+            		" materias.id_turma, turma.serie FROM materias INNER JOIN materia_professor " + 
+            		" ON materias.id_materia = materia_professor.id_materia INNER JOIN turma " + 
+            		" ON materias.id_turma = turma.id_turma WHERE materia_professor.id_professor = ?;");
             stMaterias.setInt(1, Integer.parseInt(request.getParameter("idProfessor")));
 
             rsMaterias = stMaterias.executeQuery();%>

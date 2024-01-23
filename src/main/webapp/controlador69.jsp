@@ -287,5 +287,9 @@
 </body>
 <script>
 	window.history.back();
+	window.history.replaceState(null, document.title, window.location.href);
+
+    // Recarregar a página atual
+    window.location.reload();
 </script>
 </html>

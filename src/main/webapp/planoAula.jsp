@@ -61,35 +61,39 @@
 	</div>
 
 	<div class="container">
-		<div class="col-6 mx-auto">
-			<div class="card shadow border">
-				<div class="card-body d-flex flex-column align-items-center">
-					<div class="alert alert-danger" id="preenchaCampos" role="alert" style="display: none;">
-						Preencha Todos o Campos!
-					</div>
-					<h3 class="titleNota">Atualize o Plano de Aula</h3>
+    <div class="col-md-6 mx-auto" id="cardBlue">
+        <div class="card shadow border">
+            <div class="card-body d-flex flex-column align-items-center">
+                <div class="alert alert-danger" id="preenchaCampos" role="alert" style="display: none;">
+                    Preencha Todos o Campos!
+                </div>
+                <h3 class="titleNota">Atualize o Plano de Aula</h3>
 
-					<label>Código da Aula</label> <input type="text" id="idAula"
-						class="form-control" name="idAula" value="" readonly> <br>
-					<label>Código da Materia</label> <input type="text"
-						class="form-control" name="idMateria" id="idMateria"
-						value="<%=request.getParameter("idmateria")%>" readonly> <br>
-					<label>Data da Aula</label> <input type="date" id="dataAula"
-						class="form-control" name="dataAula" value=""> <br> <label>Assunto</label>
-					<div class="form-outline">
-						<textarea class="form-control" id="textAreaExample1"
-							name="assuntosDia" rows="4"></textarea>
-					</div>
-					<button type="submit" class="btn btn-success" onclick="update()">Salvar
-						Aprovação</button> <br>
-						<button class="btn-primary" id="semUpdate" onclick="limparUpdate()">
-						<img src="imagens/fechar.png">
-						Fechar Atualização
-						</button>
-				</div>
-			</div>
-		</div>
-	</div>
+                <label for="idAula">Código da Aula</label>
+                <input type="text" id="idAula" class="form-control" name="idAula" value="" readonly>
+                
+                <label for="idMateria">Código da Matéria</label>
+                <input type="text" class="form-control" name="idMateria" id="idMateria" value="<%=request.getParameter("idmateria")%>" readonly>
+                
+                <label for="dataAula">Data da Aula</label>
+                <input type="date" id="dataAula" class="form-control" name="dataAula" value="">
+                
+                <label for="textAreaExample1">Assunto</label>
+                <div class="form-outline">
+                    <textarea class="form-control" id="textAreaExample1" name="assuntosDia" rows="4"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-success btn-block mt-3" onclick="update()">Salvar Aprovação</button>
+                
+                <button class="btn btn-primary btn-block mt-3" id="semUpdate" onclick="limparUpdate()">
+                    <img src="imagens/fechar.png">
+                    Fechar Atualização
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 	<table class="table">
 		<thead class="thead-dark">
 			<tr>

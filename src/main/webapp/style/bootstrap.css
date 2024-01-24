@@ -2203,6 +2203,12 @@ progress {
     transition: none;
   }
 }
+
+@media screen and (max-width: 330px){
+  .form-control {
+    width:220px;
+  }
+}
 .form-control[type=file] {
   overflow: hidden;
 }

@@ -13,6 +13,8 @@
 <%@ page import="javaClass.Teacher"%>
 <%@ page import="javaClass.ConectionMysql"%>
 <%@ page import="java.sql.SQLException"%>
+<%@ page import="java.text.DecimalFormat" %>
+<%@ page import="java.text.DecimalFormatSymbols" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +23,9 @@
 </head>
 <body>
 	<%
+	DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+    symbols.setDecimalSeparator('.');
+    DecimalFormat decimalFormat = new DecimalFormat("#.#", symbols);
 	Connection conexao = ConectionMysql.conectar();
 	conexao.setAutoCommit(false);
 	try {
@@ -242,12 +247,14 @@
 		} else {
 			aprovacao = false;
 		}
-
+		String triUmFormatado = decimalFormat.format(triUm);
+		String triDoisFormatado = decimalFormat.format(triDois);
+		String triTresFormatado = decimalFormat.format(triTres);
 		insertNotesTrimestres = conexao.prepareStatement("UPDATE notas SET primeira_und = ?, segunda_und = ?,"
 				+ " terceira_und = ?, prova_final = ?, nota_final = ?, media_nota = ?, aprovado = ? WHERE id_aluno = ? AND id_materia = ?");
-		insertNotesTrimestres.setDouble(1, triUm);
-		insertNotesTrimestres.setDouble(2, triDois);
-		insertNotesTrimestres.setDouble(3, triTres);
+		insertNotesTrimestres.setDouble(1, Double.parseDouble(triUmFormatado));
+		insertNotesTrimestres.setDouble(2, Double.parseDouble(triDoisFormatado));
+		insertNotesTrimestres.setDouble(3, Double.parseDouble(triTresFormatado));
 		insertNotesTrimestres.setDouble(4, Double.parseDouble(provaFinalStrings[i]));
 		insertNotesTrimestres.setDouble(5, media_soma);
 		insertNotesTrimestres.setDouble(6, media_total);

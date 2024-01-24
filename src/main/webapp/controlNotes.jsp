@@ -375,6 +375,7 @@
 			rsNotes.close();
 			%>
 		</table>
+		<br>
 		<button type="submit" onclick="verificarInputsNulos()" class="btn btn-primary btn-lg btn-block">Processar
 			Dados</button>
 	</form>

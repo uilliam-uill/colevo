@@ -155,6 +155,12 @@ li::before{
 	display: none;
 }
 
+#datesStudent{
+	width: 1300px; 
+	margin-left: auto;
+	margin-right: auto;
+}
+
 
 @media only screen and (max-width: 600px) {
     .apresentacao {
@@ -179,4 +185,12 @@ li::before{
         margin-top: 10px;
     }
 }
+
+@media screen and (min-width: 1101px) {
+    #datesStudent {
+    }
+}
+
+
+
 

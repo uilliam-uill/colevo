@@ -69,18 +69,19 @@
 
 
 	<div class="apresentacao">
-		<div>
-			<img src="imagens\Captura de tela 2024-01-17 180901.png" width="250">
+		<div class="imagem-container">
+			<img src="imagens\Captura de tela 2024-01-17 180901.png" width="250" style="margin-bottom: 20px;">
 		</div>
 		<div class="turma">
-			<div>
-				<h3>Turma:</h3>
-				<h7><%=request.getParameter("turma").replace("%AA%20", "º")%></h7>
-			</div>
-			<div>
-				<h3>Matéria:</h3>
-				<h7><%=request.getParameter("materia")%></h7>
-			</div>
+			   <div class="turmaMateria">
+            <h3>Turma:</h3>
+            <h3><%=request.getParameter("turma").replace("%AA%20", "º")%></h3>
+        </div>
+        <br>
+        <div class="turmaMateria" style="margin-top: 20px;">
+            <h3>Componente Curricular:</h3>
+            <h3><%=request.getParameter("materia")%></h3>
+        </div>
 		</div>
 	</div>
 	<br>
@@ -390,6 +391,7 @@
 			rsNotes.close();
 			%>
 		</table>
+		<br>
 		<button type="submit" class="btn btn-primary btn-lg btn-block">Processar
 			Dados</button>
 	</form>

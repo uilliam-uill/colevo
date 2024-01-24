@@ -21,3 +21,10 @@ th, td {
 	background-color: red;
 	display: none;
 }
+
+@media screen and (min-width: 351) {
+    #cardBlue {
+        width: 300px; /* Tamanho fixo para telas maiores que 300 pixels */
+    }
+}
+

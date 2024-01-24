@@ -99,7 +99,7 @@
 <div class="list">
 	<ul>
 		<li> MT - Media Trimestral</li>
-		<li> SM - Soma das Notas</li>
+		<li> 	 SM - Soma das Notas</li>
 		<li> MF - Media Final</li>
 		<li> ST - Status</li>
 		<li> PF - Prova Final</li>
@@ -107,7 +107,12 @@
 </div>
 <br>  <br>
 	<form method="post"
-		action="controlador69.jsp?idmateria=<%=request.getParameter("idmateria")%>&idturma=<%=request.getParameter("idturma")%>">
+		action="controlador69.jsp?idmateria=<%=request.getParameter("idmateria")%>&idturma=<%=request.getParameter("idturma")%>"
+		onsubmit="return verificarInputsNulos()">
+		<div class="alert alert-danger" id="preenchaCampos" role="alert" style="display: none;">
+			Preencha Todos o Campos!
+		</div>
+	
 		<table id="datesStudent">
 			<tr class="provas">
 				<td style="width: 10px;">Nº</td>
@@ -370,7 +375,7 @@
 			rsNotes.close();
 			%>
 		</table>
-		<button type="submit" class="btn btn-primary btn-lg btn-block">Processar
+		<button type="submit" onclick="verificarInputsNulos()" class="btn btn-primary btn-lg btn-block">Processar
 			Dados</button>
 	</form>
 </body>
@@ -413,5 +418,24 @@
 		let unidadeTresInput = linha.querySelector('#unidadetres');
 		unidadeTresInput.value = unidadetres;
 	}
+	
+	 function verificarInputsNulos() {
+	        // Obtém todos os elementos input na página
+	        var inputs = document.getElementsByTagName('input');
+
+	        // Itera sobre os inputs para verificar se algum é nulo
+	        for (var i = 0; i < inputs.length; i++) {
+	            if (inputs[i].value.trim() === '') {
+	                // Se algum input for nulo, exibe a mensagem
+	                document.getElementById('preenchaCampos').style.display = 'block';
+	                return false; // Impede o envio do formulário
+	            }
+	        }
+
+	        // Se nenhum input for nulo, esconde a mensagem
+	        document.getElementById('preenchaCampos').style.display = 'none';
+	        return true; // Permite o envio do formulário
+	    }
+
 </script>
 </html>

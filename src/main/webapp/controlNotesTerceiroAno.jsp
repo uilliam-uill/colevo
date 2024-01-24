@@ -108,7 +108,12 @@
 	<br>
 	<br>
 	<form method="post"
-		action="controlador3.jsp?idmateria=<%=request.getParameter("idmateria")%>&idturma=<%=request.getParameter("idturma")%>">
+		action="controlador3.jsp?idmateria=<%=request.getParameter("idmateria")%>&idturma=<%=request.getParameter("idturma")%>"
+		onsubmit="return verificarInputsNulos()">
+		
+		<div class="alert alert-danger" id="preenchaCampos" role="alert" style="display: none;">
+			Preencha Todos o Campos!
+		</div>
 		<table id="datesStudent">
 			<tr class="provas">
 				<td style="width: 10px;">Nº</td>
@@ -430,5 +435,21 @@
 		let unidadeTresInput = linha.querySelector('#unidadetres');
 		unidadeTresInput.value = unidadetres.toFixed(1);;
 	}
+	
+	 function verificarInputsNulos() {
+
+	        var inputs = document.getElementsByTagName('input');
+
+	        for (var i = 0; i < inputs.length; i++) {
+	            if (inputs[i].value.trim() === '') {
+	                
+	                document.getElementById('preenchaCampos').style.display = 'block';
+	                return false; 
+	            }
+	        }
+
+	        document.getElementById('preenchaCampos').style.display = 'none';
+	        return true; 
+	    }
 </script>
 </html>

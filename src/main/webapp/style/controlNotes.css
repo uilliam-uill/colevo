@@ -171,5 +171,12 @@ li::before{
     .turma {
         margin-top: 20px;
     }
+     .turmaMateria {
+        text-align: center;
+    }
+
+    .list {
+        margin-top: 10px;
+    }
 }
 

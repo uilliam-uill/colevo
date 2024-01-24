@@ -420,21 +420,19 @@
 	}
 	
 	 function verificarInputsNulos() {
-	        // Obtém todos os elementos input na página
+
 	        var inputs = document.getElementsByTagName('input');
 
-	        // Itera sobre os inputs para verificar se algum é nulo
 	        for (var i = 0; i < inputs.length; i++) {
 	            if (inputs[i].value.trim() === '') {
-	                // Se algum input for nulo, exibe a mensagem
+	                
 	                document.getElementById('preenchaCampos').style.display = 'block';
-	                return false; // Impede o envio do formulário
+	                return false; 
 	            }
 	        }
 
-	        // Se nenhum input for nulo, esconde a mensagem
 	        document.getElementById('preenchaCampos').style.display = 'none';
-	        return true; // Permite o envio do formulário
+	        return true; 
 	    }
 
 </script>

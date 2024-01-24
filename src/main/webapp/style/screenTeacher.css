@@ -19,6 +19,8 @@ a{
 
 .header{
 	background-color: rgb(63, 63, 202);
+	  display: flex;
+  	  justify-content: space-between;
 }
 
 .tableText{

@@ -30,22 +30,26 @@
                 <form method="post">
                 	<p id = "bancoNaoConectado" style="color: red; display: none;"> NÃO FOI POSSIVEL SE CONECTAR AO BANCO DE DADOS, TENTE NOVAMENTE</p>
                 	<p id = "senhaIncorreta" style="color: red; display: none;"> CPF E/OU SENHA ESTÃO INCORRETOS OU VAZIOS</p>
-                  <p>Insira seu CPF sem caracteres</p>
+                    <p>Insira seu CPF sem caracteres</p>
 
                   <div class="form-outline mb-4">
-                    <input type="text" id="form2Exaample111" class="form-control" id="inputCpf"
+                   <label class="form-label" for="form2Example11">CPF</label>
+                   <input type="text" id="form2Exaample111" class="form-control" id="inputCpf"
                       placeholder="Seu cpf" name="cpf-person"/>
-                    <label class="form-label" for="form2Example11">CPF</label>
                   </div>
 
                   <div class="form-outline mb-4">
-                    <input type="password" id="form2Example22" class="form-control" name="password-person" id="inputSenha"/>
                     <label class="form-label" for="form2Example22">SENHA</label>
-                  </div>
-
-                  <div class="text-center pt-1 mb-5 pb-1">
-                    <button type="submit" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" onclick="validateInputs()">Entrar</button>
-                  </div>
+                    <div class="password-container">
+					    <input type="password" id="form2Example22" name="password-person" class="form-control">
+					    <button type="button" id="mostrarSenha" class="toggle-password btn btn-outline-info" onclick="toggleSenha()">Mostrar</button>
+					</div>
+					
+					<div class="text-center pt-1 mb-5 pb-1">
+                    	<button type="submit" class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" onclick="validateInputs()">Entrar</button>
+                  	</div>
+                  
+                 </div>
                 </form>
 <%@ page import="java.io.FileInputStream" %>
 <%@ page import="java.io.IOException" %>
@@ -129,4 +133,19 @@
   </div>
 </section>
 </body>
+<script>
+function toggleSenha() {
+    var senhaInput = document.getElementById("form2Example22");
+    var mostrarSenhaBtn = document.getElementById("mostrarSenha");
+
+    if (senhaInput.type === "password") {
+        senhaInput.type = "text";
+        mostrarSenhaBtn.textContent = "Ocultar";
+    } else {
+        senhaInput.type = "password";
+        mostrarSenhaBtn.textContent = "Mostrar";
+    }
+}
+
+</script>
 </html>

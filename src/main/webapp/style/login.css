@@ -9,6 +9,24 @@ background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
 }
+.password-container {
+    position: relative;
+    display: inline-block; /* Para manter os elementos em linha */
+}
+
+#form2Example22 {
+    padding-right: 30px; /* Para dar espaço para o botão */
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translateY(-50%);
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
 
 
 @media (min-width: 768px) {

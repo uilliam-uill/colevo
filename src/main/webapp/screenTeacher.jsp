@@ -17,7 +17,9 @@
 		</div>
 		
 		<div>
-			<button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" >Alterar senha</button>
+		<a href="mudarSenha.jsp">
+			<button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" style="margin-top: 50px; margin-right: 20px">Alterar senha</button>
+		</a>
 		</div>
 	</div>
 		<%

@@ -35,10 +35,9 @@
 Connection conexao = ConectionMysql.conectar();
 ResultSet rsNotas = null;
 ResultSet rsTurma = null;
-ResultSet rsAssuntos = null;
 PreparedStatement stAula = null;
 PreparedStatement stTurma = null;
-PreparedStatement stNotasTr = null;
+PreparedStatement stNotasTr = null;	
 PreparedStatement stNotes = null;
 if(conexao != null){
 	
@@ -147,6 +146,7 @@ if(conexao != null){
 			<tr>
 	
 <%
+int count = 1;
 while (rsNotas.next()) {
     Double media_nota = rsNotas.getDouble("media_nota");
     Double pf = rsNotas.getDouble("prova_final");
@@ -311,51 +311,44 @@ while (rsNotas.next()) {
 				</td>
 
 			</tr>
-</table>
-<%
-	stAula = conexao.prepareStatement("SELECT dia-assunto, assunto FROM plano_de_aula WHERE id_materia = ?;");
-	stAula.setInt(1, rsNotas.getInt("id_materia"));
-	rsAssuntos = stAula.executeQuery();
-	while(rsAssuntos.next()){
-	%>
-	
-	<div id="<%=rsNotas.getString("nome_materia")%>" class="modal" tabindex="-1" role="dialog">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title">Plano de Aula</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	       <table>
-	       	  <tr>
-	       		<th>Data</th>
-	       		<th>Assunto</th>
-	       	  </tr>
-	       	  
-	       	  <tr>
-	       	  <td><%=rsAssuntos.getDate("dia_assunto") %>
-	       	  <td><%=rsAssuntos.getDate("assunto") %>
-	       </table>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary">Save changes</button>
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+
+			
+
 	<%
-	}
+	 count++;
 }	
 	}catch (SQLException e) {
                 e.printStackTrace();
             } finally {
             	conexao.close();
             }
-}%>
+}
+%>
+</table>
+
+<div id="modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Plano de Aula</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <table>
+       		<th>Data</th>
+       		<th>Assunto</th>
+       </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+			
 </body>
 <script>
 // Obtenha a referência para o modal

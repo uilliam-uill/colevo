@@ -32,6 +32,7 @@
 
 
 <%
+int count = 1;
 Connection conexao = ConectionMysql.conectar();
 ResultSet rsNotas = null;
 ResultSet rsTurma = null;
@@ -146,7 +147,7 @@ if(conexao != null){
 			<tr>
 	
 <%
-int count = 1;
+
 while (rsNotas.next()) {
     Double media_nota = rsNotas.getDouble("media_nota");
     Double pf = rsNotas.getDouble("prova_final");
@@ -220,7 +221,11 @@ while (rsNotas.next()) {
 					}
 					%>
 		<tr>
-				<td> <button class="btn btn-primary" onclick="modal()"><img src="imagens/prancheta.png"></button>  </td>
+				<td> 
+					<button class="btn btn-primary open-modal-btn" data-toggle="modal" data-target="#modal_<%= count %>">
+						<img src="imagens/prancheta.png">
+					</button>  
+				</td>
 				<td><input type="text" value="<%=rsNotas.getString("nome_materia")%>" readonly></td>
 				<td>
 					<table class="inner-table" id="quarterOne">
@@ -313,24 +318,11 @@ while (rsNotas.next()) {
 			</tr>
 
 			
-
-	<%
-	 count++;
-}	
-	}catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-            	conexao.close();
-            }
-}
-%>
-</table>
-
-<div id="modal" class="modal" tabindex="-1" role="dialog">
+<div id="modal_<%= count %>" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Plano de Aula</h5>
+        <h5 class="modal-title">Plano de Aula de <%=rsNotas.getString("nome_materia") %></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -349,18 +341,43 @@ while (rsNotas.next()) {
   </div>
 </div>
 			
+	<%
+	count++;
+}	
+	}catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+            	conexao.close();
+            }
+}
+%>
+</table>
+
+
 </body>
 <script>
-// Obtenha a referência para o modal
-var modalInstance = new bootstrap.Modal(document.getElementById('modalV'), {
-  show: false
-});
+document.addEventListener("DOMContentLoaded", function() {
+    var btns = document.querySelectorAll(".open-modal-btn");
 
-// Definição da função modal()
-function modal() {
-  // Mostra o modal ao chamar a função
-  modalInstance.show();
-}
+    btns.forEach(function(btn) {
+        btn.addEventListener("click", function() {
+            // Obtém o número do modal a partir do id do botão
+            var modalNumber = btn.getAttribute("data-target").split("_")[1];
+
+            // Obtém a referência ao modal
+            var modal = new bootstrap.Modal(document.getElementById("modal_" + modalNumber));
+
+            // Abre o modal
+            modal.show();
+            console.log("Botão clicado:", btn);
+            console.log("Modal a ser exibido:", document.getElementById("modal_" + modalNumber));
+
+        });
+    });
+});
 </script>
+
+
+
 
 </html>

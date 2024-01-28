@@ -17,7 +17,7 @@
 		</div>
 		
 		<div>
-		<a href="mudarSenha.jsp">
+		<a href="mudarSenha.jsp?iduser=<%=request.getParameter("iduser")%>&senhauser=<%=request.getParameter("senha")%>">
 			<button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" style="margin-top: 50px; margin-right: 20px">Alterar senha</button>
 		</a>
 		</div>
@@ -107,6 +107,8 @@
         var materiaNome = this.closest('tr').querySelectorAll('td')[3].textContent;
         const urlParams = new URLSearchParams(window.location.search);
     	var idProfessor = urlParams.get('idProfessor');
+    	var iduser = urlParams.get('iduser');
+    	var senhauser= urlParams.get('senha');
     	
         var buttonId = this.id;
         switch(buttonId){

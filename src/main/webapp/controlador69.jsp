@@ -238,8 +238,8 @@
 		Double media_soma = Double.parseDouble(trimestre1String[i]) + Double.parseDouble(trimestre2String[i])
 				+ Double.parseDouble(trimestre3String[i]);
 		Double media_total = media_soma / 3;
-		if (media_total >= 5.7 || media_total <= 5.9) {
-			media_total = 6.0;
+		if (media_total >= 5.7 && media_total <= 5.9) {
+		    media_total = 6.0;
 		}
 		boolean aprovacao = false;
 		if (media_total >= 6.0 || Double.parseDouble(provaFinalStrings[i]) >= 5.0) {
@@ -262,7 +262,7 @@
 		insertNotesTrimestres.setInt(8, Integer.parseInt(idAlunoStrings[i]));
 		insertNotesTrimestres.setInt(9, Integer.parseInt(request.getParameter("idmateria")));
 		insertNotesTrimestres.executeUpdate();
-		System.out.print(Double.parseDouble(provaFinalStrings[i]));
+		System.out.print(media_total);
 		insertNotes.close();
 		insertNotesTrimestres.close();
 			} catch (SQLException ex) {

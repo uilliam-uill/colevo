@@ -1,0 +1,101 @@
+@charset "ISO-8859-1";
+
+.apresentacao{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.turma,
+.turma div {
+    margin-right: 20px; /* Ajuste conforme necessário */
+  }
+  
+  .imagem-container {
+    margin-right: 300px; /* Ajuste o valor conforme necessário para afastar a imagem da turma e matéria */
+}
+
+.turma {
+    display: inline-block; /* Isso faz com que o bloco de turma e matéria fique na mesma linha */
+}
+
+.turmaMateria {
+    display: flex;
+}
+
+.turmaMateria h3, .turmaMateria h3 {
+    margin: 0; /* Para remover a margem padrão dos elementos h3 e h7 */
+}
+
+.icons{
+	display: flex;
+	text-align: center;
+	align-items: center;
+		}
+
+.header {
+  background-color: rgb(63 , 63, 202);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* Ajuste conforme necessário */
+}
+
+.iconsAdm{
+	display: flex;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+		}
+		
+table{
+	color: white;
+	border-collapse: collapse;
+	border: 1px solid black;
+	width: 100%;	
+	}
+	
+th, td{
+	border: 1px solid black;
+	text-align: center; 
+        }
+        
+table td {
+	font-size: 12px; /* Tamanho de fonte desejado */
+	font-family: FreeMono;
+}        
+ 
+.inputNotes {
+	 width: calc(100% - 10px); /* Tamanho dos inputs com margens removidas */
+     margin: 2px; /* Espaçamento entre os inputs */
+     box-sizing: border-box;
+        }
+        
+.inner-table {
+	border-collapse: collapse;
+	width: 100%;
+       }     
+       
+.inner-table td {
+	padding: 0; /* Remove o preenchimento interno das células das tabelas internas */
+	}
+
+.provas {
+	background-color: rgb(63 , 63, 202);
+     }
+     
+.bolinhaRed {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: red; /* Substitua "red" pela cor desejada */
+}
+    
+.bolinhaGreen {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: green /* Substitua "red" pela cor desejada */
+}
+		
+		

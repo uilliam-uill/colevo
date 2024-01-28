@@ -11,13 +11,6 @@
 <link rel="stylesheet" type="text/css" href="style/controlNotes.css">
 <link rel="stylesheet" type="text/css" href="style/planoAula.css">
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
-    if (performance.navigation.type === 2) {
-        // A página foi acessada pelo histórico, então recarrega
-        window.location.reload();
-    }
-</script>
-
 </head>
 
 <body>
@@ -52,8 +45,8 @@
                 </div>
                 <h3 class="titleNota">Atualize Sua Senha</h3>
 
-                <label for="idAula">Insira sua senha antiga</label>
-                
+                <label for="idAula">Insira sua senha atual</label>
+                <form method="post" id="novaSenha">
                 <div class="inputOcultsenha">
 	                <input type="password" id="senha1" class="form-control" name="senha1" >
                 </div>
@@ -68,17 +61,40 @@
                 	<input type="password" id="senha3" class="form-control" name="senhaNova">
                 	<button type="button" id="mostrarSenha" class="toggle-password btn btn-outline-info" onclick="toggleSenhas()">Mostrar</button>
 				</div>
-                <button type="submit" class="btn btn-success btn-block mt-3" onclick="getSenhas()">Salvar Senha</button>
+                <button type="submit" class="btn btn-success btn-block mt-3" onclick="submitForm()">Salvar Senha</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
 <%
+String senha1 = request.getParameter("senha1");
+String senhaAtual = request.getParameter("senhauser");
+
+if(senha1 != null && senha1.length() != 0){
+	if (!senha1.equals(senhaAtual)) {%>
+	 <div class="alert alert-danger" id="preenchaCampos" role="alert" style="display: block;">
+   		A senha atual está errada!!!!
+	</div>
+<%}else{
 Connection conexao = ConectionMysql.conectar();
 	if(conexao != null){
 		PreparedStatement stMs = null;
-		ResultSet rsMs = null;
+		 try{
+			stMs = conexao.prepareStatement(" UPDATE pessoa SET senha = ? WHERE id_pessoa = ?;"); 
+			stMs.setString(1, request.getParameter("senhaNova"));
+			stMs.setInt(2, Integer.parseInt(request.getParameter("iduser")));
+			stMs.executeUpdate();
+		 } catch (SQLException e) {
+             e.printStackTrace();
+         }
+		 finally {
+			 conexao.close();
+			 stMs.close();
+         }
 	}
+}
+}
 %>
 </body>
 <script>
@@ -97,6 +113,15 @@ function toggleSenhas() {
     });
 }
 
+function submitForm() {
+    if (getSenhas()) {
+        document.getElementById('novaSenha').submit();
+        window.location.href = "login.jsp";
+    }else {
+        return false;
+    }
+}
+
 function getSenhas() {
     var senha1 = document.getElementById('senha1').value;
     var senha2 = document.getElementById('senha2').value;
@@ -109,18 +134,18 @@ function getSenhas() {
         (!senha2 || senha2.length === 0) ||
         (!senhaNova || senhaNova.length === 0)) {
         alertPC.style.display = 'block';
+        return false;
     }else{
     	alertPC.style.display = 'none';
     }
     	if (senha2 !== senhaNova) {
         alertSD.style.display = 'block';
+        return false;
     } else {
     	alertSD.style.display = 'none';
     }
 
     return true;
 }
-
-
 </script>
 </html>

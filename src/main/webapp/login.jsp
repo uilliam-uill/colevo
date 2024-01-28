@@ -76,13 +76,11 @@
             PreparedStatement loginPerson = null;
             ResultSet rsLoginPerson = null;
             try {
-                loginPerson = conexao.prepareStatement("SELECT pessoa.id_pessoa, pessoa.nome, " +
-                                " CASE WHEN professor.id_professor IS NOT NULL THEN 'Professor' " +
-                                " WHEN aluno.id_aluno IS NOT NULL THEN 'Aluno' " +
-                                " ELSE 'Nenhum' END AS tipo_usuario, professor.id_professor,aluno.id_aluno FROM pessoa" +
-                                " LEFT JOIN professor ON pessoa.id_pessoa = professor.id_pessoa " +
-                                " LEFT JOIN aluno ON pessoa.id_pessoa = aluno.id_pessoa " +
-                                " WHERE pessoa.cpf = ? AND pessoa.senha = ?; ");
+                loginPerson = conexao.prepareStatement("SELECT pessoa.id_pessoa, pessoa.senha, pessoa.nome, pais.id_pai,aluno.id_aluno," +
+               " CASE WHEN pais.id_pai IS NOT NULL THEN 'Pai' WHEN aluno.id_pessoa IS NOT NULL THEN 'Aluno' " + 
+               " ELSE 'Nenhum' END AS tipo_usuario FROM pessoa LEFT JOIN pais ON pessoa.id_pessoa = pais.id_pessoa " +
+               " LEFT JOIN aluno ON pessoa.id_pessoa = aluno.id_pessoa 	" +
+               "WHERE pessoa.cpf = ? AND pessoa.senha = ?;");
                 loginPerson.setString(1, personLogin.getCpf());
                 loginPerson.setString(2, personLogin.getPassword());
 
@@ -91,13 +89,16 @@
                 String tipo_usuario = "";
                 while (rsLoginPerson.next()) {
                     tipo_usuario = rsLoginPerson.getString("tipo_usuario");
-                    personLogin.setId(rsLoginPerson.getInt("id_pessoa"));
+                    
                     personLogin.setName(rsLoginPerson.getString("nome"));
-                    if (tipo_usuario.equals("Professor")) {
-                        RequestDispatcher dispatcher = request.getRequestDispatcher("screenTeacher.jsp?idProfessor=" + rsLoginPerson.getInt("professor.id_professor"));
+                    if (tipo_usuario.equals("Pai")) {
+                    	personLogin.setId(rsLoginPerson.getInt("id_pai"));
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("telaPai.jsp?idProfessor=" + personLogin.getId());
                         dispatcher.forward(request, response);
                     } else if (tipo_usuario.equals("Aluno")) {
-                        RequestDispatcher dispatcher = request.getRequestDispatcher("screenStudent.jsp");
+                    	personLogin.setId(rsLoginPerson.getInt("id_aluno"));
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("screenStudent.jsp?idAluno=" + personLogin.getId() +
+                        "&nomeAluno=" +	rsLoginPerson.getString("nome"));
                         dispatcher.forward(request, response);
                     }
                 }

@@ -70,7 +70,7 @@
             PreparedStatement loginPerson = null;
             ResultSet rsLoginPerson = null;
             try {
-                loginPerson = conexao.prepareStatement("SELECT pessoa.id_pessoa, pessoa.nome, administrador.id_pessoa, " + 
+                loginPerson = conexao.prepareStatement("SELECT pessoa.id_pessoa, pessoa.senha, pessoa.nome, administrador.id_pessoa, " + 
               "  professor.id_professor, CASE WHEN " +
               "  administrador.id_pessoa IS NOT NULL THEN 'adm' WHEN professor.id_pessoa IS NOT NULL THEN 'professor' " +
               "  ELSE 'Nenhum' END AS tipo_usuario FROM pessoa 	LEFT JOIN administrador ON pessoa.id_pessoa " +
@@ -87,10 +87,12 @@
                     personLogin.setId(rsLoginPerson.getInt("id_pessoa"));
                     personLogin.setName(rsLoginPerson.getString("nome"));
                     if (tipo_usuario.equals("professor")) {
-                    	 RequestDispatcher dispatcher = request.getRequestDispatcher("screenTeacher.jsp?idProfessor=" + rsLoginPerson.getInt("professor.id_professor"));
-                        dispatcher.forward(request, response);
+                    	String urlRedirect = "screenTeacher.jsp?idProfessor=" + rsLoginPerson.getInt("professor.id_professor") +
+                    	 "&idUser=" + personLogin.getId();
+                    	response.sendRedirect(urlRedirect);
                     } else if (tipo_usuario.equals("adm")) {
-                        RequestDispatcher dispatcher = request.getRequestDispatcher("admTela.jsp?idAdm=" + rsLoginPerson.getInt("administrador.id_pessoa"));
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("admTela.jsp?idAdm=" +
+                    rsLoginPerson.getInt("administrador.id_pessoa") + "&senha=" + rsLoginPerson.getString("senha"));
                         dispatcher.forward(request, response);
                     }
                 }

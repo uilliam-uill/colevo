@@ -19,7 +19,13 @@
 <link rel="stylesheet" type="text/css" href="style/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="style/student.css">
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/bootstrap/bootstrap.bundle.min.afs"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body>
 
@@ -32,7 +38,6 @@
 
 
 <%
-int count = 1;
 Connection conexao = ConectionMysql.conectar();
 ResultSet rsNotas = null;
 ResultSet rsTurma = null;
@@ -80,8 +85,10 @@ if(conexao != null){
 <br>
 
 		<table id="datesStudent">
+		
 			<tr class="provas">
-				<td class="provas">Aula</td>			
+				<td class="provas">Aula</td>	
+				<td class="" width="15px">ID</td>
 				<td class="provas">Matéria</td>
 				<td class="provas" >1º TRIMESTRE</td>
 				<td class="provas">2º TRIMESTRE</td>
@@ -96,6 +103,14 @@ if(conexao != null){
 						</tr>
 					</table>
 				</td>
+				
+				<td class="provas">
+					<table class="inner-table">
+						<tr class="provas">
+						</tr>
+					</table>
+				</td>
+				
 				<td class="provas">
 					<table class="inner-table">
 						<tr class="provas">
@@ -149,7 +164,14 @@ if(conexao != null){
 <%
 
 while (rsNotas.next()) {
-    Double media_nota = rsNotas.getDouble("media_nota");
+	stAula = conexao.prepareStatement("SELECT dia_assunto, assunto FROM plano_de_aula WHERE id_materia = ?;");
+	stAula.setInt(1, rsNotas.getInt("id_materia"));
+	ResultSet rsAula = stAula.executeQuery();
+	int count = 1;
+%>
+ <!-- Abertura do modal -->
+    
+ <%  Double media_nota = rsNotas.getDouble("media_nota");
     Double pf = rsNotas.getDouble("prova_final");
 
     stNotes = conexao.prepareStatement("SELECT nota_tirada, unidade, id_avaliacao, id_aluno "
@@ -217,15 +239,17 @@ while (rsNotas.next()) {
 					if (idAvaliacao == 8) {
 						rpt3 = notaTirada;
 					}
-						}
-					}
+						}%>
+					
+					<%}
 					%>
-		<tr>
+			<tr>
 				<td> 
 					<button class="btn btn-primary open-modal-btn" data-toggle="modal" data-target="#modal_<%= count %>">
 						<img src="imagens/prancheta.png">
 					</button>  
 				</td>
+				<td width="15px"><input type="text" value="<%=rsNotas.getInt("id_materia") %>" style="width: 38px"></td>
 				<td><input type="text" value="<%=rsNotas.getString("nome_materia")%>" readonly></td>
 				<td>
 					<table class="inner-table" id="quarterOne">
@@ -316,33 +340,10 @@ while (rsNotas.next()) {
 				</td>
 
 			</tr>
+				<%
 
-			
-<div id="modal_<%= count %>" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Plano de Aula de <%=rsNotas.getString("nome_materia") %></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       <table>
-       		<th>Data</th>
-       		<th>Assunto</th>
-       </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-			
-	<%
-	count++;
+count = count + 1;
+
 }	
 	}catch (SQLException e) {
                 e.printStackTrace();
@@ -353,31 +354,36 @@ while (rsNotas.next()) {
 %>
 </table>
 
-
-</body>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     var btns = document.querySelectorAll(".open-modal-btn");
 
     btns.forEach(function(btn) {
         btn.addEventListener("click", function() {
-            // Obtém o número do modal a partir do id do botão
             var modalNumber = btn.getAttribute("data-target").split("_")[1];
-
-            // Obtém a referência ao modal
             var modal = new bootstrap.Modal(document.getElementById("modal_" + modalNumber));
 
-            // Abre o modal
-            modal.show();
-            console.log("Botão clicado:", btn);
-            console.log("Modal a ser exibido:", document.getElementById("modal_" + modalNumber));
+            // Adiciona um evento para lidar com a exibição do modal
+            modal._element.addEventListener("shown.bs.modal", function() {
+                // Ao exibir o modal, remove a classe d-none da tabela
+                document.getElementById("modalTable_" + modalNumber).classList.remove("d-none");
+            });
 
+            modal.show();
         });
     });
 });
+var buttons = document.querySelectorAll('.btn-primary.open-modal-btn');
+buttons.forEach(function(button) {
+    button.addEventListener('click', function() {
+        // Obtenha o <td> pai do botão
+        var tdParent = this.parentNode;
+
+        // Em seguida, encontre o <input> dentro desse <td>
+        var idMateria = tdParent.nextElementSibling.querySelector('input').value;
+        window.location.href = "aulaData.jsp?idmateria=" + idMateria;
+    });
+});
 </script>
-
-
-
-
+</body>
 </html>

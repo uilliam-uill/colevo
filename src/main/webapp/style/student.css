@@ -98,4 +98,6 @@ table td {
     background-color: green /* Substitua "red" pela cor desejada */
 }
 		
-		
+.modal-hidden {
+    display: none !important;
+  }

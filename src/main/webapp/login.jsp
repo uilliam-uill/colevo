@@ -23,8 +23,8 @@
               <div class="card-body p-md-5 mx-md-4" style = "background-color: white">
  
                 <div class="text-center">
-                  <img src="imagens/Captura_de_tela_2023-12-11_153011-removebg-preview.png"
-                    style="width: 185px;" alt="logo">
+                  <img src="imagens/Captura de tela 2024-01-25 231958.png"
+                    style="width: 200px;" alt="logo">
                   <h4 class="mt-1 mb-5 pb-1">Colégio Evolução</h4>
                 </div>
                 <form method="post">
@@ -92,8 +92,8 @@
                     
                     personLogin.setName(rsLoginPerson.getString("nome"));
                     if (tipo_usuario.equals("Pai")) {
-                    	personLogin.setId(rsLoginPerson.getInt("id_pai"));
-                        RequestDispatcher dispatcher = request.getRequestDispatcher("telaPai.jsp?idProfessor=" + personLogin.getId());
+                    	personLogin.setId(rsLoginPerson.getInt("id_pessoa"));
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("telaPai.jsp?idPessoa=" + personLogin.getId());
                         dispatcher.forward(request, response);
                     } else if (tipo_usuario.equals("Aluno")) {
                     	personLogin.setId(rsLoginPerson.getInt("id_aluno"));

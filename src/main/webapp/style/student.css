@@ -5,41 +5,25 @@
 	align-items: center;
 	justify-content: center;
 }
-
-.turma,
-.turma div {
-    margin-right: 20px; /* Ajuste conforme necessário */
-  }
-  
-  .imagem-container {
-    margin-right: 300px; /* Ajuste o valor conforme necessário para afastar a imagem da turma e matéria */
+body{
+   margin: 0%;
+   padding: 0%;
 }
 
-.turma {
-    display: inline-block; /* Isso faz com que o bloco de turma e matéria fique na mesma linha */
-}
-
-.turmaMateria {
-    display: flex;
-}
-
-.turmaMateria h3, .turmaMateria h3 {
-    margin: 0; /* Para remover a margem padrão dos elementos h3 e h7 */
-}
-
-.icons{
-	display: flex;
+.icons {
+  display: flex;
 	text-align: center;
 	align-items: center;
-		}
-
-.header {
-  background-color: rgb(63 , 63, 202);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px; /* Ajuste conforme necessário */
-}
+	justify-content: center;
+  }
+  
+  .header {
+    background-color: rgb(63 , 63, 202);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; 
+  }
 
 .iconsAdm{
 	display: flex;
@@ -65,6 +49,7 @@ table td {
 	font-family: FreeMono;
 }        
  
+
 .inputNotes {
 	 width: calc(100% - 10px); /* Tamanho dos inputs com margens removidas */
      margin: 2px; /* Espaçamento entre os inputs */

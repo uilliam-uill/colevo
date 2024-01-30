@@ -83,7 +83,7 @@
                     <textarea class="form-control" id="textAreaExample1" name="assuntosDia" rows="4"></textarea>
                 </div>
 
-                <button type="submit" class="btn btn-success btn-block mt-3" onclick="update()">Salvar Aprovação</button>
+                <button type="submit" class="btn btn-success btn-block mt-3" onclick="update()">Salvar Aula</button>
                 
                 <button class="btn btn-primary btn-block mt-3" id="semUpdate" onclick="limparUpdate()">
                     <img src="imagens/fechar.png">

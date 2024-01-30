@@ -31,8 +31,10 @@ body{
 }
 
 #title{
-	 font-family: "Roboto";
-	 margin-top: 30px;
+	 font-family: "Arial";
+	 font-size: 30px;
+	 font-weight: 700;
+	 margin-top: 40px;
 	 color:rgb(5, 90, 117);
 }
 
@@ -96,6 +98,12 @@ a{
 .image-text-class img{
 	border-radius: 30px;	
 }
+
+#imagemSas{
+	margin-left: 50px;
+	margin-top: 28px;
+}
+
 
 /* Estilos para dispositivos móveis */
 

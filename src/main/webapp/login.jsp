@@ -123,8 +123,8 @@
             </div>
             <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
               <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                <h4 class="mb-4">Tela Login</h4>
-                <p class="small mb-0">Nossa tela de login diferencia o acesso para professores lançarem notas e alunos visualizarem seu desempenho. Professores têm acesso exclusivo para inserir informações precisas, enquanto os alunos podem facilmente conferir suas notas, oferecendo transparência e acompanhamento direto do progresso acadêmico.</p>
+                <h4 class="mb-4">Bem-vindo à Plataforma de Acesso - Para Pais e Alunos</h4>
+                <p class="small mb-0">Nossa tela de login é o acesso direto para pais acompanharem o progresso acadêmico dos filhos e para alunos explorarem materiais de estudo, tarefas e interações. É simples, seguro e a chave para uma colaboração educacional eficaz. Vamos começar a jornada educacional juntos! </p>
               </div>
             </div>
           </div>

@@ -23,7 +23,7 @@
               <div class="card-body p-md-5 mx-md-4" style = "background-color: white">
  
                 <div class="text-center">
-                  <img src="imagens/area-restrita.png">
+                  <img src="imagens/Captura de tela 2024-01-25 231958.png"  style="width: 200px;" alt="logo">>
                   <h4 class="mt-1 mb-5 pb-1">Colégio Evolução</h4>
                 </div>
                 <form method="post">
@@ -119,8 +119,8 @@
             </div>
             <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
               <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                <h4 class="mb-4">Area Restritra</h4>
-                <p class="small mb-0">Este espaço é destinado exclusivamente aos coordenadores e membros da secretaria. Aqui, você encontrará ferramentas e recursos específicos para facilitar suas responsabilidades administrativas.</p>
+                <h4 class="mb-4">Bem-vindo à Plataforma Educativa - Para Professores e Coordenadores</h4>
+                <p class="small mb-0">Nossa tela de login é o seu acesso direto para uma experiência educacional simplificada. Professores, aqui você gerencia suas aulas e interage com os alunos. Coordenadores, é o centro de comando para coordenar esforços e monitorar o desempenho. Seguro, rápido e eficiente. Vamos facilitar a educação juntos!</p>
               </div>
             </div>
           </div>

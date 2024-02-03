@@ -17,14 +17,30 @@
   <label for="valor">Valor:</label>
   <input type="number" id="valor" placeholder="Digite o valor">
 
-  <button type="button" class="btn btn-primary btn-lg" onclick="">Gerar QrCode</button>
+  <button type="button" class="btn btn-primary btn-lg" onclick="displayOpenPixModal()">Gerar QrCode</button>
   <button type="button" class="btn btn-primary btn-lg">Outros Pagamentos</button>
 
   <div id="qrcode"></div>
 
 
-    
+  <script src="https://plugin.openpix.com.br/v1/openpix.js" async></script>
+<script>
+  function displayOpenPixModal() {
+      window.$openpix = window.$openpix || [];
 
-  </script>
+      window.$openpix.push(['config', {
+        appID: 'Q2xpZW50X0lkXzMxNGUzYjNhLTUyYzMtNDZhYy05ZjdkLTQzN2ZhYmFjMGZkMzpDbGllbnRfU2VjcmV0X0NSQ3dpTnJSUUlrNVUrekE4ZWVTbzU3c3hvUnJ1N0NmSkY0d3hoV3Ryd0k9',
+      }]);
+
+      window.$openpix.push([
+        'pix',
+        {
+          value: 1000,
+          correlationID: 'randomCorrelationID',
+          description: 'product A',
+        },
+      ]);
+    }
+</script>
 </body>
 </html>

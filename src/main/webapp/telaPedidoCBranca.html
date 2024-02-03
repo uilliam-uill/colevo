@@ -31,20 +31,22 @@
            </div>
          </div>
          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-           <span class="sr-only">Previous</span>
-         </a>
-         <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-           <span class="carousel-control-next-icon" aria-hidden="true"></span>
-           <span class="sr-only">Next</span>
-         </a>
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <img src="imagens/esquerda.png">
+          <span class="sr-only"></span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <img src="imagens/direita.png">
+          <span class="sr-only"></span>
+        </a>
        </div>
        </div>
     </td>
 
     <td style="width: 800px; margin-left: 20px; margin-top: 60px;">
         <div class="form-group">
-          <form action="https://formsubmit.co/uilliamaquino444@gmail.com" method="POST">
+          <form action="https://formsubmit.co/uilliamaquino444@gmail.com" method="POST" onsubmit="displayOpenPixModal()">
           <div class="form-group">
             <label for="fullName">Seu Nome completo</label>
             <input type="text" name="name" class="form-control" id="fullName" placeholder="Nome">
@@ -72,12 +74,12 @@
               <option>CAMISA BRANCA</option>
             </select>
           </div>
-        //https://www.gerarpix.com.br/
           <div class="form-group">
             <label for="details">Detalhes</label>
             <textarea class="form-control" id="details" rows="3" name="message"></textarea>
           </div>
         
+    	<input type="hidden" name="pixStatus" id="pixStatus" value="">
         <button type="submit" class="btn btn-success">Efetuar Pedido</button>
         </form>
     </td>
@@ -90,31 +92,27 @@
 </body>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
+<script src="https://plugin.openpix.com.br/v1/openpix.js" async></script>
 <script>
     AOS.init();
-</script>
+    function displayOpenPixModal() {
+    window.$openpix = window.$openpix || [];
 
-<script>
-  // Adiciona eventos de entrada (input) aos campos de entrada
-  document.getElementById('fullName').addEventListener('input', updateDetails);
-  document.getElementById('cpf').addEventListener('input', updateDetails);
-  document.getElementById('phone').addEventListener('input', updateDetails);
-  document.getElementById('clothingType').addEventListener('input', updateDetails);
+    window.$openpix.push(['config', {
+        appID: 'Q2xpZW50X0lkXzMxNGUzYjNhLTUyYzMtNDZhYy05ZjdkLTQzN2ZhYmFjMGZkMzpDbGllbnRfU2VjcmV0X0NSQ3dpTnJSUUlrNVUrekE4ZWVTbzU3c3hvUnJ1N0NmSkY0d3hoV3Ryd0k9',
+    }]);
 
-  // Função para atualizar o campo de detalhes
-  function updateDetails() {
-    // Obtém os valores dos campos de entrada
-    var fullName = document.getElementById('fullName').value;
-    var cpf = document.getElementById('cpf').value;
-    var phone = document.getElementById('phone').value;
-    var clothingType = document.getElementById('clothingType').value;
-    var tamanho = document.getElementById('tamanho').value;
-
-    // Constrói a string com os detalhes
-    var details = "Nome: " + fullName + "\nCPF: " + cpf + "\nTelefone: " + phone + "\tamanho" + tamanho + "\nTipo: " + clothingType;
-
-    // Atualiza o valor do campo de texto (textarea)
-    document.getElementById('details').value = details;
-  }
+    window.$openpix.push([
+        'pix',
+        {
+            value: 7500,
+            correlationID: 'randomCorrelationID',
+            description: 'product A',
+            callback: function (status) {
+                document.getElementById('pixStatus').value = status;
+            }
+        },
+    ]);
+}
 </script>
 </html>

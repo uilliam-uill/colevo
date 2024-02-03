@@ -1,129 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <link rel="stylesheet" type="text/css" href="style/bootstrap.css">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
 
-<!DOCTYPE html>
-<html lang="br">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="style/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="style/student.css">
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy6p8NUA5oqL79W2+A2C7hjTHelZcVb+5N" crossorigin="anonymous"></script>
+    <title>Exemplo de álbum Bootstrap</title>
 
-</head>
-<body>
+    <!-- Principal CSS do Bootstrap -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
 
-	<div class="header">
-		<div class="icons">
-			<h1 style="color: white">Lojinha Evolução</h1>
-		</div>
-	</div>	
-	
-<div class="apresentacao">
-    <div class="imagem-container">
-        <img src="imagens\Captura de tela 2024-01-17 180901.png" width="250">
-    </div>
-</div>	
+    <!-- Estilos customizados para este template -->
+    <link href="album.css" rel="stylesheet">
+  </head>
 
-<br>
+  <body>
 
-<div class="container mt-4">
-    <!-- Primeira Linha -->
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card mb-4" style="width: 18rem;">
-                <img class="card-img-top" src="imagens/Captura de tela 2024-01-29 19242.png" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Boné Evolução</h5>
-                    <p class="card-text">Porque evoluir é chique, mas também é necessário ter estilo enquanto aprendemos a ser os mestres Pokémon da vida!</p>
-                    <a href="telaPedido.html" class="btn btn-primary">Ver Detalhes</a>
-                </div>
-            </div>
+    <header>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <strong>Colégio Evolução</strong>
+          </a>
         </div>
+      </div>
+    </header>
 
-        <div class="col-md-3">
-            <div class="card mb-4" style="width: 18rem;">
-                <img class="card-img-top" src="imagens/Captura de tela 2024-01-29 192800.png" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Canéca Evolução</h5>
-                    <p class="card-text">Para dar aquele boost de inteligência logo de manhã! Afinal, evoluir fica mais gostoso com um cafézinho e um toque de sabedoria.</p>
-                    <a href="#" class="btn btn-primary">Ver Detalhes</a>
-                </div>
-            </div>
+    <main role="main">
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Lojinha Online Evolução</h1>
+          <p class="lead text-muted">Na Lojinha do Evolução, encontre com facilidade uniformes e itens escolares. Com apenas alguns cliques, renove seu guarda-roupa escolar ou adquira materiais essenciais de forma rápida e eficiente. Estamos aqui para simplificar sua experiência de compra, focando nas suas necessidades escolares.</p>
         </div>
+      </section>
 
-        <div class="col-md-3">
-            <div class="card mb-4" style="width: 18rem;">
-                <img class="card-img-top" src="imagens/Captura de tela 2024-01-29 194538.png" alt="Card image cap">
+      <div class="album py-5 bg-light">
+        <div class="container">
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <img class="card-img-top" src="imagens/Modelo uniforme  (1).png" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Casaco Evolução</h5>
-                    <p class="card-text">A moda que acompanha seu crescimento intelectual. Vista-se com estilo enquanto avança nos estudos. A evolução nunca foi tão quentinha e estilosa</p>
-                    <a href="#" class="btn btn-primary">Ver Detalhes</a>
+                  <p class="card-text">Este é um card maior e que suporta texto abaixo, como uma introdução mais natural ao conteúdo adicional.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                    <a href="pedidoAzulM.html">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Ver Detalhes</button>
+                    </a>
+                    </div>
+                    <small class="text-muted">R$ 75,00</small>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="card mb-4" style="width: 18rem;">
-                <img class="card-img-top" src="imagens/Captura de tela 2024-01-29 193959.png" alt="Card image cap">
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <img class="card-img-top"  src="imagens/Modelo uniforme  (2).png" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Uniforme Branco Masculino</h5>
-                    <p class="card-text">Vestindo o conhecimento com elegância. Com um toque de pureza e a logo ao meio, estamos prontos para conquistar novos horizontes. Porque na jornada do saber, a evolução é impecável!</p>
-                    <a href="telaPedidoCBranca.html" class="btn btn-primary">Ver Detalhes</a>
+                  <p class="card-text"></p>
+                  <p class="card-text">Este é um card maior e que suporta texto abaixo, como uma introdução mais natural ao conteúdo adicional. No entanto, esse conteúdo é um pouco maior.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                    <a href="pedidoAzulF.html">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Ver Detalhes</button>
+                    </a>
+                    </div>
+                    <small class="text-muted">R$ 75,00</small>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Segunda Linha -->
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card mb-4" style="width: 18rem;">
-                <img class="card-img-top" src="imagens/Captura de tela 2024-01-29 194143.png" alt="Card image cap">
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <img class="card-img-top" src="imagens/mod.png" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Uniforme Azul Masculino</h5>
-                    <p class="card-text">Simples, elegante e cheio de conhecimento. Porque, às vezes, é preciso pouco para fazer uma grande evolução!</p>
-                    <a href="#" class="btn btn-primary">Ver Detalhes</a>
+                  <p class="card-text">Este é um card maior e que suporta texto abaixo, como uma introdução mais natural ao conteúdo adicional. No entanto, esse conteúdo é um pouco maior.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                    <a href="brancaOndaF.html">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Ver Detalhes</button>
+                    </a>
+                    </div>
+                    <small class="text-muted">R$ 75,00</small>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
 
-        <div class="col-md-3">
-            <div class="card mb-4" style="width: 18rem;">
-                <img class="card-img-top" src="imagens/Captura de tela 2024-01-29 194308.png" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Uniforme Azul Feminino</h5>
-                    <p class="card-text"> Elegância em azul. A simplicidade que destaca a força feminina no caminho da evolução</p>
-                    <a href="#" class="btn btn-primary">Ver Detalhes</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="card mb-4" style="width: 18rem;">
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
                 <img class="card-img-top" src="imagens/Captura de tela 2024-01-29 194052.png" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Uniforme Branco Masculino</h5>
-                    <p class="card-text"> Uma tela em branco onde a sabedoria se pinta. Com toques de ondas azuis, representando o constante fluir do aprendizado. Maior em significado, estilo e evolução</p>
-                    <a href="#" class="btn btn-primary">Ver Detalhes</a>
+                  <p class="card-text">Este é um card maior e que suporta texto abaixo, como uma introdução mais natural ao conteúdo adicional. No entanto, esse conteúdo é um pouco maior.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                    <a href="brancoOndaM.html">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Ver Detalhes</button>
+                    </a>
+                    </div>
+                    <small class="text-muted">R$ 75,00</small>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
-
-        <div class="col-md-3 mb-4">
-            <div class="card " style="width: 18rem;">
-                <img class="card-img-top" src="imagens/Captura de tela 2024-01-29 194419.png" alt="Card image cap">
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <img class="card-img-top" src="imagens/Captura de tela 2024-01-29 193959.png" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">Uniforme Branco Masculino</h5>
-                    <p class="card-text">Um mar de conhecimento em um oceano de elegância. Branco como a base pura do aprendizado, com suaves ondas azuis que destacam a força e beleza feminina. Evolua com graciosidade, onde cada detalhe é uma declaração de excelência.</p>
-                    <a href="#" class="btn btn-primary">Ver Detalhes</a>
+                  <p class="card-text">Este é um card maior e que suporta texto abaixo, como uma introdução mais natural ao conteúdo adicional. No entanto, esse conteúdo é um pouco maior.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                    <a href="blusaBranca.html">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Ver Detalhes</button>
+                    </a>
+                    </div>
+                    <small class="text-muted">R$ 75,00</small>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
-    </div>
-</div>
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <img class="card-img-top" src="imagens/Captura_de_tela_2024-01-30_221310-removebg-preview.png" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">Este é um card maior e que suporta texto abaixo, como uma introdução mais natural ao conteúdo adicional. No entanto, esse conteúdo é um pouco maior.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                    <a href="moletom.html">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Ver Detalhes</button>
+                    </a>
+                    </div>
+                    <small class="text-muted">????</small>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-  
-</body>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                  <img class="card-img-top" src="imagens/Captura_de_tela_2024-01-30_223307-removebg-preview.png" alt="Card image cap">
+                  <div class="card-body">
+                    <p class="card-text">Este é um card maior e que suporta texto abaixo, como uma introdução mais natural ao conteúdo adicional. No entanto, esse conteúdo é um pouco maior.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <a href="shortAF.html">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Ver Detalhes</button>
+                        </a>
+                      </div>
+                      <small class="text-muted">R$ 80,00</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                  <img class="card-img-top" src="imagens/Captura_de_tela_2024-01-30_223342-removebg-preview.png" alt="Card image cap">
+                  <div class="card-body">
+                    <p class="card-text">Este é um card maior e que suporta texto abaixo, como uma introdução mais natural ao conteúdo adicional. No entanto, esse conteúdo é um pouco maior.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <a href="shortC.html">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Ver Detalhes</button>
+                            </a>
+                      </div>
+                      <small class="text-muted">R$ 80,00</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                  <img class="card-img-top" src="imagens/Captura_de_tela_2024-01-30_225038-removebg-preview.png" alt="Card image cap">
+                  <div class="card-body">
+                    <p class="card-text">Este é um card maior e que suporta texto abaixo, como uma introdução mais natural ao conteúdo adicional. No entanto, esse conteúdo é um pouco maior.</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <a href="shortE.html">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Ver Detalhes</button>
+                            </a>
+                      </div>
+                      <small class="text-muted">R$ 80,00</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <img class="card-img-top" src="imagens/Captura de tela 2024-01-31 152957.png" alt="Card image cap">
+                <div class="card-body">
+                  <p class="card-text">Este é um card maior e que suporta texto abaixo, como uma introdução mais natural ao conteúdo adicional. No entanto, esse conteúdo é um pouco maior.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+					<a href="bones.html">	
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Ver Modelos</button>
+                    </a>  
+                    </div>
+                    <small class="text-muted">25,90</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-right">
+          <a href="#">Voltar ao topo</a>
+        </p>
+        <p>Este exemplo de álbum é &copy; Bootstrap, mas, por favor, baixe e customize por conta própria.</p>
+        <p>Novo no Bootstrap? <a href="../../">Visite a página principal</a> ou leia nosso guia <a href="../../getting-started/">getting started</a>.</p>
+      </div>
+    </footer>
+
+    <!-- Principal JavaScript do Bootstrap
+    ================================================== -->
+    <!-- Foi colocado no final para a página carregar mais rápido -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+  </body>
 </html>

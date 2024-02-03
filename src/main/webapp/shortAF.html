@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="br">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="style/pedido.css">
+    <script src="js/bootstrap.js.map"></script>
+    <title>Document</title>
+  </head>
+<body>
+  <header>
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+      <div class="container d-flex justify-content-between">
+        <a href="#" class="navbar-brand d-flex align-items-center">
+          <strong>Colégio Evolução</strong>
+        </a>
+      </div>
+    </div>
+  </header>
+
+<br> <br>
+
+<div class="container">
+    <div class="row">
+      <div class="col">
+      <div id="paddimf">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
+         <div class="carousel-inner" role="listbox">
+           <div class="carousel-item active">
+             <img class="d-block w-100 img-fluid" src="imagens/Captura_de_tela_2024-01-30_223307-removebg-preview.png">
+             <div class="carousel-caption">
+               <h3></h3>
+             </div>
+           </div>
+           <div class="carousel-item">
+             <img class="d-block w-100 img-fluid" src="imagens/Captura_de_tela_2024-01-30_223342-removebg-preview.png">
+             <div class="carousel-caption">
+               <h3></h3>
+             </div>
+           </div>
+           <div class="carousel-item">
+            <img class="d-block w-100 img-fluid" src="imagens/Captura_de_tela_2024-01-30_225038-removebg-preview.png">
+            <div class="carousel-caption">
+              <h3></h3>
+            </div>
+          </div>
+         </div>
+         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <img src="imagens/esquerda.png">
+            <span class="sr-only"></span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <img src="imagens/direita.png">
+            <span class="sr-only"></span>
+          </a>
+       </div>
+       </div>
+   </div>
+   <div class="col">
+      <form action="https://formsubmit.co/uilliamaquino444@gmail.com" method="POST"
+					onsubmit="return displayOpenPixModal()">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Seu Nome completo</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Nome">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Seu CPF</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000.000.000-00">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Seu telefone de contato</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Telrfonr">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Tipo</label>
+          <select class="form-control" id="exampleFormControlSelect1">
+            <option>AZUL OCEANO LOGO COLORIDA</option>
+            <option>CINZA LOGO COLORIDA</option>
+            <option>AZUL FORTE LOGO BRANCA</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Detalhes</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Efetuar Pedido</button>
+      </form>
+      </div>
+   </div>
+   </div>	
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+</body>
+<script src="https://plugin.openpix.com.br/v1/openpix.js" async></script>
+<script>
+    AOS.init();
+    function displayOpenPixModal() {
+    window.$openpix = window.$openpix || [];
+
+    var newCorrelationID = 'randomCorrelationID' + Math.floor(Math.random() * 1000);
+
+    window.$openpix.push(['config', {
+        appID: 'Q2xpZW50X0lkXzMxNGUzYjNhLTUyYzMtNDZhYy05ZjdkLTQzN2ZhYmFjMGZkMzpDbGllbnRfU2VjcmV0X0NSQ3dpTnJSUUlrNVUrekE4ZWVTbzU3c3hvUnJ1N0NmSkY0d3hoV3Ryd0k9',
+    }]);
+
+    window.$openpix.push([
+        'pix',
+        {
+            value: 7500,
+            correlationID: newCorrelationID,
+            description: 'Camisa Azul Masculina',
+            callback: function (status) {
+                document.getElementById('pixStatus').value = status;
+
+                // Aguarde 3 segundos antes de enviar o formulário
+                setTimeout(function () {
+                    document.querySelector('form').submit();
+                }, 3000);
+            }
+        },
+    ]);
+
+    // Impede o envio padrão do formulário
+    return false;
+}
+
+</script>
+</html>

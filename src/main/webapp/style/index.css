@@ -1,152 +1,227 @@
 @charset "ISO-8859-1";
-body{
+
+body {
 	margin: 0;
 	padding: 0;
 }
 
-.contact-bar{
+.access-users{
+	padding: 10px;
+}
+
+#sas{
+	display: flex;
+	align-items: center;
+	text-align: center;
+}
+
+.contact-bar {
 	background-color: rgb(5, 90, 117);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
-.contact-bar-image{
+.contact-bar-image {
 	margin-left: 25px;
 }
 
-.contact-bar-image:hover{
+.contact-bar-image:hover {
 	width: 35;
 }
 
-.header-access-school{
+
+.header-access-school {
 	/*background-color: rgb(255, 255, 66);*/
+	 height: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
-.address{
+#sas{
+	margin-top: 60px;
+	margin-left: 30px;
+}
+
+.address {
 	align-items: center;
 }
 
-#title{
-	 font-family: "Arial";
-	 font-size: 30px;
-	 font-weight: 700;
-	 margin-top: 40px;
-	 color:rgb(5, 90, 117);
+#title {
+	font-family: "Arial";
+	font-size: 30px;
+	font-weight: 700;
+	margin-top: 40px;
+	color: rgb(5, 90, 117);
 }
 
-.image-title{
+.image-title {
 	display: flex;
 }
 
-.access-users{
-	margin-left: 10px;
-	font-family: Arial, Helvetica, sans-serif;
-	font-weight: 200px;
-	color: rgb(5, 90, 117);
-	text-decoration: none;
+.dropdown-menu {
+	display: none;
+	/* Esconde o dropdown por padrão */
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0 8px 16px rgb(5, 90, 117);
+	z-index: 1;
 }
 
-.access-users:hover{
+.dropdown-menu a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-menu a:hover {
+	background-color: rgb(5, 90, 117);
+}
+
+
+.access-users:hover {
 	color: white;
 	background-color: rgb(5, 90, 117);
 	padding: 15px;
 }
-
-#paddimf{
+#paddimf {
 	padding: 30px;
 }
 
-.image-class{
+.image-class {
 	display: flex;
 	margin-left: 2px;
 	justify-content: space-between;
 	padding: 40px;
-	}
+}
 
 
-a{
+a {
 	color: white;
 }
 
-.image-text-class{
+.image-text-class {
 	display: inline-block;
 	position: relative;
 	text-align: center;
 }
 
-#color-white{
+#color-white {
 	color: white;
 }
 
-#ensino-medio{
+#ensino-medio {
 	margin-left: 70px;
 }
 
 
-.image-text-class p{
+.image-text-class p {
 	position: absolute;
 	top: 60px;
-/*	right: 2px;*/
+	/*	right: 2px;*/
 	font-size: 30px;
 	color: white;
 }
 
-.image-text-class img{
-	border-radius: 30px;	
+.image-text-class img {
+	border-radius: 30px;
 }
 
-#imagemSas{
+#imagemSas {
 	margin-left: 50px;
 	margin-top: 28px;
 }
 
+.access {
+	display: flex;
+	flex-direction: row;
+	/* Ajuste conforme necessário */
+}
 
-/* Estilos para dispositivos móveis */
+.carousel-inner {
+    padding: 0; /* Remova ou ajuste conforme necessário */
+}
 
-/* Estilos gerais para telas menores */
-@media only screen and (max-width: 767px) {
-    /* Ajustes para a barra de contato */
-    .contact-bar {
-        /* Por exemplo, tornar os ícones de contato menores */
-        font-size: 14px;
+.carousel-item img {
+    width: 100%;
+    height: auto;
+}
+
+@media only screen and (max-width: 400px) {
+ 
+}
+
+@media only screen and (max-width: 320px) {
+    .logo-evolucao {
+        width: 120px !important;
     }
 
-    /* Ajustes para o cabeçalho */
-    .header-access-school {
-		display: table-row;
-        /* Redimensionar o logotipo e o título */
-        .logo-evolucao {
-            width: 95px;
-            margin-right: 20px; /* Ajuste o tamanho conforme necessário */
-        }
-        #title {
-            font-size: 24px; /* Ajuste o tamanho conforme necessário */
-        }
+    #dropdownMenuButton {
+        margin-top: 8px;
     }
-	.carousel-inner{
-		padding: 25px;
-	}
-    /* Ajustes para as imagens do carrossel */
+
     .carousel-item img {
-        /* Fazer as imagens ocuparem a largura total */
         width: 100%;
         height: auto;
     }
     
-    .container h1{
-		font-size: 30px;
+    #sas{
+		margin-left: 8px;
+		width: 25px;
 	}
+}
 
-    /* Ajustes para as seções Galeria de Momentos e Nossos Professores */
-    /* ... */
+@media only screen and (max-width: 600px) {
+    .access-users {
+        display: none;
+    }
 
-    /* Ajustes para o rodapé */
+    #dropdownMenuButton,
+    .dropdown,
+    .dropdown-menu {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 601px) {
+    #dropdownMenuButton,
+    .dropdown,
+    .dropdown-menu {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .contact-bar {
+        font-size: 14px;
+    }
+
+    .header-access-school .logo-evolucao {
+        width: 200px;
+        margin-right: 20px;
+    }
+
+    .header-access-school #title {
+        font-size: 24px;
+    }
+
+      .carousel-inner {
+        padding: 0; /* Remova ou ajuste conforme necessário */
+    }
+
+    .carousel-item img {
+        width: 100%;
+        height: auto;
+    }
+
+    .container h1 {
+        font-size: 30px;
+    }
+
     footer {
-        /* Reduzir o tamanho da fonte */
         font-size: 14px;
     }
 }

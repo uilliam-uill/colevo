@@ -3,37 +3,97 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<style>
+/* ===================================
+    Optional styles
+====================================== */
+
+#instacode {margin: 50px auto 0; width: fit-content;}
+
+.instagram_feed {
+  overflow: hidden;
+}
+.instagram_feed .instagram_new {
+  width: 250px;
+  float: left;
+  padding: 0 1px 1px 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.instagram_feed img.insta-image {
+  position: absolute;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s ease 0s;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -ms-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+}
+.instagram_feed .insta-link {
+  position: relative;
+  display: block;
+  background: #232323;
+  padding-top: 100%;
+}
+.instagram_feed .insta-link:hover .insta-image {
+  opacity: 0.2;
+}
+
+</style>
 </head>
 <body>
-<p>Exemplo de Política de Privacidade
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
-Última atualização: [Data da última atualização]
+<div id="instacode">
+  
+<div id="instagram-feed1" class="instagram_feed"></div>
+  
+</div>
+<script>
+	// jQuery Ajax for feed Instagram Graph API
+if ( $('#instagram-feed1').length != 0 ) {
 
-1. **Informações Coletadas:**
-   - Descreva quais tipos de informações pessoais ou dados são coletados dos usuários. Isso pode incluir informações como nome, endereço de e-mail, informações de pagamento, etc.
+    var token = 'IGQWRPX0VLR2U3WTFYR0hRUHNFZAWtzNHg0UDNUNlpJTWx5LTFpSkNBZAlR0YnNtVUhhd2Rad1pEWVBkal9ScE9iRTBaUEVqWHNZAZAXFxWjV6OXBCZAGF5NkhqNXVFWVg0YzBwR2wtUDNVY0dSaFBvZAEFfSjB0RUYtUVkZD';
+    var fields = 'id,media_type,media_url,thumbnail_url,timestamp,permalink,caption';
+    var limit = 6; // Set a number of display items
 
-2. **Uso de Informações:**
-   - Explique como as informações coletadas serão usadas. Por exemplo, para fornecer serviços, processar transações, melhorar o serviço, enviar atualizações, etc.
-
-3. **Compartilhamento de Informações:**
-   - Indique se e como as informações serão compartilhadas com terceiros. Por exemplo, parceiros de negócios, prestadores de serviços, etc.
-
-4. **Cookies e Tecnologias Semelhantes:**
-   - Informe sobre o uso de cookies e outras tecnologias de rastreamento. Explique como essas tecnologias são usadas e se os usuários têm opções de controle.
-
-5. **Segurança:**
-   - Destaque as medidas de segurança adotadas para proteger as informações dos usuários.
-
-6. **Acesso e Controle:**
-   - Explique como os usuários podem acessar, corrigir ou excluir suas informações pessoais.
-
-7. **Alterações na Política de Privacidade:**
-   - Informe que a política pode ser atualizada e forneça uma data de última atualização.
-
-8. **Contato:**
-   - Forneça informações de contato para dúvidas ou preocupações relacionadas à privacidade.
-
-[Inserir detalhes específicos do seu serviço ou aplicativo aqui]
-
+    $.ajax ( {
+        url: 'https://graph.instagram.com/me/media?fields='+ fields +'&access_token='+ token +'&limit='+ limit,
+        type: 'GET',
+        success: function( response ) {
+            for( var x in response.data ) {
+                var link = response.data[x]['permalink'],
+                    caption = response.data[x]['caption'],
+                    image = response.data[x]['media_url'],
+                    image_video = response.data[x]['thumbnail_url'],
+                    html = '';
+                if ( response.data[x]['media_type'] == 'VIDEO' ) {
+                    html += '<div class="instagram_new">';
+                        html += '<a class="insta-link" href="' + link + '" rel="noopener" target="_blank">';
+                            html += '<img src="' + image_video + '" loading="lazy" alt="' + caption + '" class="insta-image" />';
+                        html += '</a>';
+                    html += '</div>';
+                } else {
+                    html += '<div class="instagram_new">';
+                        html += '<a class="insta-link" href="' + link + '" rel="noopener" target="_blank">';
+                            html += '<img src="' + image + '" loading="lazy" alt="' + caption + '" class="insta-image" />';
+                        html += '</a>';
+                    html += '</div>';
+                }
+                $('#instagram-feed1').append(html);
+            }
+        },
+        error: function(data) {
+            var html = '<div class="class-no-data">No Images Found</div>';
+            $('#instagram-feed1').append(html);
+            }
+    });
+}
+</script>
 </body>
 </html>

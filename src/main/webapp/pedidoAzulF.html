@@ -65,26 +65,29 @@
 					onsubmit="return displayOpenPixModal()">
         <div class="form-group">
           <label for="exampleFormControlInput1">Seu Nome completo</label>
-          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Nome">
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlInput1">Seu CPF</label>
-          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="000.000.000-00">
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlInput1">Seu telefone de contato</label>
-          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Telrfonr">
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlSelect1">Tipo</label>
-          <select class="form-control" id="exampleFormControlSelect1">
-            <option>BRANCO COM NOME E LOGO</option>
-            <option>AZUL COM LOGO</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlTextarea1">Detalhes</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+						<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Nome"
+							oninput="moveTextToTextarea()">
+					</div>
+					<div class="form-group">
+						<label for="exampleFormControlInput2">Seu CPF</label>
+						<input type="text" class="form-control" id="exampleFormControlInput2"
+							placeholder="000.000.000-00" oninput="moveTextToTextarea()">
+					</div>
+					<div class="form-group">
+						<label for="exampleFormControlInput3">Seu telefone de contato</label>
+						<input type="text" class="form-control" id="exampleFormControlInput3" placeholder="Telefone"
+							oninput="moveTextToTextarea()">
+					</div>
+					<div class="form-group">
+						<label for="exampleFormControlSelect1">Tipo</label>
+						<select class="form-control" id="exampleFormControlSelect1" oninput="moveTextToTextarea()">
+							<option>BLUSA AZUL FEMININA</option>
+						</select>
+					</div>
+						<br>					<br>
+					<div class="form-group">
+						<label for="exampleFormControlTextarea1">PEDIDO COMPLETO</label>
+						<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
         <button type="submit" class="btn btn-success" onclick="displayOpenPixModal()">Efetuar Pedido</button>
        </form> 
@@ -130,6 +133,19 @@
     // Impede o envio padrão do formulário
     return false;
 }
+    function moveTextToTextarea() {
+        var nomeCompleto = document.getElementById("exampleFormControlInput1").value;
+        var cpf = document.getElementById("exampleFormControlInput2").value;
+        var telefone = document.getElementById("exampleFormControlInput3").value;
+        var tipo = document.getElementById("exampleFormControlSelect1").value;
 
+        var detalhesTextarea = document.getElementById("exampleFormControlTextarea1");
+        
+        // Monta o texto combinando os valores dos campos anteriores
+        var detalhes = "Nome Completo: " + nomeCompleto + "\nCPF: " + cpf + "\nTelefone: " + telefone + "\nTipo: " + tipo;
+
+        // Define o valor do campo de textarea
+        detalhesTextarea.value = detalhes;
+    }
 </script>
 </html>

@@ -6,30 +6,25 @@
 	<meta charset="UTF-8">
 	<title>Colégio Evolução</title>
 	<link rel="stylesheet" type="text/css" href="style/index.css">
-	<link rel="stylesheet" type="text/css" href="style/bootstrap.min.css">
+
 	<link href='https://fonts.googleapis.com/css?family=Krona One' rel='stylesheet'>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<script src="js/bootstrap.js.map"></script>
-	<link rel="shortcut icon" type="imagex/png" href="imagens/Captura de tela 2024-01-25 231958.png">
-	<script src="demo/libs/jquery.min.js">
-	</script>
-	<script src="demo/libs/bootstrap.min.js">
-	</script>
+	<link rel="shortcut icon" type="image/png" href="imagens/Captura de tela 2024-01-25 231958.png">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+		integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+		integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-	<link rel="stylesheet" href="demo/libs/bootstrap.min.css">
-
-	<link rel="stylesheet" href="demo/libs/bootstrap-theme.min.css">
-
-	<link rel="stylesheet" href="demo/demo.min.css">
-
-	<link rel="stylesheet" type="text/css" href="css/bootstrap-fullscreen-select.css" />
-
-	<script type="text/javascript" src="js/bootstrap-fullscreen-select.js">
-	</script>
+	<link rel="stylesheet" href="style/owl.carousel.scss">
+	<link rel="stylesheet" href="style/owl.theme.default.scss">
+	<script src="js/owl.carousel.js"></script>
+	<script src="jquery.min.js"></script>
 </head>
 
 <body>
-
 	<div class="header">
 		<div class="contact-bar">
 			<div>
@@ -54,23 +49,24 @@
 			<div class="image-title">
 				<img class="logo-evolucao" style="margin-left: 30px;"
 					src="imagens/Captura de tela 2024-01-17 180901.png" width="200">
-				<img src="imagens/Logo-SAS.png" width="50" height="50" id="sas">
 			</div>
 
 			<div class="access">
 				<a href="https://siga.activesoft.com.br/login/" class="access-users link-opacity-100" target="_blank"
 					rel="noopener noreferrer">Acesso Active</a>
 				<a href="loja.html" class="access-users link-opacity-100">Lojinha Online Evolução</a>
+				<a href="sobre.html" class="access-users link-opacity-100">Sobre Nos</a>
 			</div>
-			
-			<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
-				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+			<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="false">
 				<img src="imagens/mais.png">
 			</button>
 			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 				<a href="https://siga.activesoft.com.br/login/" class="access-users link-opacity-100" target="_blank"
 					rel="noopener noreferrer">Acesso Active</a>
 				<a href="loja.html" class="access-users link-opacity-100">Lojinha Online Evolução</a>
+				<a href="sobre.html" class="access-users link-opacity-100">Sobre Nos</a>
 			</div>
 		</div>
 
@@ -86,7 +82,8 @@
 			integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
 			crossorigin="anonymous"></script>
 		<div id="paddimf">
-			<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
+			<div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel"
+				data-interval="false">
 				<div class="carousel-inner" role="listbox">
 					<div class="carousel-item active">
 						<img class="d-block w-100 img-fluid"
@@ -114,163 +111,15 @@
 				</a>
 			</div>
 		</div>
+		<div class="col-6">
+			<h1 style="color: rgb(250,202,34);">Feed Evolução</h1>
+		</div>
+		<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+		
 
-		<section class="pt-5 pb-5">
-			<div class="container">
-				<div class="row">
-					<div class="col-6">
-						<h1 style="color: rgb(250,202,34);">Galeria de Momentos</h1>
-					</div>
-					<div class="col-6 text-right">
-						<a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button"
-							data-slide="prev">
-							<i class="fa fa-arrow-left"> <img src="imagens/seta-esquerda.png"></i>
-						</a>
-						<a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button"
-							data-slide="next">
-							<i class="fa fa-arrow-right"> <img src="imagens/seta-direita.png"></i>
-						</a>
-					</div>
-					<div class="col-12">
-						<div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+			<div id="instagram-feed1" class="instagram_feed owl-carousel owl-theme"></div>
 
-							<div class="carousel-inner">
-								<div class="carousel-item active">
-									<div class="row">
-
-										<div class="col-md-4 mb-3">
-											<div class="card"
-												style="background-color: rgb(250,202,34); border-radius: 10px;">
-												<img class="img-fluid" alt="100%x280"
-													src="imagens/Captura de tela 2023-12-15 15414.png">
-												<div class="card-body">
-													<h4 class="card-title">Nome evento aqui</h4>
-													<p class="card-text">Descrição do evento aqui. Descrição do evento
-														aqui.Descrição do evento aqui.</p>
-												</div>
-
-											</div>
-										</div>
-										<div class="col-md-4 mb-3">
-											<div class="card"
-												style="background-color: rgb(5, 90, 117); border-radius: 10px;">
-												<img class="img-fluid" alt="100%x280"
-													src="imagens/Captura de tela 2023-12-15 15412.png">
-												<div class="card-body">
-													<h4 class="card-title">Nome evento aqui</h4>
-													<p class="card-text">Descrição do evento aqui. Descrição do evento
-														aqui.Descrição do evento aqui.</p>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4 mb-3">
-											<div class="card"
-												style="background-color: rgb(120,177,74);border-radius: 10px;">
-												<img class="img-fluid" alt="100%x280"
-													src="imagens/Captura de tela 2023-12-15 15411.png">
-												<div class="card-body">
-													<h4 class="card-title">Nome evento aqui</h4>
-													<p class="card-text">Descrição do evento aqui. Descrição do evento
-														aqui.Descrição do evento aqui.</p>
-												</div>
-											</div>
-										</div>
-
-									</div>
-								</div>
-								<div class="carousel-item">
-									<div class="row">
-
-										<div class="col-md-4 mb-3">
-											<div class="card"
-												style="background-color: rgb(250,202,34); border-radius: 10px;">
-												<img class="img-fluid" alt="100%x280"
-													src="imagens/Captura de tela 2023-12-15 15405.png">
-												<div class="card-body">
-													<h4 class="card-title">Nome evento aqui</h4>
-													<p class="card-text">Descrição do evento aqui. Descrição do evento
-														aqui.Descrição do evento aqui.</p>
-												</div>
-
-											</div>
-										</div>
-										<div class="col-md-4 mb-3">
-											<div class="card"
-												style="background-color: rgb(5, 90, 117); border-radius: 10px;">
-												<img class="img-fluid" alt="100%x280"
-													src="imagens/Captura de tela 2023-12-15 15404.png">
-												<div class="card-body">
-													<h4 class="card-title">Nome evento aqui</h4>
-													<p class="card-text">Descrição do evento aqui. Descrição do evento
-														aqui.Descrição do evento aqui.</p>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4 mb-3">
-											<div class="card"
-												style="background-color: rgb(120,177,74);border-radius: 10px;">
-												<img class="img-fluid" alt="100%x280"
-													src="imagens/Captura de tela 2023-12-15 152131.png">
-												<div class="card-body">
-													<h4 class="card-title">Nome evento aqui</h4>
-													<p class="card-text">Descrição do evento aqui. Descrição do evento
-														aqui.Descrição do evento aqui.</p>
-												</div>
-											</div>
-										</div>
-
-									</div>
-								</div>
-								<div class="carousel-item">
-									<div class="row">
-
-										<div class="col-md-4 mb-3">
-											<div class="card"
-												style="background-color: rgb(250,202,34); border-radius: 10px;">
-												<img class="img-fluid" alt="100%x280"
-													src="imagens/Captura de tela 2023-12-15 16242.png">
-												<div class="card-body">
-													<h4 class="card-title">Nome evento aqui</h4>
-													<p class="card-text">Descrição do evento aqui. Descrição do evento
-														aqui.Descrição do evento aqui.</p>
-												</div>
-
-											</div>
-										</div>
-										<div class="col-md-4 mb-3">
-											<div class="card"
-												style="background-color: rgb(5, 90, 117); border-radius: 10px;">
-												<img class="img-fluid" alt="100%x280"
-													src="imagens/Captura de tela 2023-12-15 16253.png">
-												<div class="card-body">
-													<h4 class="card-title">Nome evento aqui</h4>
-													<p class="card-text">Descrição do evento aqui. Descrição do evento
-														aqui.Descrição do evento aqui.</p>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4 mb-3">
-											<div class="card"
-												style="background-color: rgb(120,177,74);border-radius: 10px;">
-												<img class="img-fluid" alt="100%x280"
-													src="imagens/Captura de tela 2023-12-15 16254.png">
-												<div class="card-body">
-													<h4 class="card-title">Nome evento aqui</h4>
-													<p class="card-text">Descrição do evento aqui. Descrição do evento
-														aqui.Descrição do evento aqui..</p>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-
+		
 		<section class="pt-5 pb-5">
 			<div class="container">
 				<div class="row">
@@ -422,15 +271,81 @@
 				&copy 2023 Copyright: <a href="#">Uilliam Aquino</a>
 			</div>
 		</footer>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+			integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+			crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+			integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+			crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script>
+	$(document).ready(function () {
+    var $owl = $('.owl-carousel');
 
-		<script type="text/javascript" src="path/to/instafeed.min.js"></script>
-		<div id="instafeed"></div>
-		<script type="text/javascript">
-			var feed = new Instafeed({
-				accessToken: 'IGQWRNN1loLTUydGpKclJZAVERkcEdoNHZAmRWUzRlRfUFdHTS02ZAGxjR1F1dVpWTU1WeFNiWjlFYWRFcjBnT0ZAlZAHpkY3F5ampZAVlpRVG1Fb2FQRkRPeldkNXlEZAXFWSTd1NnJtN3E0NzZAKc1I5c2R3YTFmNVg0OXcZD'
-			});
-			feed.run();
+    // jQuery Ajax for feed Instagram Graph API
+    if ($('#instagram-feed1').length != 0) {
+        var token = 'IGQWRQUmJGZAGw0Y0daUFVEbEpndW5yVDBKTHpZAMVBNekhCMjM1WGwtN043WG9sVnE5SXJBUUVlLTB5UWk2T2pma1JwcW1HOEhNcUpyalRnT0dCVjh0SlhJcUkxU2h6Q1JnbVh1ckFjeVVDOWIyd2x5ZAE9YWVNuZAGsZD';
+        var fields = 'id,media_type,media_url,thumbnail_url,timestamp,permalink,caption';
+        var limit = 9; // Set a number of display items
+
+        $.ajax({
+            url: 'https://graph.instagram.com/me/media?fields=' + fields + '&access_token=' + token + '&limit=' + limit,
+            type: 'GET',
+            success: function (response) {
+                for (var x in response.data) {
+                    var link = response.data[x]['permalink'],
+                        caption = response.data[x]['caption'],
+                        image = response.data[x]['media_url'],
+                        image_video = response.data[x]['thumbnail_url'],
+                        html = '';
+
+                    if (response.data[x]['media_type'] == 'VIDEO') {
+                        html += '<div class="instagram_new">';
+                        html += '<div class="item"><a class="insta-link" href="' + link + '" rel="noopener" target="_blank">';
+                        html += '<img src="' + image_video + '" loading="lazy" alt="' + caption + '" class="insta-image" />';
+                        html += '</a>';
+                        html += '</div>';
+                    } else {
+                        html += '<div class="instagram_new">';
+                        html += '<div class="item"><a class="insta-link" href="' + link + '" rel="noopener" target="_blank">';
+                        html += '<img src="' + image + '" loading="lazy" alt="' + caption + '" class="insta-image" />';
+                        html += '</a></div>';
+                        html += '</div>';
+                    }
+
+                    $('#instagram-feed1').append(html);
+                }
+
+                // Inicialize o Owl Carousel
+                $owl.owlCarousel({
+                    loop: true,
+                    margin: 10,
+                    nav: true,
+                    responsive: {
+                        0: { items: 1 },
+                        600: { items: 3 },
+                        1000: { items: 5 }
+                    },
+                    onTranslated: function (event) {
+                        var visibleItems = $owl.find('.owl-item.active').length;
+                        var totalItems = $owl.find('.owl-item').length;
+
+                        // Se todas as imagens estiverem visíveis, oculte a sexta
+                        if (visibleItems === totalItems) {
+                            $('#instagram-feed1 .item:last').hide();
+                        }
+                    }
+                });
+            },
+            error: function (data) {
+                var html = '<div class="class-no-data">No Images Found</div>';
+                $('#instagram-feed1').append(html);
+            }
+        });
+    }
+});
+
 		</script>
+
 </body>
 
 </html>
